@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/c298ee5/staging.svetguide.com/wp-content/themes/
+    - /bin/cp -R wp-content/themes/svetguide $DEPLOYPATH
