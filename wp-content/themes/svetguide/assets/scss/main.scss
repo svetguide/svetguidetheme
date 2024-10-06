@@ -29,57 +29,165 @@ body {
 
 // Header.php styles - Start
 
-.sg-header {
+.sg-nav {
   background: #102738;
   .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    img {
-      width: 200px;
-      height: 37px;
-    }
-
-    .city-wrapper {
+    .sg-nav-desktop {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      p {
-        font-family: "Poppins", sans-serif;
+      padding-block: 16px;
+
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
+
+      img {
+        width: 200px;
+        height: 37px;
+      }
+
+      .city-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .city {
+          text-decoration: none;
+          font-family: "Poppins", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 27px;
+          text-align: center;
+          color: white;
+          text-transform: capitalize;
+        }
+
+        .orange-dot {
+          width: 10px;
+          height: 10px;
+          background-color: #ed561c;
+          border-radius: 100px;
+        }
+      }
+
+      .advertise {
+        font-family: Inter;
         font-size: 18px;
         font-weight: 600;
-        line-height: 27px;
+        line-height: 21.78px;
         text-align: center;
         color: white;
-        text-transform: capitalize;
-      }
-
-      .orange-dot {
-        width: 10px;
-        height: 10px;
         background-color: #ed561c;
+        padding-block: 10px;
+        padding-inline: 20px;
+        text-decoration: none;
         border-radius: 100px;
       }
+
+      .advertise:hover {
+        background-color: #b73b0c;
+        transition: all;
+        transition-duration: 300ms;
+      }
     }
 
-    a {
-      font-family: Inter;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 21.78px;
-      text-align: center;
-      color: white;
-      background-color: #ed561c;
-      padding-block: 10px;
-      padding-inline: 20px;
-      text-decoration: none;
-      border-radius: 100px;
-    }
+    .sg-nav-mob {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media screen and (min-width: 1024px) {
+        display: none;
+      }
 
-    a:hover {
-      background-color: #b73b0c;
-      transition: all;
-      transition-duration: 300ms;
+      img {
+        width: 200px;
+      }
+
+      .btn {
+        img {
+          width: 30px;
+          filter: invert(99%) sepia(3%) saturate(0%) hue-rotate(211deg)
+            brightness(106%) contrast(100%);
+        }
+      }
+
+      .city-wrapper {
+        .city {
+          text-decoration: none;
+          font-family: "Poppins", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 27px;
+          text-align: center;
+          color: black;
+          text-transform: uppercase;
+          display: block;
+        }
+      }
+
+      .advertise {
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21.78px;
+        text-align: center;
+        color: white;
+        background-color: #ed561c;
+        padding-block: 10px;
+        padding-inline: 20px;
+        text-decoration: none;
+        border-radius: 100px;
+      }
+
+      .advertise:hover {
+        background-color: #b73b0c;
+        transition: all;
+        transition-duration: 300ms;
+      }
+
+      .modal {
+        @media screen and (max-width: 640px) {
+          width: 100%;
+          --bs-modal-width: 100%;
+        }
+        .modal-dialog {
+          margin-right: 0;
+          @media screen and (max-width: 640px) {
+            margin-left: 0;
+          }
+          .modal-content {
+            .modal-body {
+              @media screen and (max-width: 640px) {
+                width: 100%;
+              }
+
+              .modal-inner-wrapper {
+                margin-top: 20px;
+                .city {
+                  margin-bottom: 10px;
+                  width: fit-content;
+                  margin-inline: auto;
+                  display: block;
+                }
+                .advertise {
+                  display: block;
+                  margin-inline: auto;
+                  margin-top: 20px;
+                }
+              }
+            }
+          }
+        }
+
+        .modal.fade .modal-dialog {
+          transition: transform 0.3s ease-out;
+          transform: translate(100%, 0px) !important;
+        }
+        .modal.show .modal-dialog {
+          transform: none !important;
+        }
+      }
     }
   }
 }
