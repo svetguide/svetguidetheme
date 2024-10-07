@@ -89,9 +89,7 @@ function theme_enqueue_styles()
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 
-
-
-// jquery , main.js
+// jquery , main.js, bootstrap
 
 function load_js()
 {
@@ -107,4 +105,28 @@ function load_js()
 }
 add_action('wp_enqueue_scripts', 'load_js');
 
-///////
+
+// Register Custom Post Type (Illinois)
+
+function register_illinois_post_type()
+{
+	$args = array(
+		'labels' => array(
+			'name' => 'Illinois',
+			'singular_name' => 'Illinois',
+
+		),
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array('title', 'editor', 'thumbnail'),
+		'rewrite' => array(
+			'slug' => 'illinois', // Base slug for illinoise
+			'with_front' => false
+		),
+		// 'publicly_queryable'    => true,
+		'show_in_rest' => true // added so that posts can be accessed through REST api eg: http://localhost:8888/wp-json/wp/v2/illinois
+	);
+
+	register_post_type('illinois', $args);
+}
+add_action('init', 'register_illinois_post_type');

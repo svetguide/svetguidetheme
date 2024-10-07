@@ -20,7 +20,7 @@
         <div class="container">
 
             <div class="sg-nav-desktop">
-                <img src="wp-content/themes/svetguide/assets/images/svetguide-header-logo.png" alt="svetguide logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
 
                 <div class="city-wrapper">
                     <a href="/illinois" class="city">ILLINOIS</a>
@@ -30,10 +30,10 @@
                 <a class="advertise" href="https://svet.com/contact-us/">Advertise with us</a>
             </div>
             <div class="sg-nav-mob">
-                <img src="wp-content/themes/svetguide/assets/images/svetguide-header-logo.png" alt="svetguide logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src="wp-content/themes/svetguide/assets/images/hamburger-menu.svg" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hamburger-menu.svg" alt="">
                 </button>
 
                 <!-- Modal -->
