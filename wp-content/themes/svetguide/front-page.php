@@ -13,13 +13,13 @@
             <div class="wrapper-1">
                 <div>
                     <a href="/sadf">
-                        <img src="wp-content/themes/svetguide/assets/images/front-page/illinois-guide.png" alt="">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/illinois-guide.png" alt="">
                     </a>
                     <a href="/sdf">Illinois Guide</a>
                 </div>
                 <div>
                     <a href="/asdf">
-                        <img src="wp-content/themes/svetguide/assets/images/front-page/florida-guide.png" alt="">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/florida-guide.png" alt="">
                     </a>
                     <a href="/asdf">Florida Guide</a>
                 </div>
