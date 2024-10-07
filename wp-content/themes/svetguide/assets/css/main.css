@@ -36,6 +36,9 @@ body {
 
 .sg-nav {
   background: #102738;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
 }
 .sg-nav .container .sg-nav-desktop {
   display: flex;
@@ -95,6 +98,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-block: 18px;
 }
 @media screen and (min-width: 1024px) {
   .sg-nav .container .sg-nav-mob {
@@ -144,6 +148,7 @@ body {
   }
 }
 .sg-nav .container .sg-nav-mob .modal .modal-dialog {
+  margin-top: 0px;
   margin-right: 0;
 }
 @media screen and (max-width: 640px) {
@@ -155,9 +160,6 @@ body {
   .sg-nav .container .sg-nav-mob .modal .modal-dialog .modal-content .modal-body {
     width: 100%;
   }
-}
-.sg-nav .container .sg-nav-mob .modal .modal-dialog .modal-content .modal-body .modal-inner-wrapper {
-  margin-top: 20px;
 }
 .sg-nav .container .sg-nav-mob .modal .modal-dialog .modal-content .modal-body .modal-inner-wrapper .city {
   margin-bottom: 10px;
