@@ -1,24 +1,20 @@
 <?php
 
 /*
-Template Name: Illinois Archive
+Template Name: Illinois Single
 */
 
 ?>
 
+
 <?php get_header(); ?>
 
-
-<section class="ss-illinois">
+<section>
     <div class="container">
-        <h1>this is /illinoise</h1>
-
+        <h1>this is illiniose single</h1>
         <?php the_content(); ?>
     </div>
-
 </section>
-
-
 
 
 <?php get_footer(); ?>

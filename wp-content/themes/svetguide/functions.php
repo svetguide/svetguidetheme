@@ -120,7 +120,7 @@ function register_illinois_post_type()
 		'has_archive' => true,
 		'supports' => array('title', 'editor', 'thumbnail'),
 		'rewrite' => array(
-			'slug' => 'illinois', // Base slug for illinoise
+			'slug' => 'illinois', // Base slug for illinois
 			'with_front' => false
 		),
 		// 'publicly_queryable'    => true,
@@ -130,3 +130,60 @@ function register_illinois_post_type()
 	register_post_type('illinois', $args);
 }
 add_action('init', 'register_illinois_post_type');
+
+
+// Register Custom Taxonomy (il)
+function register_illinois_il_taxonomy()
+{
+	$args = array(
+		'labels' => array(
+			'name' => 'il',
+			'singular_name' => 'il',
+		),
+		'hierarchical' => true,
+		'public' => true,
+		'rewrite' => array('slug' => 'illinois'), // Base slug for il
+		'show_in_rest' => true // added so that posts can be accessed through REST api (http://localhost:8888/wp-json/wp/v2/il)
+	);
+
+	register_taxonomy('il', array('illinois'), $args);
+}
+add_action('init', 'register_illinois_il_taxonomy');
+
+
+// Adjust Permalink Structure to Include il
+function illinois_permalink_structure($post_link, $post)
+{
+	if (is_object($post) && $post->post_type === 'illinois') {
+		$terms = wp_get_object_terms($post->ID, 'il');
+		if ($terms) {
+			$term = $terms[0]; // Get the first il term
+			$val = "illinois/$term->slug";
+			$post_link = str_replace('illinois', $val, $post_link);
+		}
+	}
+	return $post_link;
+}
+add_filter('post_type_link', 'illinois_permalink_structure', 10, 2);
+
+// Add Custom Rewrite Rules
+if (!function_exists('add_custom_rewrite_rules')) {
+	function add_custom_rewrite_rules()
+	{
+
+		// Rule for il archive (e.g., /illinois/toyota/)
+		add_rewrite_rule(
+			'^illinois/([^/]+)/?$',
+			'index.php?taxonomy=il&term=$matches[1]',
+			'top'
+		);
+
+		// Rule for single illinois posts (e.g., /illinois/toyota/innova/)
+		add_rewrite_rule(
+			'^illinois/([^/]+)/([^/]+)/?$',
+			'index.php?post_type=illinois&il=$matches[1]&name=$matches[2]',
+			'top'
+		);
+	}
+	add_action('init', 'add_custom_rewrite_rules');
+}
