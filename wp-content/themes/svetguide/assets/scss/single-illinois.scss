@@ -1,0 +1,135 @@
+.sg-illinois-inner {
+  margin-bottom: 100px;
+  .container {
+    //wrapper-2 - start
+    .wrapper-2 {
+      background: linear-gradient(
+        180deg,
+        rgba(16, 39, 56, 0.02) 0%,
+        rgba(45, 110, 158, 0.02) 100%
+      );
+
+      margin-top: 60px;
+      border: 1px solid #ed561c4d;
+      border-radius: 14px;
+      padding-block: 24px;
+      padding-inline: 22px;
+
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          gap: 10px;
+          align-items: start;
+        }
+
+        h1 {
+          font-family: Poppins;
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 42px;
+          text-align: left;
+          color: #000;
+          margin-bottom: 0;
+        }
+
+        a {
+          background-color: #ed561c;
+          font-family: Inter;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 21.78px;
+          text-align: center;
+          color: white;
+          text-decoration: none;
+          padding-inline: 25px;
+          padding-block: 8px;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 13px;
+          }
+        }
+
+        a:hover {
+          background-color: #b73b0c;
+          transition: all 300ms;
+        }
+      }
+
+      h5 {
+        font-family: Poppins;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: left;
+        color: #000000;
+        margin-bottom: 0;
+      }
+
+      .about {
+        margin-top: 20px;
+        p {
+          font-family: Poppins;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          text-align: left;
+          color: #505f6b;
+          padding-top: 13px;
+        }
+      }
+
+      .website,
+      .phone,
+      .address,
+      .social-media {
+        padding-top: 10px;
+        div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 18px;
+          }
+        }
+
+        p {
+          padding-top: 17px;
+          font-family: Poppins;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+          text-align: left;
+          color: black;
+        }
+      }
+
+      .social-media {
+        a {
+          padding-top: 17px;
+          img {
+            width: 36px;
+          }
+        }
+      }
+
+      .full-description-image {
+        padding-top: 30px;
+        img {
+          max-width: 618px;
+          width: 100%;
+          padding-top: 17px;
+        }
+      }
+    }
+    //wrapper-2 - end
+  }
+}

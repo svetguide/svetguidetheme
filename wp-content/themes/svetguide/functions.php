@@ -77,6 +77,10 @@ function load_css()
 	// load front-page.css
 	wp_register_style('front-page', get_template_directory_uri() . '/assets/css/front-page.css', array(), false, 'all');
 	wp_enqueue_style('front-page');
+
+	// load single-illinois.css
+	wp_register_style('single-illinois', get_template_directory_uri() . '/assets/css/single-illinois.css', array(), false, 'all');
+	wp_enqueue_style('single-illinois');
 }
 add_action('wp_enqueue_scripts', 'load_css');
 
