@@ -1,27 +1,142 @@
 .sg-illinois-inner {
   margin-bottom: 100px;
 }
-.sg-illinois-inner .container .wrapper-2 {
-  background: linear-gradient(180deg, rgba(16, 39, 56, 0.02) 0%, rgba(45, 110, 158, 0.02) 100%);
+.sg-illinois-inner .container .section-1 {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+@media screen and (max-width: 640px) {
+  .sg-illinois-inner .container .section-1 {
+    flex-wrap: wrap;
+  }
+}
+.sg-illinois-inner .container .section-1 div:nth-of-type(1) img {
+  width: 15px;
+}
+.sg-illinois-inner .container .section-1 div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.sg-illinois-inner .container .section-1 div img {
+  width: 6px;
+}
+.sg-illinois-inner .container .section-1 div a {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: rgba(16, 39, 56, 0.5019607843);
+  text-decoration: none;
+}
+.sg-illinois-inner .container .section-1 div a:hover {
+  color: #102738;
+  transition: all 300ms;
+}
+.sg-illinois-inner .container .section-1 div:nth-of-type(3) p {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: #102738;
+  margin-bottom: 0;
+}
+.sg-illinois-inner .container .section-2 {
+  display: flex;
+  align-items: start;
   margin-top: 60px;
+  gap: 18px;
+}
+@media screen and (max-width: 1024px) {
+  .sg-illinois-inner .container .section-2 {
+    flex-direction: column-reverse;
+    gap: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sg-illinois-inner .container .section-2 {
+    align-items: center;
+  }
+}
+.sg-illinois-inner .container .section-2 .wrapper-1 {
+  flex-basis: 20%;
+}
+.sg-illinois-inner .container .section-2 .wrapper-1 .title {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: black;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 768px) {
+  .sg-illinois-inner .container .section-2 .wrapper-1 .title {
+    text-align: center;
+  }
+}
+.sg-illinois-inner .container .section-2 .wrapper-1 .most-searched-list ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 768px) {
+  .sg-illinois-inner .container .section-2 .wrapper-1 .most-searched-list ul li {
+    text-align: center;
+  }
+}
+.sg-illinois-inner .container .section-2 .wrapper-1 .most-searched-list ul li a {
+  text-decoration: none;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 35px;
+  text-align: left;
+  color: #505f6b;
+}
+.sg-illinois-inner .container .section-2 .wrapper-1 .most-searched-list ul li a:hover {
+  color: #102738;
+  transition: all 300ms;
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 {
+  display: flex;
+  align-items: start;
+  gap: 18px;
+  flex-basis: 80%;
+}
+@media screen and (max-width: 768px) {
+  .sg-illinois-inner .container .section-2 .wrapper-2 {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content {
+  background: linear-gradient(180deg, rgba(16, 39, 56, 0.02) 0%, rgba(45, 110, 158, 0.02) 100%);
   border: 1px solid rgba(237, 86, 28, 0.3019607843);
   border-radius: 14px;
   padding-block: 24px;
   padding-inline: 22px;
 }
-.sg-illinois-inner .container .wrapper-2 .title {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 50px;
 }
-@media screen and (max-width: 768px) {
-  .sg-illinois-inner .container .wrapper-2 .title {
+@media screen and (max-width: 1280px) {
+  .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title {
     flex-direction: column;
     gap: 10px;
     align-items: start;
   }
 }
-.sg-illinois-inner .container .wrapper-2 .title h1 {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title h1 {
   font-family: Poppins;
   font-size: 28px;
   font-weight: 600;
@@ -30,7 +145,7 @@
   color: #000;
   margin-bottom: 0;
 }
-.sg-illinois-inner .container .wrapper-2 .title a {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title a {
   background-color: #ed561c;
   font-family: Inter;
   font-size: 18px;
@@ -46,14 +161,14 @@
   align-items: center;
   gap: 10px;
 }
-.sg-illinois-inner .container .wrapper-2 .title a img {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title a img {
   width: 13px;
 }
-.sg-illinois-inner .container .wrapper-2 .title a:hover {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title a:hover {
   background-color: #b73b0c;
   transition: all 300ms;
 }
-.sg-illinois-inner .container .wrapper-2 h5 {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content h5 {
   font-family: Poppins;
   font-size: 20px;
   font-weight: 600;
@@ -62,10 +177,10 @@
   color: #000000;
   margin-bottom: 0;
 }
-.sg-illinois-inner .container .wrapper-2 .about {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .about {
   margin-top: 20px;
 }
-.sg-illinois-inner .container .wrapper-2 .about p {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .about p {
   font-family: Poppins;
   font-size: 16px;
   font-weight: 400;
@@ -74,30 +189,30 @@
   color: #505f6b;
   padding-top: 13px;
 }
-.sg-illinois-inner .container .wrapper-2 .website,
-.sg-illinois-inner .container .wrapper-2 .phone,
-.sg-illinois-inner .container .wrapper-2 .address,
-.sg-illinois-inner .container .wrapper-2 .social-media {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .address,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media {
   padding-top: 10px;
 }
-.sg-illinois-inner .container .wrapper-2 .website div,
-.sg-illinois-inner .container .wrapper-2 .phone div,
-.sg-illinois-inner .container .wrapper-2 .address div,
-.sg-illinois-inner .container .wrapper-2 .social-media div {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website div,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone div,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .address div,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.sg-illinois-inner .container .wrapper-2 .website div img,
-.sg-illinois-inner .container .wrapper-2 .phone div img,
-.sg-illinois-inner .container .wrapper-2 .address div img,
-.sg-illinois-inner .container .wrapper-2 .social-media div img {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website div img,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone div img,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .address div img,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media div img {
   width: 18px;
 }
-.sg-illinois-inner .container .wrapper-2 .website p,
-.sg-illinois-inner .container .wrapper-2 .phone p,
-.sg-illinois-inner .container .wrapper-2 .address p,
-.sg-illinois-inner .container .wrapper-2 .social-media p {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website p,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone p,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .address p,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media p {
   padding-top: 17px;
   font-family: Poppins;
   font-size: 16px;
@@ -106,19 +221,44 @@
   text-align: left;
   color: black;
 }
-.sg-illinois-inner .container .wrapper-2 .social-media a {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website a,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone a,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .address a,
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media a {
+  padding-top: 17px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: black;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media a {
   padding-top: 17px;
 }
-.sg-illinois-inner .container .wrapper-2 .social-media a img {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media a img {
   width: 36px;
 }
-.sg-illinois-inner .container .wrapper-2 .full-description-image {
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .full-description-image {
   padding-top: 30px;
 }
-.sg-illinois-inner .container .wrapper-2 .full-description-image img {
-  max-width: 618px;
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .full-description-image img {
+  max-width: 560px;
   width: 100%;
   padding-top: 17px;
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-image a {
+  display: block;
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-image a img {
+  width: 235px;
+}
+.sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-image a:hover img {
+  opacity: 0.8;
+  transition: all 300ms;
 }
 
 /*# sourceMappingURL=single-illinois.css.map */
