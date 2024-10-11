@@ -110,6 +110,12 @@ function load_js()
 
 	// Bootstrap JS
 	wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
+
+
+	// Enqueue Owl Carousel CSS and JS from cdnjs
+	wp_enqueue_style('owl-carousel-css', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', array(), '2.3.4');
+	wp_enqueue_style('owl-carousel-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', array(), '2.3.4');
+	wp_enqueue_script('owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', array('jquery'), '2.3.4', true);
 }
 add_action('wp_enqueue_scripts', 'load_js');
 
@@ -240,3 +246,99 @@ function filter_illinois_by_il_slug($args, $request)
 
 // Hook into the REST API for the 'cars' post type
 add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
+
+
+//Global Settings page for text field and image field
+// Add a custom options page in the admin dashboard 
+function custom_theme_options_page()
+{
+	add_menu_page(
+		'Global Settings',            // Page title
+		'Global Settings',            // Menu title
+		'manage_options',             // Capability required
+		'global-settings',            // Menu slug
+		'custom_theme_options_page_html', // Callback function
+		null,
+		99
+	);
+}
+add_action('admin_menu', 'custom_theme_options_page');
+
+// Display the custom options page
+function custom_theme_options_page_html()
+{
+	if (!current_user_can('manage_options')) {
+		return;
+	}
+
+	// Save the fields if the form is submitted
+	if (isset($_POST['most_searched_list'])) {
+		update_option('most_searched_list', wp_kses_post($_POST['most_searched_list']));
+	}
+
+	// Save the image fields
+	for ($i = 1; $i <= 8; $i++) {
+		if (isset($_POST["image_$i"])) {
+			update_option("image_$i", esc_url_raw($_POST["image_$i"]));
+		}
+	}
+
+	// Get the current values of the fields
+	$most_searched_list = get_option('most_searched_list', '');
+	$images = [];
+	for ($i = 1; $i <= 8; $i++) {
+		$images[$i] = get_option("image_$i", '');
+	}
+
+?>
+	<div class="wrap">
+		<h1>Global Settings</h1>
+		<form method="POST">
+			<h2>Most Searched List</h2>
+			<?php
+			// Display WYSIWYG field for "Most Searched List"
+			wp_editor($most_searched_list, 'most_searched_list', array(
+				'textarea_name' => 'most_searched_list',
+				'media_buttons' => true,
+				'textarea_rows' => 10,
+				'teeny'         => false,
+				'quicktags'     => true
+			));
+			?>
+
+			<h2>Image Uploads</h2>
+			<?php for ($i = 1; $i <= 8; $i++): ?>
+				<label for="image_<?php echo $i; ?>">Image <?php echo $i; ?></label><br>
+				<input type="text" name="image_<?php echo $i; ?>" id="image_<?php echo $i; ?>" value="<?php echo esc_url($images[$i]); ?>" placeholder="Image URL" />
+				<input type="button" class="upload_image_button button" value="Upload Image" data-image-index="<?php echo $i; ?>" />
+				<br><br>
+			<?php endfor; ?>
+
+			<input type="submit" value="Save" class="button button-primary">
+		</form>
+	</div>
+
+	<script>
+		jQuery(document).ready(function($) {
+			$('.upload_image_button').click(function(e) {
+				e.preventDefault();
+				var imageIndex = $(this).data('image-index');
+				var fileFrame = wp.media({
+					title: 'Select or Upload an Image',
+					button: {
+						text: 'Use this image'
+					},
+					multiple: false // Allow single image selection
+				});
+
+				fileFrame.on('select', function() {
+					var attachment = fileFrame.state().get('selection').first().toJSON();
+					$('#image_' + imageIndex).val(attachment.url); // Set the input value to the image URL
+				});
+
+				fileFrame.open();
+			});
+		});
+	</script>
+<?php
+}

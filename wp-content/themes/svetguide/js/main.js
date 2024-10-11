@@ -18,6 +18,7 @@ if (document.querySelector(".sg-illinois-inner")) {
 
 if (document.querySelector(".sg-illinois-taxonomy")) {
   (function () {
+    // ////////////
     let categoryNav = document.querySelector(".ss-illinois-category-name");
     let categoryTitle = document.querySelector(".category-heading");
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
@@ -90,5 +91,32 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     }
 
     fetchData();
+
+    // carousel
+
+    jQuery(document).ready(function ($) {
+      // Your jQuery code here
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        dots: false,
+        animateOut: "fadeOut",
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 1,
+          },
+        },
+      });
+    });
   })();
 }

@@ -1,6 +1,24 @@
 .sg-illinois-taxonomy {
   margin-bottom: 100px;
 
+  // ads section
+
+  .ads-section {
+    padding-block: 20px;
+    .container {
+      .owl-carousel {
+        .item {
+          img {
+            width: 100%;
+            max-height: 192px;
+          }
+        }
+      }
+    }
+  }
+
+  // ads section end
+
   //search section - start
   .search-section {
     background: #f3f3f3;

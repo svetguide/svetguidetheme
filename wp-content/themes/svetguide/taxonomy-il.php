@@ -9,11 +9,89 @@ Template Name: Illinois Taxonomy
 
 <section class="sg-illinois-taxonomy">
 
+
     <!-- ads section -->
 
     <div class="ads-section">
         <div class="container">
+            <div class="owl-carousel owl-theme">
 
+                <div class="item">
+                    <?php
+                    $image_one = get_option('image_1', '');
+                    if ($image_one) {
+                        echo '<img src="' . esc_url($image_one) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+                <div class="item">
+                    <?php
+                    $image_two = get_option('image_2', '');
+                    if ($image_two) {
+                        echo '<img src="' . esc_url($image_two) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+
+                <div class="item">
+                    <?php
+                    $image_three = get_option('image_3', '');
+                    if ($image_three) {
+                        echo '<img src="' . esc_url($image_three) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+
+                <div class="item">
+                    <?php
+                    $image_four = get_option('image_4', '');
+                    if ($image_four) {
+                        echo '<img src="' . esc_url($image_four) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+
+                <div class="item">
+                    <?php
+                    $image_five = get_option('image_5', '');
+                    if ($image_five) {
+                        echo '<img src="' . esc_url($image_five) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+                <div class="item">
+                    <?php
+                    $image_six = get_option('image_6', '');
+                    if ($image_six) {
+                        echo '<img src="' . esc_url($image_six) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+                <div class="item">
+                    <?php
+                    $image_seven = get_option('image_7', '');
+                    if ($image_seven) {
+                        echo '<img src="' . esc_url($image_seven) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+                <div class="item">
+                    <?php
+                    $image_eight = get_option('image_8', '');
+                    if ($image_eight) {
+                        echo '<img src="' . esc_url($image_eight) . '" alt="Image One">';
+                    }
+                    ?>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -73,7 +151,12 @@ Template Name: Illinois Taxonomy
             <div class="wrapper-1">
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
-                    <?php the_field('most_searched_list'); ?>
+                    <?php
+                    $most_searched_list = get_option('most_searched_list', '');
+                    if ($most_searched_list) {
+                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -109,5 +192,8 @@ Template Name: Illinois Taxonomy
         <!-- end of section 2 -->
     </div>
 </section>
+
+
+</div>
 
 <?php get_footer(); ?>
