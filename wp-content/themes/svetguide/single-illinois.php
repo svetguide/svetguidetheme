@@ -41,7 +41,12 @@ Template Name: Illinois Single
             <div class="wrapper-1">
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
-                    <?php the_field('most_searched_list'); ?>
+                    <?php
+                    $most_searched_list = get_option('most_searched_list', '');
+                    if ($most_searched_list) {
+                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
+                    }
+                    ?>
                 </div>
             </div>
 
