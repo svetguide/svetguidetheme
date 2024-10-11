@@ -18,7 +18,6 @@ if (document.querySelector(".sg-illinois-inner")) {
 
 if (document.querySelector(".sg-illinois-taxonomy")) {
   (function () {
-    // ////////////
     let categoryNav = document.querySelector(".ss-illinois-category-name");
     let categoryTitle = document.querySelector(".category-heading");
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
@@ -32,16 +31,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     categoryNav.textContent = combinedName;
     categoryNav.href = `https://svetguide.com/illinois/${pathnameArray[2]}`;
     categoryTitle.textContent = combinedName;
-
-    let dummyArr = Array.from({ length: 6 }).map(() => {
-      return {
-        title: "name",
-        about: "about",
-        phone: "phone",
-        address: "address",
-        website: "website",
-      };
-    });
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -81,7 +70,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     async function fetchData() {
       try {
         let res = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?brand_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
         );
         let data = await res.data;
         data.map((item) => {

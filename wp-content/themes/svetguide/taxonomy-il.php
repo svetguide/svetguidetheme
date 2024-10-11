@@ -25,7 +25,6 @@ Template Name: Illinois Taxonomy
                 }
                 ?>
 
-
                 <?php
                 $image_two = get_option('image_2', '');
                 if ($image_two) {
@@ -34,9 +33,6 @@ Template Name: Illinois Taxonomy
                     echo '</div>';
                 }
                 ?>
-
-
-
 
                 <?php
                 $image_three = get_option('image_3', '');
@@ -47,9 +43,6 @@ Template Name: Illinois Taxonomy
                 }
                 ?>
 
-
-
-
                 <?php
                 $image_four = get_option('image_4', '');
                 if ($image_four) {
@@ -58,9 +51,6 @@ Template Name: Illinois Taxonomy
                     echo '</div>';
                 }
                 ?>
-
-
-
 
                 <?php
                 $image_five = get_option('image_5', '');
@@ -71,8 +61,6 @@ Template Name: Illinois Taxonomy
                 }
                 ?>
 
-
-
                 <?php
                 $image_six = get_option('image_6', '');
                 if ($image_six) {
@@ -82,8 +70,6 @@ Template Name: Illinois Taxonomy
                 }
                 ?>
 
-
-
                 <?php
                 $image_seven = get_option('image_7', '');
                 if ($image_seven) {
@@ -92,8 +78,6 @@ Template Name: Illinois Taxonomy
                     echo '</div>';
                 }
                 ?>
-
-
 
                 <?php
                 $image_eight = get_option('image_8', '');

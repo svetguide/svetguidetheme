@@ -243,6 +243,9 @@
     gap: 50px;
   }
 }
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper {
+  flex-grow: 1;
+}
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .category-heading-wrapper {
   display: flex;
   align-items: center;
