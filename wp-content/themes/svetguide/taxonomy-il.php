@@ -16,80 +16,94 @@ Template Name: Illinois Taxonomy
         <div class="container">
             <div class="owl-carousel owl-theme">
 
-                <div class="item">
-                    <?php
-                    $image_one = get_option('image_1', '');
-                    if ($image_one) {
-                        echo '<img src="' . esc_url($image_one) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
-
-                <div class="item">
-                    <?php
-                    $image_two = get_option('image_2', '');
-                    if ($image_two) {
-                        echo '<img src="' . esc_url($image_two) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
+                <?php
+                $image_one = get_option('image_1', '');
+                if ($image_one) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_one) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
 
 
-                <div class="item">
-                    <?php
-                    $image_three = get_option('image_3', '');
-                    if ($image_three) {
-                        echo '<img src="' . esc_url($image_three) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
+                <?php
+                $image_two = get_option('image_2', '');
+                if ($image_two) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_two) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
 
 
-                <div class="item">
-                    <?php
-                    $image_four = get_option('image_4', '');
-                    if ($image_four) {
-                        echo '<img src="' . esc_url($image_four) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
 
 
-                <div class="item">
-                    <?php
-                    $image_five = get_option('image_5', '');
-                    if ($image_five) {
-                        echo '<img src="' . esc_url($image_five) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
+                <?php
+                $image_three = get_option('image_3', '');
+                if ($image_three) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_three) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
 
-                <div class="item">
-                    <?php
-                    $image_six = get_option('image_6', '');
-                    if ($image_six) {
-                        echo '<img src="' . esc_url($image_six) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
 
-                <div class="item">
-                    <?php
-                    $image_seven = get_option('image_7', '');
-                    if ($image_seven) {
-                        echo '<img src="' . esc_url($image_seven) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
 
-                <div class="item">
-                    <?php
-                    $image_eight = get_option('image_8', '');
-                    if ($image_eight) {
-                        echo '<img src="' . esc_url($image_eight) . '" alt="Image One">';
-                    }
-                    ?>
-                </div>
+
+                <?php
+                $image_four = get_option('image_4', '');
+                if ($image_four) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_four) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
+
+
+
+
+                <?php
+                $image_five = get_option('image_5', '');
+                if ($image_five) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_five) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
+
+
+
+                <?php
+                $image_six = get_option('image_6', '');
+                if ($image_six) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_six) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
+
+
+
+                <?php
+                $image_seven = get_option('image_7', '');
+                if ($image_seven) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_seven) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
+
+
+
+                <?php
+                $image_eight = get_option('image_8', '');
+                if ($image_eight) {
+                    echo  ' <div class="item">';
+                    echo '<img src="' . esc_url($image_eight) . '" alt="Image One">';
+                    echo '</div>';
+                }
+                ?>
+
 
             </div>
         </div>
