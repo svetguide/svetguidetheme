@@ -81,6 +81,10 @@ function load_css()
 	// load single-illinois.css
 	wp_register_style('single-illinois', get_template_directory_uri() . '/assets/css/single-illinois.css', array(), false, 'all');
 	wp_enqueue_style('single-illinois');
+
+	// load taxonomy-illinois.css
+	wp_register_style('taxonomy-illinois', get_template_directory_uri() . '/assets/css/taxonomy-illinois.css', array(), false, 'all');
+	wp_enqueue_style('taxonomy-illinois');
 }
 add_action('wp_enqueue_scripts', 'load_css');
 
@@ -191,3 +195,48 @@ if (!function_exists('add_custom_rewrite_rules')) {
 	}
 	add_action('init', 'add_custom_rewrite_rules');
 }
+
+// code to add acf fields to the REST api call 
+
+function add_acf_to_rest_api()
+{
+	// Check if ACF is installed and active
+	if (!function_exists('get_field')) return;
+
+	// Hook into the REST API for the post type 'cars'
+	register_rest_field('illinois', 'acf_fields', array(
+		'get_callback'    => function ($post) {
+			return get_fields($post['id']);
+		},
+		'schema'          => null,
+	));
+}
+add_action('rest_api_init', 'add_acf_to_rest_api');
+
+// function to create the api endpoint to fetch custom post type category(inside the taxonomy eg:brand) items using the category name, otherwise it can 
+// only be done using term id of the category
+
+// http://localhost:8888/wp-json/wp/v2/illinois?il_slug=Accounting Services
+
+function filter_illinois_by_il_slug($args, $request)
+{
+	if (isset($request['il_slug'])) {
+		$brand_slug = sanitize_text_field($request['il_slug']);
+		$term = get_term_by('slug', $brand_slug, 'il');
+
+		if ($term) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'il',
+					'field'    => 'term_id',
+					'terms'    => $term->term_id,
+				),
+			);
+		}
+	}
+
+	return $args;
+}
+
+// Hook into the REST API for the 'cars' post type
+add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
