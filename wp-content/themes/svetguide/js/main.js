@@ -81,7 +81,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     async function fetchData() {
       try {
         let res = await axios(
-          `http://localhost:8888/wp-json/wp/v2/illinois?brand_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/illinois?brand_slug=${combinedName}&_fields=acf_fields,slug`
         );
         let data = await res.data;
         data.map((item) => {
