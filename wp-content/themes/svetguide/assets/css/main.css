@@ -51,7 +51,10 @@ body {
     display: none;
   }
 }
-.sg-nav .container .sg-nav-desktop img {
+.sg-nav .container .sg-nav-desktop a {
+  display: block;
+}
+.sg-nav .container .sg-nav-desktop a img {
   width: 200px;
   height: 37px;
 }

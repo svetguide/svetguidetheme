@@ -12,16 +12,16 @@
         <div class="guide-wrapper">
             <div class="wrapper-1">
                 <div>
-                    <a href="/sadf">
+                    <a href="/illinois">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/illinois-guide.png" alt="">
                     </a>
-                    <a href="/sdf">Illinois Guide</a>
+                    <a href="/illinois">Illinois Guide</a>
                 </div>
                 <div>
-                    <a href="/asdf">
+                    <a href="/florida">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/florida-guide.png" alt="">
                     </a>
-                    <a href="/asdf">Florida Guide</a>
+                    <a href="/florida">Florida Guide</a>
                 </div>
             </div>
             <div class="wrapper-2">

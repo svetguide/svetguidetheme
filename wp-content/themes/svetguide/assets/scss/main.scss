@@ -43,10 +43,12 @@ body {
       @media screen and (max-width: 1024px) {
         display: none;
       }
-
-      img {
-        width: 200px;
-        height: 37px;
+      a {
+        display: block;
+        img {
+          width: 200px;
+          height: 37px;
+        }
       }
 
       .city-wrapper {
