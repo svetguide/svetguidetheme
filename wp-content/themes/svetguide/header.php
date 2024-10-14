@@ -21,7 +21,9 @@
         <div class="container">
 
             <div class="sg-nav-desktop">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
+                <a href="/">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
+                </a>
 
                 <div class="city-wrapper">
                     <a href="/illinois" class="city">ILLINOIS</a>
