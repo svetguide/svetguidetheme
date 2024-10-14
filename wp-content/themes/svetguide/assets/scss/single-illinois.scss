@@ -150,6 +150,7 @@
           border-radius: 14px;
           padding-block: 24px;
           padding-inline: 22px;
+          flex-grow: 1;
 
           .title {
             display: flex;
@@ -259,6 +260,7 @@
               text-decoration: none;
               display: block;
               margin-bottom: 10px;
+              width: fit-content;
             }
           }
 

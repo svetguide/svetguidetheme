@@ -184,7 +184,8 @@
 .sg-illinois-taxonomy .container .section-1 div img {
   width: 6px;
 }
-.sg-illinois-taxonomy .container .section-1 div a {
+.sg-illinois-taxonomy .container .section-1 div a,
+.sg-illinois-taxonomy .container .section-1 div p {
   font-family: Poppins;
   font-size: 14px;
   font-weight: 400;
@@ -192,6 +193,10 @@
   text-align: left;
   color: rgba(16, 39, 56, 0.5019607843);
   text-decoration: none;
+  margin-bottom: 0;
+}
+.sg-illinois-taxonomy .container .section-1 div p {
+  color: #102738;
 }
 .sg-illinois-taxonomy .container .section-1 div a:hover {
   color: #102738;

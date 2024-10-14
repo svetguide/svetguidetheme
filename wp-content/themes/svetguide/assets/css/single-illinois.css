@@ -122,6 +122,7 @@
   border-radius: 14px;
   padding-block: 24px;
   padding-inline: 22px;
+  flex-grow: 1;
 }
 .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title {
   display: flex;
@@ -235,6 +236,7 @@
   text-decoration: none;
   display: block;
   margin-bottom: 10px;
+  width: fit-content;
 }
 .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .social-media a {
   padding-top: 17px;

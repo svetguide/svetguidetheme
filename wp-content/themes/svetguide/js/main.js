@@ -11,7 +11,7 @@ if (document.querySelector(".sg-illinois-inner")) {
     });
     let combinedName = capitalCaseArray.join(" ");
     categoryNav.textContent = combinedName;
-    categoryNav.href = `https://svetguide.com/illinois/${pathnameArray[2]}`;
+    categoryNav.href = `${window.location.origin}/illinois/${pathnameArray[2]}`;
   })();
 }
 // taxonomy illinois
@@ -29,7 +29,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     });
     let combinedName = capitalCaseArray.join(" ");
     categoryNav.textContent = combinedName;
-    categoryNav.href = `https://svetguide.com/illinois/${pathnameArray[2]}`;
     categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
