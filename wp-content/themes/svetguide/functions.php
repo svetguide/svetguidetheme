@@ -85,6 +85,10 @@ function load_css()
 	// load taxonomy-illinois.css
 	wp_register_style('taxonomy-illinois', get_template_directory_uri() . '/assets/css/taxonomy-illinois.css', array(), false, 'all');
 	wp_enqueue_style('taxonomy-illinois');
+
+	// load archive-illinois.css
+	wp_register_style('archive-illinois', get_template_directory_uri() . '/assets/css/archive-illinois.css', array(), false, 'all');
+	wp_enqueue_style('archive-illinois');
 }
 add_action('wp_enqueue_scripts', 'load_css');
 
