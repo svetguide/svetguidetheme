@@ -131,7 +131,7 @@ Template Name: Illinois Taxonomy
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
-                <a class="ss-illinois-category-name" href="">All Categories</a>
+                <p class="ss-illinois-category-name"></p>
             </div>
 
 

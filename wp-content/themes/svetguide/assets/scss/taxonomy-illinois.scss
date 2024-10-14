@@ -211,7 +211,8 @@
           width: 6px;
         }
 
-        a {
+        a,
+        p {
           font-family: Poppins;
           font-size: 14px;
           font-weight: 400;
@@ -219,6 +220,11 @@
           text-align: left;
           color: #10273880;
           text-decoration: none;
+          margin-bottom: 0;
+        }
+
+        p {
+          color: #102738;
         }
 
         a:hover {
