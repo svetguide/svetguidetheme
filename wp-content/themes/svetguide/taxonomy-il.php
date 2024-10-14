@@ -105,11 +105,11 @@ Template Name: Illinois Taxonomy
                 <div class="input-wrapper">
                     <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/search-icon.png" alt="">
                     <input type="text" placeholder="Business name & location in Illinois">
-
+                </div>
+                <div class="list">
                 </div>
             </div>
             <div class="wrapper-2">
-                <!-- <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/contact-us-banner.png" alt=""> -->
                 <p>Do you want your business to be found by the local Eastern European Communities?</p>
                 <a href="/asdf">Contact us</a>
             </div>

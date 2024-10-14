@@ -107,5 +107,45 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         },
       });
     });
+
+    // search function
+
+    let searchBar = document.querySelector(".search-section input");
+    let list = document.querySelector(".search-section .list");
+    let arr = [];
+
+    function listItems(data) {
+      let item = document.createElement("div");
+      item.classList.add(".list-item");
+      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div> `;
+      list.append(item);
+    }
+
+    function unlistItem() {
+      document.querySelectorAll(".list-item").forEach((val) => {
+        val.remove();
+      });
+    }
+
+    searchBar.addEventListener("input", async function (e) {
+      arr = [];
+      if (e.target.value.length > 0) {
+        try {
+          let res = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
+          );
+          let data = await res.data;
+          unlistItem();
+          arr = [...data];
+
+          arr.map((item) => {
+            listItems(item);
+          });
+        } catch {}
+      }
+      if (e.target.value.length === 0) {
+        unlistItem();
+      }
+    });
   })();
 }
