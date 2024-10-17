@@ -25,7 +25,7 @@ body {
 }
 @media screen and (min-width: 1280px) {
   .container {
-    max-width: 1200px;
+    max-width: 1080px;
   }
 }
 @media screen and (min-width: 1536px) {
@@ -65,7 +65,7 @@ body {
 }
 .sg-nav .container .sg-nav-desktop .city-wrapper .city {
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "" Open Sans "", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -117,7 +117,7 @@ body {
 }
 .sg-nav .container .sg-nav-mob .city-wrapper .city {
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "" Open Sans "", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -218,7 +218,7 @@ body {
   margin-bottom: 15px;
 }
 .sg-footer .container .wrapper .contact > a {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 400;
   line-height: 27px;
@@ -231,7 +231,7 @@ body {
   margin-right: 5px;
 }
 .sg-footer .container .wrapper .social-media p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -250,7 +250,7 @@ body {
 }
 .sg-footer .container .wrapper .footer-illinois p:nth-of-type(1),
 .sg-footer .container .wrapper .footer-florida p:nth-of-type(1) {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -259,7 +259,7 @@ body {
 }
 .sg-footer .container .wrapper .footer-illinois p:nth-of-type(2),
 .sg-footer .container .wrapper .footer-florida p:nth-of-type(2) {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 400;
   line-height: 27px;
@@ -267,7 +267,7 @@ body {
   color: #505f6b;
 }
 .sg-footer .container .copyright p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
