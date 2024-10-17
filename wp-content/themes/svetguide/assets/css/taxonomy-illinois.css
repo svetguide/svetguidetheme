@@ -34,7 +34,7 @@
   }
 }
 .sg-illinois-taxonomy .search-section .container .wrapper-1 h2 {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 38px;
   font-weight: 600;
   line-height: 57px;
@@ -72,7 +72,7 @@
   outline: none;
 }
 .sg-illinois-taxonomy .search-section .container .wrapper-1 .input-wrapper input::placeholder {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -96,7 +96,7 @@
 .sg-illinois-taxonomy .search-section .container .wrapper-1 .list .list-item a {
   padding-block: 10px;
   padding-inline: 15px;
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -126,7 +126,7 @@
   }
 }
 .sg-illinois-taxonomy .search-section .container .wrapper-2 p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -186,7 +186,7 @@
 }
 .sg-illinois-taxonomy .container .section-1 div a,
 .sg-illinois-taxonomy .container .section-1 div p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -203,7 +203,7 @@
   transition: all 300ms;
 }
 .sg-illinois-taxonomy .container .section-1 div:nth-of-type(3) p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -232,7 +232,7 @@
   flex-basis: 20%;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-1 .title {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
@@ -258,7 +258,7 @@
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-1 .most-searched-list ul li a {
   text-decoration: none;
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 35px;
@@ -295,7 +295,7 @@
   width: 36px;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .category-heading-wrapper h1 {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 28px;
   font-weight: 600;
   line-height: 42px;
@@ -312,7 +312,7 @@
   margin-bottom: 20px;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .title a {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 24px;
   font-weight: 700;
   line-height: 36px;
@@ -323,7 +323,7 @@
   display: block;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content h5 {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 20px;
   font-weight: 600;
   line-height: 30px;
@@ -335,7 +335,7 @@
   margin-top: 10px;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .about p {
-  font-family: Poppins;
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
   line-height: 27px;
@@ -362,7 +362,7 @@
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .website p,
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .phone p,
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .address p {
-  font-family: poppins;
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
