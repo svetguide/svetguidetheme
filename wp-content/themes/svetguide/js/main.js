@@ -247,7 +247,6 @@ if (document.querySelector(".sg-illinois-archive")) {
             `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
           );
           let data = await res.data;
-          // //////////////
 
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.tags,title,link`
@@ -259,19 +258,23 @@ if (document.querySelector(".sg-illinois-archive")) {
 
           let filteredValue = tagsData.filter((item) => {
             return searchedArray.some((val) => {
-              return item.acf_fields.tags
-                .toLowerCase()
-                .includes(val.toLowerCase());
+              // Match each search term as a whole word
+              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+              return regex.test(item.acf_fields.tags.toLowerCase());
             });
           });
 
-          console.log(filteredValue);
-
-          ///////////
           unlistItem();
-          arr = [...data];
+          arr = [...data, ...filteredValue].map((item) => {
+            delete item.acf_fields;
+            return item;
+          });
 
-          arr.map((item) => {
+          let val = Array.from(
+            new Set(arr.map((item) => JSON.stringify(item)))
+          ).map((item) => JSON.parse(item));
+
+          val.map((item) => {
             listItems(item);
           });
         } catch (err) {
