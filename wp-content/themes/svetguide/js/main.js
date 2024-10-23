@@ -229,7 +229,17 @@ if (document.querySelector(".sg-illinois-archive")) {
       });
     }
 
-    searchBar.addEventListener("input", async function (e) {
+    function debounce(func, timeout = 500) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, timeout);
+      };
+    }
+
+    async function searching(e) {
       arr = [];
       if (e.target.value.length > 0) {
         try {
@@ -237,6 +247,27 @@ if (document.querySelector(".sg-illinois-archive")) {
             `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
           );
           let data = await res.data;
+          // //////////////
+
+          let tagsRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.tags,title,link`
+          );
+
+          let tagsData = await tagsRes.data;
+
+          let searchedArray = e.target.value.split(" ");
+
+          let filteredValue = tagsData.filter((item) => {
+            return searchedArray.some((val) => {
+              return item.acf_fields.tags
+                .toLowerCase()
+                .includes(val.toLowerCase());
+            });
+          });
+
+          console.log(filteredValue);
+
+          ///////////
           unlistItem();
           arr = [...data];
 
@@ -250,6 +281,11 @@ if (document.querySelector(".sg-illinois-archive")) {
       if (e.target.value.length === 0) {
         unlistItem();
       }
-    });
+    }
+
+    searchBar.addEventListener(
+      "input",
+      debounce((e) => searching(e))
+    );
   })();
 }
