@@ -116,7 +116,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     function listItems(data) {
       let item = document.createElement("div");
       item.classList.add(".list-item");
-      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div> `;
+      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
       list.append(item);
     }
 
@@ -126,7 +126,17 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       });
     }
 
-    searchBar.addEventListener("input", async function (e) {
+    function debounce(func, timeout = 500) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, timeout);
+      };
+    }
+
+    async function searching(e) {
       arr = [];
       if (e.target.value.length > 0) {
         try {
@@ -134,18 +144,49 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
             `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
           );
           let data = await res.data;
-          unlistItem();
-          arr = [...data];
 
-          arr.map((item) => {
+          let tagsRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.tags,title,link`
+          );
+
+          let tagsData = await tagsRes.data;
+
+          let searchedArray = e.target.value.trimEnd().split(" ");
+
+          let filteredValue = tagsData.filter((item) => {
+            return searchedArray.some((val) => {
+              // Match each search term as a whole word
+              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+              return regex.test(item.acf_fields.tags.toLowerCase());
+            });
+          });
+
+          unlistItem();
+          arr = [...data, ...filteredValue].map((item) => {
+            delete item.acf_fields;
+            return item;
+          });
+
+          let val = Array.from(
+            new Set(arr.map((item) => JSON.stringify(item)))
+          ).map((item) => JSON.parse(item));
+
+          val.map((item) => {
             listItems(item);
           });
-        } catch {}
+        } catch (err) {
+          console.error(err);
+        }
       }
       if (e.target.value.length === 0) {
         unlistItem();
       }
-    });
+    }
+
+    searchBar.addEventListener(
+      "input",
+      debounce((e) => searching(e))
+    );
   })();
 }
 
@@ -254,7 +295,7 @@ if (document.querySelector(".sg-illinois-archive")) {
 
           let tagsData = await tagsRes.data;
 
-          let searchedArray = e.target.value.split(" ");
+          let searchedArray = e.target.value.trimEnd().split(" ");
 
           let filteredValue = tagsData.filter((item) => {
             return searchedArray.some((val) => {
