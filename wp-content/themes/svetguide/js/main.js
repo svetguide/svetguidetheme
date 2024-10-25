@@ -146,7 +146,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           let data = await res.data;
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.tags,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
           );
 
           let tagsData = await tagsRes.data;
@@ -157,7 +157,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
             return searchedArray.some((val) => {
               // Match each search term as a whole word
               let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.tags.toLowerCase());
+              return regex.test(item.acf_fields.search_terms.toLowerCase());
             });
           });
 
@@ -290,7 +290,7 @@ if (document.querySelector(".sg-illinois-archive")) {
           let data = await res.data;
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.tags,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
           );
 
           let tagsData = await tagsRes.data;
@@ -301,7 +301,7 @@ if (document.querySelector(".sg-illinois-archive")) {
             return searchedArray.some((val) => {
               // Match each search term as a whole word
               let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.tags.toLowerCase());
+              return regex.test(item.acf_fields.search_terms.toLowerCase());
             });
           });
 
