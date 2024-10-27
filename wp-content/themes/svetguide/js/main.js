@@ -187,6 +187,13 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       "input",
       debounce((e) => searching(e))
     );
+
+    //redirect to search results page on pressing enter
+    searchBar.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        window.location = `${window.location.origin}/search-results-illinois/?searchterm=${e.target.value}`;
+      }
+    });
   })();
 }
 
@@ -331,5 +338,267 @@ if (document.querySelector(".sg-illinois-archive")) {
       "input",
       debounce((e) => searching(e))
     );
+
+    //redirect to search results page on pressing enter
+    searchBar.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        window.location = `${window.location.origin}/search-results-illinois/?searchterm=${e.target.value}`;
+      }
+    });
+  })();
+}
+
+//search results page illinois
+
+if (document.querySelector(".sg-search-results-illinois")) {
+  (function () {
+    let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
+
+    // search on input
+
+    let searchBar = document.querySelector(".search-section input");
+    let list = document.querySelector(".search-section .list");
+    let noResultsElement = document.querySelector(".message");
+    let query = document.querySelector(".query");
+    let arr = [];
+    let arrayOnEnter = [];
+
+    function debounce(func, timeout = 500) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, timeout);
+      };
+    }
+
+    function listItems(data) {
+      let item = document.createElement("div");
+      item.classList.add(".list-item");
+      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
+      list.append(item);
+    }
+
+    function unlistItem() {
+      document.querySelectorAll(".list-item").forEach((val) => {
+        val.remove();
+      });
+    }
+
+    async function searching(e) {
+      arr = [];
+      if (e.target.value.length > 0) {
+        try {
+          let res = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
+          );
+          let data = await res.data;
+
+          let tagsRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
+          );
+
+          let tagsData = await tagsRes.data;
+
+          let searchedArray = e.target.value.trimEnd().split(" ");
+
+          let filteredValue = tagsData.filter((item) => {
+            return searchedArray.some((val) => {
+              // Match each search term as a whole word
+              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+              return regex.test(item.acf_fields.search_terms.toLowerCase());
+            });
+          });
+
+          unlistItem();
+          arr = [...data, ...filteredValue].map((item) => {
+            delete item.acf_fields;
+            return item;
+          });
+
+          let val = Array.from(
+            new Set(arr.map((item) => JSON.stringify(item)))
+          ).map((item) => JSON.parse(item));
+
+          val.map((item) => {
+            listItems(item);
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      if (e.target.value.length === 0) {
+        unlistItem();
+      }
+    }
+
+    searchBar.addEventListener(
+      "input",
+      debounce((e) => searching(e))
+    );
+
+    // search on press enter
+
+    function createBusinessCard(data) {
+      let wrapper = document.createElement("div");
+      wrapper.classList.add("wrapper-content");
+      wrapper.innerHTML = `<div class="title">
+                            <a href="${data?.link}">${data?.acf_fields?.title}</a>
+                          </div>
+
+                            <div class="about">
+                                <p>${data?.acf_fields?.about}</p>
+                            </div>
+
+                            <div class="phone">
+                                <div>
+                                    <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
+                                    <p><?php the_field('phone'); ?>${data?.acf_fields?.phone}</p>
+                                </div>
+                            </div>
+
+                            <div class="website">
+                                <div>
+                                    <img src="/wp-content/themes/svetguide/assets/images/single-illinois/website.png" alt="">
+                                    <p>${data?.acf_fields?.website}</p>
+                                </div>
+                            </div>
+
+                            <div class="address">
+                                <div>
+                                    <img src="/wp-content/themes/svetguide/assets/images/single-illinois/location.png" alt="">
+                                    <p>${data?.acf_fields?.address}</p>
+                                </div>
+                            </div>`;
+
+      subWrapper.appendChild(wrapper);
+    }
+
+    function removeCards() {
+      document.querySelectorAll(".wrapper-content").forEach((val) => {
+        val.remove();
+      });
+    }
+
+    async function searchOnEnter(e) {
+      arrayOnEnter = [];
+      if (e.key === "Enter") {
+        if (e.target.value.length > 0) {
+          try {
+            let res = await axios(
+              `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link,acf_fields`
+            );
+            let data = await res.data;
+
+            let tagsRes = await axios(
+              `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link`
+            );
+
+            let tagsData = await tagsRes.data;
+
+            let searchedArray = e.target.value.trimEnd().split(" ");
+
+            let filteredValue = tagsData.filter((item) => {
+              return searchedArray.some((val) => {
+                // Match each search term as a whole word
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            });
+
+            unlistItem();
+            removeCards();
+            arrayOnEnter = [...data, ...filteredValue].map((item) => {
+              return item;
+            });
+
+            let val = Array.from(
+              new Set(arrayOnEnter.map((item) => JSON.stringify(item)))
+            ).map((item) => JSON.parse(item));
+
+            if (val.length !== 0) {
+              noResultsElement.style.display = "none";
+            }
+            if (val.length === 0) {
+              noResultsElement.style.display = "block";
+              query.textContent = e.target.value.trim();
+            }
+
+            val.map((item) => {
+              console.log(item);
+              createBusinessCard(item);
+            });
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      }
+    }
+
+    searchBar.addEventListener(
+      "keypress",
+      debounce((e) => searchOnEnter(e))
+    );
+
+    // show cards on page load if searchterm is there
+
+    const searchParams = new URLSearchParams(window.location.search);
+    if (
+      searchParams.has("searchterm") &&
+      searchParams.get("searchterm").trim().length !== 0
+    ) {
+      const queryTerm = searchParams.get("searchterm").trim();
+
+      async function showCardsOnPageLoad() {
+        try {
+          let res = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?search=${queryTerm}&_fields=title,link,acf_fields`
+          );
+          let data = await res.data;
+
+          console.log(data);
+
+          let tagsRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link`
+          );
+
+          let tagsData = await tagsRes.data;
+
+          let searchedArray = queryTerm.trimEnd().split(" ");
+
+          let filteredValue = tagsData.filter((item) => {
+            return searchedArray.some((val) => {
+              // Match each search term as a whole word
+              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+              return regex.test(item.acf_fields.search_terms.toLowerCase());
+            });
+          });
+
+          let val = Array.from(
+            new Set(
+              [...data, ...filteredValue].map((item) => JSON.stringify(item))
+            )
+          ).map((item) => JSON.parse(item));
+
+          if (val.length !== 0) {
+            noResultsElement.style.display = "none";
+          }
+          if (val.length === 0) {
+            noResultsElement.style.display = "block";
+            query.textContent = searchParams.get("searchterm").trim();
+          }
+
+          val.map((item) => {
+            createBusinessCard(item);
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      showCardsOnPageLoad();
+    } else {
+      noResultsElement.style.display = "block";
+    }
   })();
 }

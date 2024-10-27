@@ -68,8 +68,6 @@ add_action('after_setup_theme', 'svetguidetheme_setup');
 
 function load_css()
 {
-
-
 	// load main.css for all pages eg: header.php footer.php etc or we can have seperate files for header and footer
 	wp_register_style('main', get_template_directory_uri() . '/assets/css/main.css', array(), false, 'all');
 	wp_enqueue_style('main');
@@ -89,6 +87,10 @@ function load_css()
 	// load archive-illinois.css
 	wp_register_style('archive-illinois', get_template_directory_uri() . '/assets/css/archive-illinois.css', array(), false, 'all');
 	wp_enqueue_style('archive-illinois');
+
+	// load search-results-illinois.css
+	wp_register_style('search-results-illinois', get_template_directory_uri() . '/assets/css/search-results-illinois.css', array(), false, 'all');
+	wp_enqueue_style('search-results-illinois');
 }
 add_action('wp_enqueue_scripts', 'load_css');
 
