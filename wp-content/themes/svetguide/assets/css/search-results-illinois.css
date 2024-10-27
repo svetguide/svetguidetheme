@@ -70,6 +70,7 @@
   color: rgba(16, 39, 56, 0.5019607843);
 }
 .sg-search-results-illinois .search-section .container .wrapper-1 .list {
+  display: none;
   box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.0705882353);
   position: absolute;
   margin-top: 10px;

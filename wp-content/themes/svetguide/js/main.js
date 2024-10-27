@@ -114,6 +114,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let arr = [];
 
     function listItems(data) {
+      list.style.display = "block";
       let item = document.createElement("div");
       item.classList.add(".list-item");
       item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
@@ -124,6 +125,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       document.querySelectorAll(".list-item").forEach((val) => {
         val.remove();
       });
+      list.style.display = "none";
     }
 
     function debounce(func, timeout = 500) {
@@ -265,6 +267,7 @@ if (document.querySelector(".sg-illinois-archive")) {
     let arr = [];
 
     function listItems(data) {
+      list.style.display = "block";
       let item = document.createElement("div");
       item.classList.add(".list-item");
       item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
@@ -275,6 +278,7 @@ if (document.querySelector(".sg-illinois-archive")) {
       document.querySelectorAll(".list-item").forEach((val) => {
         val.remove();
       });
+      list.style.display = "none";
     }
 
     function debounce(func, timeout = 500) {
@@ -374,6 +378,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
     }
 
     function listItems(data) {
+      list.style.display = "block";
       let item = document.createElement("div");
       item.classList.add(".list-item");
       item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
@@ -384,6 +389,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
       document.querySelectorAll(".list-item").forEach((val) => {
         val.remove();
       });
+      list.style.display = "none";
     }
 
     async function searching(e) {
