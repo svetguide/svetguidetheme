@@ -148,19 +148,46 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           let data = await res.data;
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
 
           let tagsData = await tagsRes.data;
 
-          let searchedArray = e.target.value.trimEnd().split(" ");
-
           let filteredValue = tagsData.filter((item) => {
-            return searchedArray.some((val) => {
-              // Match each search term as a whole word
-              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.search_terms.toLowerCase());
-            });
+            // Trim the input and split it into an array of words
+            let searchedArray = e.target.value.trimEnd().split(" ");
+
+            // Check if the first word is "service" or "services"
+            const firstWordIsService =
+              searchedArray[0]?.toLowerCase() === "service" ||
+              searchedArray[0]?.toLowerCase() === "services";
+
+            // Case 1: If the first word is "service" or "services", there must be at least two words
+            if (firstWordIsService && searchedArray.length >= 2) {
+              // Ensure all search terms match as whole words
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            }
+
+            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+            if (!firstWordIsService) {
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                let searchTermAndAddress =
+                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                  " " +
+                  item.acf_fields.search_terms.toLowerCase();
+                return regex.test(searchTermAndAddress);
+                // return regex.test(
+
+                // );
+              });
+            }
+
+            // Case 3: Ignore if only "service" or "services" is searched as a single word
+            return false;
           });
 
           unlistItem();
@@ -301,19 +328,46 @@ if (document.querySelector(".sg-illinois-archive")) {
           let data = await res.data;
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
 
           let tagsData = await tagsRes.data;
 
-          let searchedArray = e.target.value.trimEnd().split(" ");
-
           let filteredValue = tagsData.filter((item) => {
-            return searchedArray.some((val) => {
-              // Match each search term as a whole word
-              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.search_terms.toLowerCase());
-            });
+            // Trim the input and split it into an array of words
+            let searchedArray = e.target.value.trimEnd().split(" ");
+
+            // Check if the first word is "service" or "services"
+            const firstWordIsService =
+              searchedArray[0]?.toLowerCase() === "service" ||
+              searchedArray[0]?.toLowerCase() === "services";
+
+            // Case 1: If the first word is "service" or "services", there must be at least two words
+            if (firstWordIsService && searchedArray.length >= 2) {
+              // Ensure all search terms match as whole words
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            }
+
+            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+            if (!firstWordIsService) {
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                let searchTermAndAddress =
+                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                  " " +
+                  item.acf_fields.search_terms.toLowerCase();
+                return regex.test(searchTermAndAddress);
+                // return regex.test(
+
+                // );
+              });
+            }
+
+            // Case 3: Ignore if only "service" or "services" is searched as a single word
+            return false;
           });
 
           unlistItem();
@@ -402,19 +456,46 @@ if (document.querySelector(".sg-search-results-illinois")) {
           let data = await res.data;
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
 
           let tagsData = await tagsRes.data;
 
-          let searchedArray = e.target.value.trimEnd().split(" ");
-
           let filteredValue = tagsData.filter((item) => {
-            return searchedArray.some((val) => {
-              // Match each search term as a whole word
-              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.search_terms.toLowerCase());
-            });
+            // Trim the input and split it into an array of words
+            let searchedArray = e.target.value.trimEnd().split(" ");
+
+            // Check if the first word is "service" or "services"
+            const firstWordIsService =
+              searchedArray[0]?.toLowerCase() === "service" ||
+              searchedArray[0]?.toLowerCase() === "services";
+
+            // Case 1: If the first word is "service" or "services", there must be at least two words
+            if (firstWordIsService && searchedArray.length >= 2) {
+              // Ensure all search terms match as whole words
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            }
+
+            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+            if (!firstWordIsService) {
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                let searchTermAndAddress =
+                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                  " " +
+                  item.acf_fields.search_terms.toLowerCase();
+                return regex.test(searchTermAndAddress);
+                // return regex.test(
+
+                // );
+              });
+            }
+
+            // Case 3: Ignore if only "service" or "services" is searched as a single word
+            return false;
           });
 
           unlistItem();
@@ -498,19 +579,46 @@ if (document.querySelector(".sg-search-results-illinois")) {
             let data = await res.data;
 
             let tagsRes = await axios(
-              `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link`
+              `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link,acf_fields.address`
             );
 
             let tagsData = await tagsRes.data;
 
-            let searchedArray = e.target.value.trimEnd().split(" ");
-
             let filteredValue = tagsData.filter((item) => {
-              return searchedArray.some((val) => {
-                // Match each search term as a whole word
-                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-                return regex.test(item.acf_fields.search_terms.toLowerCase());
-              });
+              // Trim the input and split it into an array of words
+              let searchedArray = e.target.value.trimEnd().split(" ");
+
+              // Check if the first word is "service" or "services"
+              const firstWordIsService =
+                searchedArray[0]?.toLowerCase() === "service" ||
+                searchedArray[0]?.toLowerCase() === "services";
+
+              // Case 1: If the first word is "service" or "services", there must be at least two words
+              if (firstWordIsService && searchedArray.length >= 2) {
+                // Ensure all search terms match as whole words
+                return searchedArray.every((val) => {
+                  let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                  return regex.test(item.acf_fields.search_terms.toLowerCase());
+                });
+              }
+
+              // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+              if (!firstWordIsService) {
+                return searchedArray.every((val) => {
+                  let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                  let searchTermAndAddress =
+                    item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                    " " +
+                    item.acf_fields.search_terms.toLowerCase();
+                  return regex.test(searchTermAndAddress);
+                  // return regex.test(
+
+                  // );
+                });
+              }
+
+              // Case 3: Ignore if only "service" or "services" is searched as a single word
+              return false;
             });
 
             unlistItem();
@@ -566,19 +674,46 @@ if (document.querySelector(".sg-search-results-illinois")) {
           console.log(data);
 
           let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link`
+            `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link,acf_fields.address`
           );
 
           let tagsData = await tagsRes.data;
 
-          let searchedArray = queryTerm.trimEnd().split(" ");
-
           let filteredValue = tagsData.filter((item) => {
-            return searchedArray.some((val) => {
-              // Match each search term as a whole word
-              let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-              return regex.test(item.acf_fields.search_terms.toLowerCase());
-            });
+            // Trim the input and split it into an array of words
+            let searchedArray = queryTerm.trimEnd().split(" ");
+
+            // Check if the first word is "service" or "services"
+            const firstWordIsService =
+              searchedArray[0]?.toLowerCase() === "service" ||
+              searchedArray[0]?.toLowerCase() === "services";
+
+            // Case 1: If the first word is "service" or "services", there must be at least two words
+            if (firstWordIsService && searchedArray.length >= 2) {
+              // Ensure all search terms match as whole words
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            }
+
+            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+            if (!firstWordIsService) {
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                let searchTermAndAddress =
+                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                  " " +
+                  item.acf_fields.search_terms.toLowerCase();
+                return regex.test(searchTermAndAddress);
+                // return regex.test(
+
+                // );
+              });
+            }
+
+            // Case 3: Ignore if only "service" or "services" is searched as a single word
+            return false;
           });
 
           let val = Array.from(
