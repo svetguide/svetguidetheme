@@ -225,6 +225,8 @@ function add_acf_to_rest_api()
 }
 add_action('rest_api_init', 'add_acf_to_rest_api');
 
+/////////////////////
+
 // function to create the api endpoint to fetch custom post type category(inside the taxonomy eg:brand) items using the category name, otherwise it can 
 // only be done using term id of the category
 
@@ -233,25 +235,69 @@ add_action('rest_api_init', 'add_acf_to_rest_api');
 function filter_illinois_by_il_slug($args, $request)
 {
 	if (isset($request['il_slug'])) {
-		$brand_slug = sanitize_text_field($request['il_slug']);
-		$term = get_term_by('slug', $brand_slug, 'il');
+		$search_slug = sanitize_text_field($request['il_slug']);
 
-		if ($term) {
-			$args['tax_query'] = array(
-				array(
-					'taxonomy' => 'il',
-					'field'    => 'term_id',
-					'terms'    => $term->term_id,
-				),
-			);
+		// Get all terms from the 'il' taxonomy
+		$all_terms = get_terms(array(
+			'taxonomy' => 'il',
+			'hide_empty' => false,
+		));
+
+		if (!empty($all_terms) && !is_wp_error($all_terms)) {
+			$best_match = null;
+			$highest_similarity = 0;
+
+			foreach ($all_terms as $term) {
+				// Calculate similarity scores using different methods
+				$term_name = strtolower($term->name);
+				$term_slug = strtolower($term->slug);
+				$search_term = strtolower($search_slug);
+
+				// Check if search term is contained within the term name or slug
+				$contains_search = (strpos($term_name, $search_term) !== false) ||
+					(strpos($term_slug, $search_term) !== false);
+
+				// Calculate Levenshtein distance (lower is better)
+				$lev_distance = levenshtein($search_term, $term_name);
+				$max_length = max(strlen($search_term), strlen($term_name));
+				$lev_similarity = 1 - ($lev_distance / $max_length);
+
+				// Similar_text percentage
+				similar_text($search_term, $term_name, $percent_similarity);
+				$percent_similarity = $percent_similarity / 100;
+
+				// Combine similarity scores with weights
+				$final_similarity = ($contains_search ? 0.5 : 0) +
+					($lev_similarity * 0.25) +
+					($percent_similarity * 0.25);
+
+				// Update best match if this term has a higher similarity
+				if ($final_similarity > $highest_similarity && $final_similarity > 0.3) { // Threshold of 0.3
+					$highest_similarity = $final_similarity;
+					$best_match = $term;
+				}
+			}
+
+			// If we found a match above our threshold, add it to the query
+			if ($best_match) {
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'il',
+						'field'    => 'term_id',
+						'terms'    => $best_match->term_id,
+					),
+				);
+			}
 		}
 	}
-
 	return $args;
 }
 
-// Hook into the REST API for the 'cars' post type
+// Hook into the REST API for the 'illinois' post type
 add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
+
+
+///////////////////
 
 
 //Global Settings page for text field and image field
