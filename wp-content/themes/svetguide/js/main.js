@@ -35,17 +35,24 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.slug}">${data?.acf_fields?.title}</a>
+                            <a href="${data?.slug}">${
+        data?.acf_fields?.title
+      }</a>
                           </div>
 
                             <div class="about">
-                                <p>${data?.acf_fields?.about}</p>
+                                <p>${
+                                  data?.acf_fields?.category_description ||
+                                  data?.acf_fields?.about
+                                }</p>
                             </div>
 
                             <div class="phone">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
-                                    <p><?php the_field('phone'); ?>${data?.acf_fields?.phone}</p>
+                                    <p><?php the_field('phone'); ?>${
+                                      data?.acf_fields?.phone
+                                    }</p>
                                 </div>
                             </div>
 
