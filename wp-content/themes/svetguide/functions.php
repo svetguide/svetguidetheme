@@ -73,24 +73,34 @@ function load_css()
 	wp_enqueue_style('main');
 
 	// load front-page.css
-	wp_register_style('front-page', get_template_directory_uri() . '/assets/css/front-page.css', array(), false, 'all');
-	wp_enqueue_style('front-page');
-
+	if (is_front_page()) {
+		wp_register_style('front-page', get_template_directory_uri() . '/assets/css/front-page.css', array(), false, 'all');
+		wp_enqueue_style('front-page');
+	}
 	// load single-illinois.css
-	wp_register_style('single-illinois', get_template_directory_uri() . '/assets/css/single-illinois.css', array(), false, 'all');
-	wp_enqueue_style('single-illinois');
-
+	if (is_singular('illinois')) {
+		wp_register_style('single-illinois', get_template_directory_uri() . '/assets/css/single-illinois.css', array(), false, 'all');
+		wp_enqueue_style('single-illinois');
+	}
 	// load taxonomy-illinois.css
-	wp_register_style('taxonomy-illinois', get_template_directory_uri() . '/assets/css/taxonomy-illinois.css', array(), false, 'all');
-	wp_enqueue_style('taxonomy-illinois');
-
+	if (is_tax('il')) {
+		wp_register_style('taxonomy-illinois', get_template_directory_uri() . '/assets/css/taxonomy-illinois.css', array(), false, 'all');
+		wp_enqueue_style('taxonomy-illinois');
+	}
 	// load archive-illinois.css
-	wp_register_style('archive-illinois', get_template_directory_uri() . '/assets/css/archive-illinois.css', array(), false, 'all');
-	wp_enqueue_style('archive-illinois');
-
+	if (is_post_type_archive('illinois')) {
+		wp_register_style('archive-illinois', get_template_directory_uri() . '/assets/css/archive-illinois.css', array(), false, 'all');
+		wp_enqueue_style('archive-illinois');
+	}
 	// load search-results-illinois.css
 	wp_register_style('search-results-illinois', get_template_directory_uri() . '/assets/css/search-results-illinois.css', array(), false, 'all');
 	wp_enqueue_style('search-results-illinois');
+
+	// load 404-page.css
+	if (is_404()) {
+		wp_register_style('404-page', get_template_directory_uri() . '/assets/css/404-page.css', array(), false, 'all');
+		wp_enqueue_style('404-page');
+	}
 }
 add_action('wp_enqueue_scripts', 'load_css');
 

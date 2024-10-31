@@ -1,0 +1,32 @@
+.sg-not-found {
+  margin-block: 100px;
+}
+.sg-not-found .container {
+  padding-block: 100px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("/wp-content/themes/svetguide/assets/images/404-bg.png");
+  display: grid;
+  place-items: center;
+}
+.sg-not-found .container h3 {
+  font-family: Poppins;
+  font-size: 60px;
+  color: black;
+  font-weight: 700;
+}
+.sg-not-found .container p {
+  font-family: Poppins;
+  font-size: 30px;
+  color: black;
+  font-weight: 700;
+}
+.sg-not-found .container a {
+  font-family: Poppins;
+  font-size: 20px;
+  color: #ed561c;
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=404-page.css.map */
