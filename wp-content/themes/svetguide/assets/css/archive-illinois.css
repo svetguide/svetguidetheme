@@ -60,6 +60,7 @@
   left: 20px;
 }
 .sg-illinois-archive .search-section .container .wrapper-1 .input-wrapper input {
+  padding-right: 45px;
   position: relative;
   width: 100%;
   border-radius: 48px;
@@ -112,6 +113,40 @@
 }
 .sg-illinois-archive .search-section .container .wrapper-1 .list .list-item:last-child {
   border-bottom: none;
+}
+.sg-illinois-archive .search-section .container .wrapper-1 .loader {
+  display: none;
+  position: absolute;
+  right: 20px;
+  bottom: 24px;
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  animation: l22-0 2s infinite linear;
+}
+.sg-illinois-archive .search-section .container .wrapper-1 .loader:before,
+.sg-illinois-archive .search-section .container .wrapper-1 .loader:after {
+  content: "";
+  grid-area: 1/1;
+  margin: 15%;
+  border-radius: 50%;
+  background: inherit;
+  transform: rotate(0deg) translate(150%);
+  animation: l22 1s infinite;
+}
+.sg-illinois-archive .search-section .container .wrapper-1 .loader:after {
+  animation-delay: -0.5s;
+}
+@keyframes l22-0 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@keyframes l22 {
+  100% {
+    transform: rotate(1turn) translate(150%);
+  }
 }
 .sg-illinois-archive .search-section .container .wrapper-2 {
   padding: 35px 30px;
