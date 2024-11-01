@@ -144,6 +144,16 @@
             transform: rotate(1turn) translate(150%);
           }
         }
+
+        // no results found
+        .no-results-found {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          margin-top: 20px;
+        }
       }
 
       .wrapper-2 {
