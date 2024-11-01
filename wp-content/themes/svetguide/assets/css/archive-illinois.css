@@ -148,6 +148,14 @@
     transform: rotate(1turn) translate(150%);
   }
 }
+.sg-illinois-archive .search-section .container .wrapper-1 .no-results-found {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 20px;
+}
 .sg-illinois-archive .search-section .container .wrapper-2 {
   padding: 35px 30px;
   flex-basis: 487px;
