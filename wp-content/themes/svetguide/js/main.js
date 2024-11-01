@@ -21,6 +21,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let categoryNav = document.querySelector(".ss-illinois-category-name");
     let categoryTitle = document.querySelector(".category-heading");
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
+    let loader = document.querySelector(".loader");
     let pageUrl = window.location.pathname;
     let pathnameArray = pageUrl.split("/");
     let categoryName = pathnameArray[2].split("-");
@@ -147,10 +148,13 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
     async function searching(e) {
       arr = [];
-      if (e.target.value.length > 0) {
+      if (e.target.value.trim().length > 0) {
+        loader.style.display = "grid";
         try {
           let res = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?search=${e.target.value.trim()}&_fields=title,link`
           );
           let data = await res.data;
 
@@ -210,6 +214,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           val.map((item) => {
             listItems(item);
           });
+          loader.style.display = "none";
         } catch (err) {
           console.error(err);
         }
@@ -238,6 +243,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 if (document.querySelector(".sg-illinois-archive")) {
   (function () {
     let listArray = [];
+    let loader = document.querySelector(".loader");
     let categoryList = document.querySelectorAll(".category-list");
     categoryList.forEach((item) => {
       listArray.push(item);
@@ -327,10 +333,13 @@ if (document.querySelector(".sg-illinois-archive")) {
 
     async function searching(e) {
       arr = [];
-      if (e.target.value.length > 0) {
+      if (e.target.value.trim().length > 0) {
+        loader.style.display = "grid";
         try {
           let res = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?search=${e.target.value.trim()}&_fields=title,link`
           );
           let data = await res.data;
 
@@ -390,6 +399,8 @@ if (document.querySelector(".sg-illinois-archive")) {
           val.map((item) => {
             listItems(item);
           });
+
+          loader.style.display = "none";
         } catch (err) {
           console.error(err);
         }
@@ -420,7 +431,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
 
     // search on input
-
+    let loader = document.querySelector(".loader");
     let searchBar = document.querySelector(".search-section input");
     let list = document.querySelector(".search-section .list");
     let noResultsElement = document.querySelector(".message");
@@ -455,10 +466,13 @@ if (document.querySelector(".sg-search-results-illinois")) {
 
     async function searching(e) {
       arr = [];
-      if (e.target.value.length > 0) {
+      if (e.target.value.trim().length > 0) {
+        loader.style.display = "grid";
         try {
           let res = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link`
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?search=${e.target.value.trim()}&_fields=title,link`
           );
           let data = await res.data;
 
@@ -518,6 +532,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
           val.map((item) => {
             listItems(item);
           });
+          loader.style.display = "none";
         } catch (err) {
           console.error(err);
         }
@@ -578,7 +593,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
     async function searchOnEnter(e) {
       arrayOnEnter = [];
       if (e.key === "Enter") {
-        if (e.target.value.length > 0) {
+        if (e.target.value.trim().length > 0) {
           try {
             let res = await axios(
               `${window.location.origin}/wp-json/wp/v2/illinois?search=${e.target.value}&_fields=title,link,acf_fields`
@@ -677,8 +692,6 @@ if (document.querySelector(".sg-search-results-illinois")) {
             `${window.location.origin}/wp-json/wp/v2/illinois?search=${queryTerm}&_fields=title,link,acf_fields`
           );
           let data = await res.data;
-
-          console.log(data);
 
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link,acf_fields.address`

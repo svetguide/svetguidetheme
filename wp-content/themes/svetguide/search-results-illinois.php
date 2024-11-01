@@ -19,6 +19,7 @@ Template Name: Search Results Illinois
                 </div>
                 <div class="list">
                 </div>
+                <div class="loader"></div>
             </div>
             <div class="wrapper-2">
                 <p>Do you want your business to be found by the local Eastern European Communities?</p>
