@@ -136,7 +136,6 @@ Template Name: Illinois Taxonomy
                 <p class="ss-illinois-category-name"></p>
             </div>
 
-
         </div>
 
         <!-- section 1 end -->
@@ -165,17 +164,22 @@ Template Name: Illinois Taxonomy
             <!-- wrapper-2 -->
 
             <div class="wrapper-2">
+                <div class="list-of-cards">
+                    <div class="sub-wrapper">
 
-                <div class="sub-wrapper">
+                        <div class="category-heading-wrapper">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/taxonomy-illinois/svetguide-flower-icon.png" alt="">
+                            <h1 class="category-heading"></h1>
+                        </div>
 
-                    <div class="category-heading-wrapper">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/taxonomy-illinois/svetguide-flower-icon.png" alt="">
-                        <h1 class="category-heading"></h1>
                     </div>
 
-
-
+                    <div class="page-nav">
+                        <button class="prev">Prev</button>
+                        <button class="next">Next</button>
+                    </div>
                 </div>
+
 
                 <div class="wrapper-image">
                     <a href="/asdf">
@@ -185,9 +189,12 @@ Template Name: Illinois Taxonomy
 
             </div>
 
+
             <!-- end of wrapper-2 -->
 
         </div>
+
+
 
         <!-- end of section 2 -->
     </div>

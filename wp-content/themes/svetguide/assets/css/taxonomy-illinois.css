@@ -318,6 +318,11 @@
   gap: 18px;
   flex-basis: 80%;
 }
+@media screen and (max-width: 1024px) {
+  .sg-illinois-taxonomy .container .section-2 .wrapper-2 {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 768px) {
   .sg-illinois-taxonomy .container .section-2 .wrapper-2 {
     flex-direction: column;
@@ -325,19 +330,24 @@
     gap: 50px;
   }
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards {
   flex-grow: 1;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .category-heading-wrapper {
+@media screen and (max-width: 768px) {
+  .sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards {
+    width: 100%;
+  }
+}
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 26px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .category-heading-wrapper img {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper img {
   width: 36px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .category-heading-wrapper h1 {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper h1 {
   font-family: "Open Sans";
   font-size: 28px;
   font-weight: 600;
@@ -347,14 +357,14 @@
   color: #505f6b;
   margin-bottom: 0;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content {
   border: 1px solid rgba(16, 39, 56, 0.0901960784);
   border-radius: 14px;
   padding-block: 24px;
   padding-inline: 22px;
   margin-bottom: 20px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .title a {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .title a {
   font-family: "Open Sans";
   font-size: 24px;
   font-weight: 700;
@@ -365,7 +375,7 @@
   text-decoration: none;
   display: block;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content h5 {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content h5 {
   font-family: "Open Sans";
   font-size: 20px;
   font-weight: 600;
@@ -374,10 +384,10 @@
   color: #000000;
   margin-bottom: 0;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .about {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .about {
   margin-top: 10px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .about p {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .about p {
   font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
@@ -385,26 +395,26 @@
   text-align: left;
   color: rgba(16, 39, 56, 0.6980392157);
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .website,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .phone,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .address {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address {
   padding-top: 10px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .website div,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .phone div,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .address div {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website div,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone div,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .website div img,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .phone div img,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .address div img {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website div img,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone div img,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address div img {
   width: 15px;
 }
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .website p,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .phone p,
-.sg-illinois-taxonomy .container .section-2 .wrapper-2 .sub-wrapper .wrapper-content .address p {
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website p,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone p,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address p {
   font-family: "Open Sans";
   font-size: 16px;
   font-weight: 400;
@@ -412,6 +422,22 @@
   text-align: left;
   color: #102738;
   margin-bottom: 0;
+}
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .prev,
+.sg-illinois-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .next {
+  background-color: #ed561c;
+  border: 1px solid #ed561c;
+  border-radius: 50px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: white;
 }
 .sg-illinois-taxonomy .container .section-2 .wrapper-2 .wrapper-image a {
   display: block;

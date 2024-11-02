@@ -255,19 +255,81 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       subWrapper.appendChild(wrapper);
     }
 
+    /////////////
+    let dataItems = [];
+
     async function fetchData() {
       try {
-        let res = await axios(
+        let response = await axios(
           `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
         );
-        let data = await res.data;
-        data.map((item) => {
-          createBusinessCard(item);
-        });
-      } catch {}
-    }
+        let data = response.data;
+        dataItems = [...data];
 
+        data.slice(0, 5).forEach((item) => createBusinessCard(item));
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    }
     fetchData();
+
+    let paginationContainer = document.querySelector(".page-nav");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
+    let currentStartIndex = 0;
+    let currentEndIndex = 5;
+    previousButton.style.pointerEvents = "none";
+    previousButton.style.opacity = ".6";
+
+    paginationContainer.addEventListener("click", function (event) {
+      if (event.target.textContent === "Next") {
+        if (dataItems.length >= currentEndIndex) {
+          currentStartIndex += 5;
+          currentEndIndex += 5;
+          previousButton.style.pointerEvents =
+            currentStartIndex > 0 ? "all" : "none";
+          previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
+        }
+
+        if (dataItems.length - currentStartIndex <= 5) {
+          nextButton.style.pointerEvents = "none";
+          nextButton.style.opacity = ".6";
+        }
+
+        if (dataItems.length > currentStartIndex) {
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+
+      if (event.target.textContent === "Prev") {
+        nextButton.style.pointerEvents = "all";
+        nextButton.style.opacity = "1";
+
+        previousButton.style.pointerEvents =
+          currentStartIndex <= 5 ? "none" : "all";
+        previousButton.style.opacity = currentStartIndex <= 5 ? ".6" : "1";
+
+        if (currentStartIndex > 0) {
+          currentStartIndex -= 5;
+          currentEndIndex -= 5;
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+    });
 
     // carousel
 
