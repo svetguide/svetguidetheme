@@ -255,19 +255,107 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       subWrapper.appendChild(wrapper);
     }
 
+    //  pagination functionality
+    let dataItems = [];
+    let paginationContainer = document.querySelector(".page-nav");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
+    let loadMoreWrapper = document.querySelector(".load-more-wrapper");
+    let loadMoreBtn = document.querySelector(".load-more-btn");
+    let currentStartIndex = 0;
+    let currentEndIndex = 5;
+
     async function fetchData() {
       try {
-        let res = await axios(
+        let response = await axios(
           `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
         );
-        let data = await res.data;
-        data.map((item) => {
-          createBusinessCard(item);
+        let data = response.data;
+        dataItems = [...data];
+        isDataItemEmpty(data);
+
+        data.slice(0, 5).forEach((item) => createBusinessCard(item));
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    }
+    fetchData();
+
+    // hide btns
+    function isDataItemEmpty(data) {
+      if (data.length <= 5) {
+        [previousButton, nextButton, loadMoreBtn].map((item) => {
+          item.style.display = "none";
         });
-      } catch {}
+      }
     }
 
-    fetchData();
+    // loadmore btn
+    loadMoreWrapper.addEventListener("click", function () {
+      currentStartIndex += 5;
+      currentEndIndex += 5;
+      if (dataItems.length < currentEndIndex) {
+        loadMoreBtn.style.display = "none";
+      }
+      let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
+      slicedArray.map((item) => {
+        createBusinessCard(item);
+      });
+    });
+
+    // prev and next btn
+    previousButton.style.pointerEvents = "none";
+    previousButton.style.opacity = ".6";
+
+    paginationContainer.addEventListener("click", function (event) {
+      if (event.target.textContent === "Next") {
+        if (dataItems.length >= currentEndIndex) {
+          currentStartIndex += 5;
+          currentEndIndex += 5;
+          previousButton.style.pointerEvents =
+            currentStartIndex > 0 ? "all" : "none";
+          previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
+        }
+
+        if (dataItems.length - currentStartIndex <= 5) {
+          nextButton.style.pointerEvents = "none";
+          nextButton.style.opacity = ".6";
+        }
+
+        if (dataItems.length > currentStartIndex) {
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+
+      if (event.target.textContent === "Prev") {
+        nextButton.style.pointerEvents = "all";
+        nextButton.style.opacity = "1";
+
+        previousButton.style.pointerEvents =
+          currentStartIndex <= 5 ? "none" : "all";
+        previousButton.style.opacity = currentStartIndex <= 5 ? ".6" : "1";
+
+        if (currentStartIndex > 0) {
+          currentStartIndex -= 5;
+          currentEndIndex -= 5;
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+    });
 
     // carousel
 
@@ -554,6 +642,8 @@ if (document.querySelector(".sg-search-results-illinois")) {
 
           if (val.length === 0) {
             noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
           }
 
           val.map((item) => {
@@ -575,6 +665,15 @@ if (document.querySelector(".sg-search-results-illinois")) {
     );
 
     // search on press enter
+
+    let dataItems = [];
+    let paginationContainer = document.querySelector(".page-nav");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
+    let loadMoreWrapper = document.querySelector(".load-more-wrapper");
+    let loadMoreBtn = document.querySelector(".load-more-btn");
+    let currentStartIndex = 0;
+    let currentEndIndex = 2;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -618,6 +717,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
     }
 
     async function searchOnEnter(e) {
+      dataItems = [];
       arrayOnEnter = [];
       if (e.key === "Enter") {
         if (e.target.value.trim().length > 0) {
@@ -660,9 +760,6 @@ if (document.querySelector(".sg-search-results-illinois")) {
                     " " +
                     item.acf_fields.search_terms.toLowerCase();
                   return regex.test(searchTermAndAddress);
-                  // return regex.test(
-
-                  // );
                 });
               }
 
@@ -687,11 +784,15 @@ if (document.querySelector(".sg-search-results-illinois")) {
               noResultsElement.style.display = "block";
               query.textContent = e.target.value.trim();
             }
-
-            val.map((item) => {
-              console.log(item);
+            dataItems = [...val];
+            isDataItemEmpty(dataItems);
+            val.splice(0, 2).map((item) => {
               createBusinessCard(item);
             });
+
+            // val.map((item) => {
+            //   createBusinessCard(item);
+            // });
           } catch (err) {
             console.error(err);
           }
@@ -753,9 +854,6 @@ if (document.querySelector(".sg-search-results-illinois")) {
                   " " +
                   item.acf_fields.search_terms.toLowerCase();
                 return regex.test(searchTermAndAddress);
-                // return regex.test(
-
-                // );
               });
             }
 
@@ -776,8 +874,9 @@ if (document.querySelector(".sg-search-results-illinois")) {
             noResultsElement.style.display = "block";
             query.textContent = searchParams.get("searchterm").trim();
           }
-
-          val.map((item) => {
+          dataItems = [...val];
+          isDataItemEmpty(dataItems);
+          val.splice(0, 2).map((item) => {
             createBusinessCard(item);
           });
         } catch (err) {
@@ -787,6 +886,91 @@ if (document.querySelector(".sg-search-results-illinois")) {
       showCardsOnPageLoad();
     } else {
       noResultsElement.style.display = "block";
+      [previousButton, nextButton, loadMoreBtn].map((item) => {
+        item.style.display = "none";
+      });
     }
+
+    //  pagination functionality
+
+    // hide btns
+    function isDataItemEmpty(data) {
+      if (data.length <= 2) {
+        [previousButton, nextButton, loadMoreBtn].map((item) => {
+          item.style.display = "none";
+        });
+      } else {
+        [previousButton, nextButton, loadMoreBtn].map((item) => {
+          item.style.display = "block";
+        });
+      }
+    }
+
+    // loadmore btn
+    loadMoreWrapper.addEventListener("click", function () {
+      currentStartIndex += 2;
+      currentEndIndex += 2;
+      if (dataItems.length < currentEndIndex) {
+        loadMoreBtn.style.display = "none";
+      }
+      let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
+      slicedArray.map((item) => {
+        createBusinessCard(item);
+      });
+    });
+
+    // prev and next btn
+    previousButton.style.pointerEvents = "none";
+    previousButton.style.opacity = ".6";
+
+    paginationContainer.addEventListener("click", function (event) {
+      if (event.target.textContent === "Next") {
+        if (dataItems.length >= currentEndIndex) {
+          currentStartIndex += 2;
+          currentEndIndex += 2;
+          previousButton.style.pointerEvents =
+            currentStartIndex > 0 ? "all" : "none";
+          previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
+        }
+
+        if (dataItems.length - currentStartIndex <= 2) {
+          nextButton.style.pointerEvents = "none";
+          nextButton.style.opacity = ".6";
+        }
+
+        if (dataItems.length > currentStartIndex) {
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+
+      if (event.target.textContent === "Prev") {
+        nextButton.style.pointerEvents = "all";
+        nextButton.style.opacity = "1";
+
+        previousButton.style.pointerEvents =
+          currentStartIndex <= 2 ? "none" : "all";
+        previousButton.style.opacity = currentStartIndex <= 2 ? ".6" : "1";
+
+        if (currentStartIndex > 0) {
+          currentStartIndex -= 2;
+          currentEndIndex -= 2;
+          document
+            .querySelectorAll(".wrapper-content")
+            .forEach((item) => item.remove());
+          let currentItems = dataItems.slice(
+            currentStartIndex,
+            currentEndIndex
+          );
+          currentItems.forEach((item) => createBusinessCard(item));
+        }
+      }
+    });
   })();
 }
