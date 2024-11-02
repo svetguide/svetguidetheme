@@ -257,22 +257,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
     /////////////
     let dataItems = [];
-
-    async function fetchData() {
-      try {
-        let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
-        );
-        let data = response.data;
-        dataItems = [...data];
-
-        data.slice(0, 5).forEach((item) => createBusinessCard(item));
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    }
-    fetchData();
-
     let paginationContainer = document.querySelector(".page-nav");
     let previousButton = document.querySelector(".prev");
     let nextButton = document.querySelector(".next");
@@ -281,7 +265,29 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let currentStartIndex = 0;
     let currentEndIndex = 5;
 
-    // /////////////
+    async function fetchData() {
+      try {
+        let response = await axios(
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
+        );
+        let data = response.data;
+        dataItems = [...data];
+        isDataItemEmpty(data);
+
+        data.slice(0, 5).forEach((item) => createBusinessCard(item));
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    }
+    fetchData();
+
+    function isDataItemEmpty(data) {
+      if (data.length <= 5) {
+        [previousButton, nextButton, loadMoreBtn].map((item) => {
+          item.style.display = "none";
+        });
+      }
+    }
 
     loadMoreWrapper.addEventListener("click", function () {
       currentStartIndex += 5;
