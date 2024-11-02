@@ -178,6 +178,10 @@ Template Name: Illinois Taxonomy
                         <button class="prev">Prev</button>
                         <button class="next">Next</button>
                     </div>
+
+                    <div class="load-more-wrapper">
+                        <button class="load-more-btn">Load more</button>
+                    </div>
                 </div>
 
 

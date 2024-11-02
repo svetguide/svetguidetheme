@@ -276,8 +276,26 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let paginationContainer = document.querySelector(".page-nav");
     let previousButton = document.querySelector(".prev");
     let nextButton = document.querySelector(".next");
+    let loadMoreWrapper = document.querySelector(".load-more-wrapper");
+    let loadMoreBtn = document.querySelector(".load-more-btn");
     let currentStartIndex = 0;
     let currentEndIndex = 5;
+
+    // /////////////
+
+    loadMoreWrapper.addEventListener("click", function () {
+      currentStartIndex += 5;
+      currentEndIndex += 5;
+      if (dataItems.length < currentEndIndex) {
+        loadMoreBtn.style.display = "none";
+      }
+      let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
+      slicedArray.map((item) => {
+        createBusinessCard(item);
+      });
+    });
+
+    // ////////
     previousButton.style.pointerEvents = "none";
     previousButton.style.opacity = ".6";
 
