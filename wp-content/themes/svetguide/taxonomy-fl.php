@@ -1,14 +1,13 @@
 <?php
 /*
-Template Name: Illinois Taxonomy
+Template Name: Florida Taxonomy
 */
 ?>
 
 
 <?php get_header(); ?>
 
-<section class="sg-illinois-taxonomy">
-
+<section class="sg-florida-taxonomy">
 
     <!-- ads section -->
 
@@ -17,80 +16,80 @@ Template Name: Illinois Taxonomy
             <div class="owl-carousel  owl-theme">
 
                 <?php
-                $illinois_image_1 = get_option('illinois_image_1');
-                if ($illinois_image_1) {
+                $florida_image_1 = get_option('florida_image_1');
+                if ($florida_image_1) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_1) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_1) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_2 = get_option('illinois_image_2');
+                $florida_image_2 = get_option('florida_image_2');
 
-                if ($illinois_image_2) {
+                if ($florida_image_2) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_2) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_2) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_3 = get_option('illinois_image_3');
+                $florida_image_3 = get_option('florida_image_3');
 
-                if ($illinois_image_3) {
+                if ($florida_image_3) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_3) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_3) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_4 = get_option('illinois_image_4');
+                $florida_image_4 = get_option('florida_image_4');
 
-                if ($illinois_image_4) {
+                if ($florida_image_4) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_4) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_4) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_5 = get_option('illinois_image_5');
+                $florida_image_5 = get_option('florida_image_5');
 
-                if ($illinois_image_5) {
+                if ($florida_image_5) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_5) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_5) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_6 = get_option('illinois_image_6');
+                $florida_image_6 = get_option('florida_image_6');
 
-                if ($illinois_image_6) {
+                if ($florida_image_6) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_6) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_6) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_7 = get_option('illinois_image_7');
+                $florida_image_7 = get_option('florida_image_7');
 
-                if ($illinois_image_7) {
+                if ($florida_image_7) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_7) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_7) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_8 = get_option('illinois_image_8');
+                $florida_image_8 = get_option('florida_image_8');
 
-                if ($illinois_image_8) {
+                if ($florida_image_8) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_8) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_8) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
@@ -108,10 +107,10 @@ Template Name: Illinois Taxonomy
     <div class="search-section">
         <div class="container">
             <div class="wrapper-1">
-                <h2>Find A Business in Illinois</h2>
+                <h2>Find A Business in Florida</h2>
                 <div class="input-wrapper">
                     <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/search-icon.png" alt="">
-                    <input type="text" placeholder="Business name & location in Illinois">
+                    <input type="text" placeholder="Business name & location in Florida">
                 </div>
                 <div class="list">
                 </div>
@@ -136,7 +135,7 @@ Template Name: Illinois Taxonomy
 
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/home-icon.png" alt="">
-                <a href="/illinois/">All Categories</a>
+                <a href="/florida/">All Categories</a>
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
@@ -158,9 +157,9 @@ Template Name: Illinois Taxonomy
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
                     <?php
-                    $illinois_most_searched = get_option('illinois_most_searched_list');
-                    if ($illinois_most_searched) {
-                        echo wp_kses_post($illinois_most_searched);  // Outputs the WYSIWYG content
+                    $most_searched_list = get_option('most_searched_list', '');
+                    if ($most_searched_list) {
+                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
                     }
                     ?>
                 </div>
@@ -210,8 +209,5 @@ Template Name: Illinois Taxonomy
         <!-- end of section 2 -->
     </div>
 </section>
-
-
-</div>
 
 <?php get_footer(); ?>

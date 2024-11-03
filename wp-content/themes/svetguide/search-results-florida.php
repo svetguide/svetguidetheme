@@ -1,21 +1,21 @@
 <?php
 /*
-Template Name: Search Results Illinois
+Template Name: Search Results Florida
 */
 ?>
 
 <?php get_header(); ?>
 
-<section class="sg-search-results-illinois">
+<section class="sg-search-results-florida">
     <!-- search section -->
 
     <div class="search-section">
         <div class="container">
             <div class="wrapper-1">
-                <h2>Find A Business in Illinois</h2>
+                <h2>Find A Business in Florida</h2>
                 <div class="input-wrapper">
                     <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/search-icon.png" alt="">
-                    <input type="text" placeholder="Business name & location in Illinois">
+                    <input type="text" placeholder="Business name & location in Florida">
                 </div>
                 <div class="list">
                 </div>
@@ -45,9 +45,9 @@ Template Name: Search Results Illinois
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
                     <?php
-                    $illinois_most_searched = get_option('illinois_most_searched_list');
-                    if ($illinois_most_searched) {
-                        echo wp_kses_post($illinois_most_searched);  // Outputs the WYSIWYG content
+                    $most_searched_list = get_option('most_searched_list', '');
+                    if ($most_searched_list) {
+                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
                     }
                     ?>
                 </div>
