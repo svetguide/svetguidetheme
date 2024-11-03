@@ -246,7 +246,7 @@
     gap: 50px;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .sg-florida-archive .container .section-2 {
     align-items: center;
   }
@@ -264,7 +264,7 @@
   color: black;
   margin-bottom: 20px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .sg-florida-archive .container .section-2 .wrapper-1 .title {
     text-align: center;
   }
@@ -274,7 +274,7 @@
   padding-left: 0;
   margin-bottom: 0;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .sg-florida-archive .container .section-2 .wrapper-1 .most-searched-list ul li {
     text-align: center;
   }
@@ -290,6 +290,19 @@
 }
 .sg-florida-archive .container .section-2 .wrapper-1 .most-searched-list ul li a:hover {
   color: #102738;
+  transition: all 300ms;
+}
+.sg-florida-archive .container .section-2 .wrapper-1 .wrapper-image {
+  margin-top: 50px;
+}
+.sg-florida-archive .container .section-2 .wrapper-1 .wrapper-image a {
+  display: block;
+}
+.sg-florida-archive .container .section-2 .wrapper-1 .wrapper-image a img {
+  width: 235px;
+}
+.sg-florida-archive .container .section-2 .wrapper-1 .wrapper-image a:hover img {
+  opacity: 0.8;
   transition: all 300ms;
 }
 .sg-florida-archive .container .section-2 .wrapper-2 {
@@ -312,6 +325,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   row-gap: 33px;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+  }
+}
+@media screen and (max-width: 540px) {
+  .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
 }
 .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper .category-list {
   display: none;
@@ -337,16 +360,6 @@
 }
 .sg-florida-archive .container .section-2 .wrapper-2 .show-category-list {
   display: block !important;
-}
-.sg-florida-archive .container .section-2 .wrapper-2 .wrapper-image a {
-  display: block;
-}
-.sg-florida-archive .container .section-2 .wrapper-2 .wrapper-image a img {
-  width: 235px;
-}
-.sg-florida-archive .container .section-2 .wrapper-2 .wrapper-image a:hover img {
-  opacity: 0.8;
-  transition: all 300ms;
 }
 
 /*# sourceMappingURL=archive-florida.css.map */
