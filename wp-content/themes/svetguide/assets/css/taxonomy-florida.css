@@ -1,0 +1,484 @@
+.sg-florida-taxonomy {
+  margin-bottom: 100px;
+}
+.sg-florida-taxonomy .ads-section .container .owl-carousel .item {
+  margin-block: 20px;
+}
+.sg-florida-taxonomy .ads-section .container .owl-carousel .item img {
+  width: 100%;
+  max-height: 192px;
+}
+.sg-florida-taxonomy .search-section {
+  background: #f3f3f3;
+  padding-block: 30px;
+}
+.sg-florida-taxonomy .search-section .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 135px;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .search-section .container {
+    flex-direction: column;
+    gap: 50px;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 {
+  flex-basis: 630px;
+  position: relative;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .search-section .container .wrapper-1 {
+    flex-basis: 0px;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 h2 {
+  font-family: "Open Sans";
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 57px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #505f6b;
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .search-section .container .wrapper-1 h2 {
+    font-size: 28px;
+    line-height: 35px;
+    text-align: center;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .input-wrapper img {
+  z-index: 100;
+  position: absolute;
+  left: 20px;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .input-wrapper input {
+  position: relative;
+  width: 100%;
+  border-radius: 48px;
+  border: 1px solid #e1e1e1;
+  padding-block: 15px;
+  padding-inline-start: 50px;
+  background-color: white;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .input-wrapper input:focus {
+  outline: none;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .input-wrapper input::placeholder {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgba(16, 39, 56, 0.5019607843);
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .list {
+  display: none;
+  box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.0705882353);
+  position: absolute;
+  margin-top: 10px;
+  max-height: 100px;
+  overflow: scroll;
+  width: 100%;
+  border-radius: 15px;
+  background-color: white;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .list .list-item {
+  border-bottom: 1px solid rgba(16, 39, 56, 0.0705882353);
+  background-color: white;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .list .list-item a {
+  padding-block: 10px;
+  padding-inline: 15px;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #102738;
+  display: block;
+  text-decoration: none;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .list .list-item:hover {
+  background-color: rgba(237, 86, 28, 0.0784313725);
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .list .list-item:last-child {
+  border-bottom: none;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .loader {
+  display: none;
+  position: absolute;
+  right: 20px;
+  bottom: 24px;
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  animation: l22-0 2s infinite linear;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .loader:before,
+.sg-florida-taxonomy .search-section .container .wrapper-1 .loader:after {
+  content: "";
+  grid-area: 1/1;
+  margin: 15%;
+  border-radius: 50%;
+  background: inherit;
+  transform: rotate(0deg) translate(150%);
+  animation: l22 1s infinite;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .loader:after {
+  animation-delay: -0.5s;
+}
+@keyframes l22-0 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@keyframes l22 {
+  100% {
+    transform: rotate(1turn) translate(150%);
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-1 .no-results-found {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 20px;
+}
+.sg-florida-taxonomy .search-section .container .wrapper-2 {
+  padding: 35px 30px;
+  flex-basis: 487px;
+  border-radius: 14px;
+  background-image: url("/wp-content/themes/svetguide/assets/images/taxonomy-illinois/contact-us-banner.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .search-section .container .wrapper-2 {
+    flex-basis: 0;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-2 p {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: white;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .search-section .container .wrapper-2 p {
+    text-align: center;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-2 a {
+  font-family: Inter;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 23px;
+  text-align: center;
+  color: white;
+  background-color: #ed561c;
+  padding: 11px 25px;
+  border-radius: 50px;
+  display: block;
+  width: fit-content;
+  text-decoration: none;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .search-section .container .wrapper-2 a {
+    margin-inline: auto;
+  }
+}
+.sg-florida-taxonomy .search-section .container .wrapper-2 a:hover {
+  background-color: #b73b0c;
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .container .section-1 {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+@media screen and (max-width: 640px) {
+  .sg-florida-taxonomy .container .section-1 {
+    flex-wrap: wrap;
+  }
+}
+.sg-florida-taxonomy .container .section-1 div:nth-of-type(1) img {
+  width: 15px;
+}
+.sg-florida-taxonomy .container .section-1 div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.sg-florida-taxonomy .container .section-1 div img {
+  width: 6px;
+}
+.sg-florida-taxonomy .container .section-1 div a,
+.sg-florida-taxonomy .container .section-1 div p {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: rgba(16, 39, 56, 0.5019607843);
+  text-decoration: none;
+  margin-bottom: 0;
+}
+.sg-florida-taxonomy .container .section-1 div p {
+  color: #102738;
+}
+.sg-florida-taxonomy .container .section-1 div a:hover {
+  color: #102738;
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .container .section-1 div:nth-of-type(3) p {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: #102738;
+  margin-bottom: 0;
+}
+.sg-florida-taxonomy .container .section-2 {
+  display: flex;
+  align-items: start;
+  margin-top: 60px;
+  gap: 18px;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .container .section-2 {
+    flex-direction: column-reverse;
+    gap: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .container .section-2 {
+    align-items: center;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-1 {
+  flex-basis: 20%;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-1 .title {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: black;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-1 .title {
+    text-align: center;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-1 .most-searched-list ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-1 .most-searched-list ul li {
+    text-align: center;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-1 .most-searched-list ul li a {
+  text-decoration: none;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 35px;
+  text-align: left;
+  color: #505f6b;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-1 .most-searched-list ul li a:hover {
+  color: #102738;
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 {
+  display: flex;
+  align-items: start;
+  gap: 18px;
+  flex-basis: 80%;
+}
+@media screen and (max-width: 1024px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-2 {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-2 {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards {
+  flex-grow: 1;
+}
+@media screen and (max-width: 768px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards {
+    width: 100%;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 26px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper img {
+  width: 36px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .category-heading-wrapper h1 {
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #505f6b;
+  margin-bottom: 0;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content {
+  border: 1px solid rgba(16, 39, 56, 0.0901960784);
+  border-radius: 14px;
+  padding-block: 24px;
+  padding-inline: 22px;
+  margin-bottom: 20px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .title a {
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #ed561c;
+  text-decoration: none;
+  display: block;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content h5 {
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 0;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .about {
+  margin-top: 10px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .about p {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: left;
+  color: rgba(16, 39, 56, 0.6980392157);
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address {
+  padding-top: 10px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website div,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone div,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website div img,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone div img,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address div img {
+  width: 15px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .website p,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .phone p,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .sub-wrapper .wrapper-content .address p {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #102738;
+  margin-bottom: 0;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}
+@media screen and (max-width: 640px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav {
+    display: none;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .prev,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .next {
+  background-color: #ed561c;
+  border: 1px solid #ed561c;
+  border-radius: 50px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: white;
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .prev:hover,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .next:hover {
+  background-color: #b73b0c;
+}
+@media screen and (min-width: 640px) {
+  .sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .load-more-wrapper {
+    display: none;
+  }
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .load-more-wrapper .load-more-btn {
+  background-color: #ed561c;
+  border: 1px solid #ed561c;
+  border-radius: 50px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: white;
+  margin-inline: auto;
+  display: flex;
+  transition: all 300ms;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .load-more-wrapper .load-more-btn:hover {
+  background-color: #b73b0c;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .wrapper-image a {
+  display: block;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .wrapper-image a img {
+  width: 235px;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .wrapper-image a:hover img {
+  opacity: 0.8;
+  transition: all 300ms;
+}
+
+/*# sourceMappingURL=taxonomy-florida.css.map */

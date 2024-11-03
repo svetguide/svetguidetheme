@@ -101,6 +101,27 @@ function load_css()
 		wp_register_style('404-page', get_template_directory_uri() . '/assets/css/404-page.css', array(), false, 'all');
 		wp_enqueue_style('404-page');
 	}
+
+	//florida 
+
+	// load single-florida.css
+	if (is_singular('florida')) {
+		wp_register_style('single-florida', get_template_directory_uri() . '/assets/css/single-florida.css', array(), false, 'all');
+		wp_enqueue_style('single-florida');
+	}
+	// load taxonomy-florida.css
+	if (is_tax('fl')) {
+		wp_register_style('taxonomy-florida', get_template_directory_uri() . '/assets/css/taxonomy-florida.css', array(), false, 'all');
+		wp_enqueue_style('taxonomy-florida');
+	}
+	// load archive-florida.css
+	if (is_post_type_archive('florida')) {
+		wp_register_style('archive-florida', get_template_directory_uri() . '/assets/css/archive-florida.css', array(), false, 'all');
+		wp_enqueue_style('archive-florida');
+	}
+	// load search-results-florida.css
+	wp_register_style('search-results-florida', get_template_directory_uri() . '/assets/css/search-results-florida.css', array(), false, 'all');
+	wp_enqueue_style('search-results-florida');
 }
 add_action('wp_enqueue_scripts', 'load_css');
 
@@ -136,33 +157,28 @@ function load_js()
 add_action('wp_enqueue_scripts', 'load_js');
 
 
-// Register Custom Post Type (Illinois)
-
+// Register Illinois Post Type
 function register_illinois_post_type()
 {
 	$args = array(
 		'labels' => array(
 			'name' => 'Illinois',
 			'singular_name' => 'Illinois',
-
 		),
 		'public' => true,
 		'has_archive' => true,
 		'supports' => array('title', 'editor', 'thumbnail'),
 		'rewrite' => array(
-			'slug' => 'illinois', // Base slug for illinois
-			'with_front' => false
+			'slug' => 'illinois',
+			'with_front' => false,
 		),
-		// 'publicly_queryable'    => true,
-		'show_in_rest' => true // added so that posts can be accessed through REST api eg: http://localhost:8888/wp-json/wp/v2/illinois
+		'show_in_rest' => true
 	);
-
 	register_post_type('illinois', $args);
 }
 add_action('init', 'register_illinois_post_type');
 
-
-// Register Custom Taxonomy (il)
+// Register IL Taxonomy
 function register_illinois_il_taxonomy()
 {
 	$args = array(
@@ -172,51 +188,71 @@ function register_illinois_il_taxonomy()
 		),
 		'hierarchical' => true,
 		'public' => true,
-		'rewrite' => array('slug' => 'illinois'), // Base slug for il
-		'show_in_rest' => true // added so that posts can be accessed through REST api (http://localhost:8888/wp-json/wp/v2/il)
+		'show_in_rest' => true,
+		'rewrite' => array(
+			'slug' => 'illinois',
+			'with_front' => false,
+			'hierarchical' => true
+		)
 	);
-
 	register_taxonomy('il', array('illinois'), $args);
 }
 add_action('init', 'register_illinois_il_taxonomy');
 
-
-// Adjust Permalink Structure to Include il
+// Permalink Structure
 function illinois_permalink_structure($post_link, $post)
 {
 	if (is_object($post) && $post->post_type === 'illinois') {
 		$terms = wp_get_object_terms($post->ID, 'il');
 		if ($terms) {
-			$term = $terms[0]; // Get the first il term
-			$val = "illinois/$term->slug";
-			$post_link = str_replace('illinois', $val, $post_link);
+			$term = $terms[0];
+			return home_url("illinois/{$term->slug}/{$post->post_name}/");
 		}
 	}
 	return $post_link;
 }
 add_filter('post_type_link', 'illinois_permalink_structure', 10, 2);
 
-// Add Custom Rewrite Rules
-if (!function_exists('add_custom_rewrite_rules')) {
-	function add_custom_rewrite_rules()
-	{
+// Custom Rewrite Rules
+function illinois_rewrite_rules()
+{
+	// Rule for taxonomy archive (e.g., /illinois/accounting-services/)
+	add_rewrite_rule(
+		'illinois/([^/]+)/?$',
+		'index.php?il=$matches[1]',
+		'top'
+	);
 
-		// Rule for il archive (e.g., /illinois/toyota/)
-		add_rewrite_rule(
-			'^illinois/([^/]+)/?$',
-			'index.php?taxonomy=il&term=$matches[1]',
-			'top'
-		);
+	// Rule for single posts (e.g., /illinois/accounting-services/post-name/)
+	add_rewrite_rule(
+		'illinois/([^/]+)/([^/]+)/?$',
+		'index.php?illinois=$matches[2]',
+		'top'
+	);
 
-		// Rule for single illinois posts (e.g., /illinois/toyota/innova/)
-		add_rewrite_rule(
-			'^illinois/([^/]+)/([^/]+)/?$',
-			'index.php?post_type=illinois&il=$matches[1]&name=$matches[2]',
-			'top'
-		);
-	}
-	add_action('init', 'add_custom_rewrite_rules');
+	// Rule for taxonomy pagination
+	add_rewrite_rule(
+		'illinois/([^/]+)/page/?([0-9]{1,})/?$',
+		'index.php?il=$matches[1]&paged=$matches[2]',
+		'top'
+	);
 }
+add_action('init', 'illinois_rewrite_rules');
+
+// Optional: Debug rewrite rules
+function debug_rewrite_rules()
+{
+	if (current_user_can('manage_options') && isset($_GET['debug_rewrites'])) {
+		global $wp_rewrite;
+		echo '<pre>';
+		print_r($wp_rewrite->rules);
+		echo '</pre>';
+		exit;
+	}
+}
+add_action('init', 'debug_rewrite_rules');
+
+
 
 // code to add acf fields to the REST api call 
 
@@ -235,7 +271,6 @@ function add_acf_to_rest_api()
 }
 add_action('rest_api_init', 'add_acf_to_rest_api');
 
-/////////////////////
 
 // function to create the api endpoint to fetch custom post type category(inside the taxonomy eg:brand) items using the category name, otherwise it can 
 // only be done using term id of the category
@@ -312,55 +347,103 @@ add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
 
 //Global Settings page for text field and image field
 // Add a custom options page in the admin dashboard 
-function custom_theme_options_page()
+// Add Illinois and Florida options pages
+function custom_theme_options_pages()
 {
+	// Illinois Settings Page
 	add_menu_page(
-		'Global Settings',            // Page title
-		'Global Settings',            // Menu title
-		'manage_options',             // Capability required
-		'global-settings',            // Menu slug
-		'custom_theme_options_page_html', // Callback function
+		'Illinois Settings',
+		'Illinois Settings',
+		'manage_options',
+		'illinois-settings',
+		'illinois_settings_page_html',
 		null,
 		99
 	);
-}
-add_action('admin_menu', 'custom_theme_options_page');
 
-// Display the custom options page
-function custom_theme_options_page_html()
+	// Florida Settings Page
+	add_menu_page(
+		'Florida Settings',
+		'Florida Settings',
+		'manage_options',
+		'florida-settings',
+		'florida_settings_page_html',
+		null,
+		100
+	);
+}
+add_action('admin_menu', 'custom_theme_options_pages');
+
+// Display Illinois settings page
+function illinois_settings_page_html()
 {
 	if (!current_user_can('manage_options')) {
 		return;
 	}
 
 	// Save the fields if the form is submitted
-	if (isset($_POST['most_searched_list'])) {
-		update_option('most_searched_list', wp_kses_post($_POST['most_searched_list']));
+	if (isset($_POST['illinois_most_searched_list'])) {
+		update_option('illinois_most_searched_list', wp_kses_post($_POST['illinois_most_searched_list']));
 	}
 
 	// Save the image fields
 	for ($i = 1; $i <= 8; $i++) {
-		if (isset($_POST["image_$i"])) {
-			update_option("image_$i", esc_url_raw($_POST["image_$i"]));
+		if (isset($_POST["illinois_image_$i"])) {
+			update_option("illinois_image_$i", esc_url_raw($_POST["illinois_image_$i"]));
 		}
 	}
 
-	// Get the current values of the fields
-	$most_searched_list = get_option('most_searched_list', '');
+	// Get current values
+	$most_searched_list = get_option('illinois_most_searched_list', '');
 	$images = [];
 	for ($i = 1; $i <= 8; $i++) {
-		$images[$i] = get_option("image_$i", '');
+		$images[$i] = get_option("illinois_image_$i", '');
 	}
 
+	render_settings_page('Illinois', $most_searched_list, $images);
+}
+
+// Display Florida settings page
+function florida_settings_page_html()
+{
+	if (!current_user_can('manage_options')) {
+		return;
+	}
+
+	// Save the fields if the form is submitted
+	if (isset($_POST['florida_most_searched_list'])) {
+		update_option('florida_most_searched_list', wp_kses_post($_POST['florida_most_searched_list']));
+	}
+
+	// Save the image fields
+	for ($i = 1; $i <= 8; $i++) {
+		if (isset($_POST["florida_image_$i"])) {
+			update_option("florida_image_$i", esc_url_raw($_POST["florida_image_$i"]));
+		}
+	}
+
+	// Get current values
+	$most_searched_list = get_option('florida_most_searched_list', '');
+	$images = [];
+	for ($i = 1; $i <= 8; $i++) {
+		$images[$i] = get_option("florida_image_$i", '');
+	}
+
+	render_settings_page('Florida', $most_searched_list, $images);
+}
+
+// Common render function for both pages
+function render_settings_page($state, $most_searched_list, $images)
+{
+	$state_lower = strtolower($state);
 ?>
 	<div class="wrap">
-		<h1>Global Settings</h1>
+		<h1><?php echo $state; ?> Settings</h1>
 		<form method="POST">
 			<h2>Most Searched List</h2>
 			<?php
-			// Display WYSIWYG field for "Most Searched List"
-			wp_editor($most_searched_list, 'most_searched_list', array(
-				'textarea_name' => 'most_searched_list',
+			wp_editor($most_searched_list, $state_lower . '_most_searched_list', array(
+				'textarea_name' => $state_lower . '_most_searched_list',
 				'media_buttons' => true,
 				'textarea_rows' => 10,
 				'teeny'         => false,
@@ -370,9 +453,17 @@ function custom_theme_options_page_html()
 
 			<h2>Image Uploads</h2>
 			<?php for ($i = 1; $i <= 8; $i++): ?>
-				<label for="image_<?php echo $i; ?>">Image <?php echo $i; ?></label><br>
-				<input type="text" name="image_<?php echo $i; ?>" id="image_<?php echo $i; ?>" value="<?php echo esc_url($images[$i]); ?>" placeholder="Image URL" />
-				<input type="button" class="upload_image_button button" value="Upload Image" data-image-index="<?php echo $i; ?>" />
+				<label for="<?php echo $state_lower; ?>_image_<?php echo $i; ?>">Image <?php echo $i; ?></label><br>
+				<input type="text"
+					name="<?php echo $state_lower; ?>_image_<?php echo $i; ?>"
+					id="<?php echo $state_lower; ?>_image_<?php echo $i; ?>"
+					value="<?php echo esc_url($images[$i]); ?>"
+					placeholder="Image URL" />
+				<input type="button"
+					class="upload_image_button button"
+					value="Upload Image"
+					data-image-index="<?php echo $i; ?>"
+					data-state="<?php echo $state_lower; ?>" />
 				<br><br>
 			<?php endfor; ?>
 
@@ -385,17 +476,18 @@ function custom_theme_options_page_html()
 			$('.upload_image_button').click(function(e) {
 				e.preventDefault();
 				var imageIndex = $(this).data('image-index');
+				var state = $(this).data('state');
 				var fileFrame = wp.media({
 					title: 'Select or Upload an Image',
 					button: {
 						text: 'Use this image'
 					},
-					multiple: false // Allow single image selection
+					multiple: false
 				});
 
 				fileFrame.on('select', function() {
 					var attachment = fileFrame.state().get('selection').first().toJSON();
-					$('#image_' + imageIndex).val(attachment.url); // Set the input value to the image URL
+					$('#' + state + '_image_' + imageIndex).val(attachment.url);
 				});
 
 				fileFrame.open();
@@ -404,3 +496,185 @@ function custom_theme_options_page_html()
 	</script>
 <?php
 }
+
+//florida
+
+// Register Florida Post Type
+function register_florida_post_type()
+{
+	$args = array(
+		'labels' => array(
+			'name' => 'Florida',
+			'singular_name' => 'Florida',
+		),
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array('title', 'editor', 'thumbnail'),
+		'rewrite' => array(
+			'slug' => 'florida',
+			'with_front' => false,
+		),
+		'show_in_rest' => true
+	);
+	register_post_type('florida', $args);
+}
+add_action('init', 'register_florida_post_type');
+
+// Register FL Taxonomy
+function register_florida_fl_taxonomy()
+{
+	$args = array(
+		'labels' => array(
+			'name' => 'fl',
+			'singular_name' => 'fl',
+		),
+		'hierarchical' => true,
+		'public' => true,
+		'show_in_rest' => true,
+		'rewrite' => array(
+			'slug' => 'florida',
+			'with_front' => false,
+			'hierarchical' => true
+		)
+	);
+	register_taxonomy('fl', array('florida'), $args);
+}
+add_action('init', 'register_florida_fl_taxonomy');
+
+// Permalink Structure
+function florida_permalink_structure($post_link, $post)
+{
+	if (is_object($post) && $post->post_type === 'florida') {
+		$terms = wp_get_object_terms($post->ID, 'fl');
+		if ($terms) {
+			$term = $terms[0];
+			return home_url("florida/{$term->slug}/{$post->post_name}/");
+		}
+	}
+	return $post_link;
+}
+add_filter('post_type_link', 'florida_permalink_structure', 10, 2);
+
+// Custom Rewrite Rules
+function florida_rewrite_rules()
+{
+	// Rule for taxonomy archive (e.g., /florida/category-name/)
+	add_rewrite_rule(
+		'florida/([^/]+)/?$',
+		'index.php?fl=$matches[1]',
+		'top'
+	);
+
+	// Rule for single posts (e.g., /florida/category-name/post-name/)
+	add_rewrite_rule(
+		'florida/([^/]+)/([^/]+)/?$',
+		'index.php?florida=$matches[2]',
+		'top'
+	);
+
+	// Rule for taxonomy pagination
+	add_rewrite_rule(
+		'florida/([^/]+)/page/?([0-9]{1,})/?$',
+		'index.php?fl=$matches[1]&paged=$matches[2]',
+		'top'
+	);
+}
+add_action('init', 'florida_rewrite_rules');
+
+// Optional: Debug rewrite rules
+function florida_debug_rewrite_rules()
+{
+	if (current_user_can('manage_options') && isset($_GET['debug_rewrites'])) {
+		global $wp_rewrite;
+		echo '<pre>';
+		print_r($wp_rewrite->rules);
+		echo '</pre>';
+		exit;
+	}
+}
+add_action('init', 'florida_debug_rewrite_rules');
+
+// ACF Integration
+function add_florida_acf_to_rest_api()
+{
+	// Check if ACF is installed and active
+	if (!function_exists('get_field')) return;
+
+	// Hook into the REST API for the post type 'florida'
+	register_rest_field('florida', 'acf_fields', array(
+		'get_callback'    => function ($post) {
+			return get_fields($post['id']);
+		},
+		'schema'          => null,
+	));
+}
+add_action('rest_api_init', 'add_florida_acf_to_rest_api');
+
+// function to create the api endpoint to fetch custom post type category(inside the taxonomy eg:brand) items using the category name, otherwise it can 
+// only be done using term id of the category
+
+// http://localhost:8888/wp-json/wp/v2/florida?fl_slug=Accounting Services
+
+function filter_florida_by_fl_slug($args, $request)
+{
+	if (isset($request['fl_slug'])) {
+		$search_slug = sanitize_text_field($request['fl_slug']);
+
+		// Get all terms from the 'fl' taxonomy
+		$all_terms = get_terms(array(
+			'taxonomy' => 'fl',
+			'hide_empty' => false,
+		));
+
+		if (!empty($all_terms) && !is_wp_error($all_terms)) {
+			$best_match = null;
+			$highest_similarity = 0;
+
+			foreach ($all_terms as $term) {
+				// Calculate similarity scores using different methods
+				$term_name = strtolower($term->name);
+				$term_slug = strtolower($term->slug);
+				$search_term = strtolower($search_slug);
+
+				// Check if search term is contained within the term name or slug
+				$contains_search = (strpos($term_name, $search_term) !== false) ||
+					(strpos($term_slug, $search_term) !== false);
+
+				// Calculate Levenshtein distance (lower is better)
+				$lev_distance = levenshtein($search_term, $term_name);
+				$max_length = max(strlen($search_term), strlen($term_name));
+				$lev_similarity = 1 - ($lev_distance / $max_length);
+
+				// Similar_text percentage
+				similar_text($search_term, $term_name, $percent_similarity);
+				$percent_similarity = $percent_similarity / 100;
+
+				// Combine similarity scores with weights
+				$final_similarity = ($contains_search ? 0.5 : 0) +
+					($lev_similarity * 0.25) +
+					($percent_similarity * 0.25);
+
+				// Update best match if this term has a higher similarity
+				if ($final_similarity > $highest_similarity && $final_similarity > 0.3) { // Threshold of 0.3
+					$highest_similarity = $final_similarity;
+					$best_match = $term;
+				}
+			}
+
+			// If we found a match above our threshold, add it to the query
+			if ($best_match) {
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'fl',
+						'field'    => 'term_id',
+						'terms'    => $best_match->term_id,
+					),
+				);
+			}
+		}
+	}
+	return $args;
+}
+
+// Hook into the REST API for the 'florida' post type
+add_filter('rest_florida_query', 'filter_florida_by_fl_slug', 10, 2);

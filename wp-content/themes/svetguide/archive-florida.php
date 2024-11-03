@@ -1,13 +1,12 @@
 <?php
 /*
-Template Name: Illinois Archive
+Template Name: Florida Archive
 */
 ?>
 
 
 <?php get_header(); ?>
-
-<section class="sg-illinois-archive">
+<section class="sg-florida-archive">
 
 
     <!-- ads section -->
@@ -17,80 +16,80 @@ Template Name: Illinois Archive
             <div class="owl-carousel  owl-theme">
 
                 <?php
-                $illinois_image_1 = get_option('illinois_image_1');
-                if ($illinois_image_1) {
+                $florida_image_1 = get_option('florida_image_1');
+                if ($florida_image_1) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_1) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_1) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_2 = get_option('illinois_image_2');
+                $florida_image_2 = get_option('florida_image_2');
 
-                if ($illinois_image_2) {
+                if ($florida_image_2) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_2) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_2) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_3 = get_option('illinois_image_3');
+                $florida_image_3 = get_option('florida_image_3');
 
-                if ($illinois_image_3) {
+                if ($florida_image_3) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_3) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_3) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_4 = get_option('illinois_image_4');
+                $florida_image_4 = get_option('florida_image_4');
 
-                if ($illinois_image_4) {
+                if ($florida_image_4) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_4) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_4) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_5 = get_option('illinois_image_5');
+                $florida_image_5 = get_option('florida_image_5');
 
-                if ($illinois_image_5) {
+                if ($florida_image_5) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_5) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_5) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_6 = get_option('illinois_image_6');
+                $florida_image_6 = get_option('florida_image_6');
 
-                if ($illinois_image_6) {
+                if ($florida_image_6) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_6) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_6) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_7 = get_option('illinois_image_7');
+                $florida_image_7 = get_option('florida_image_7');
 
-                if ($illinois_image_7) {
+                if ($florida_image_7) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_7) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_7) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
 
                 <?php
-                $illinois_image_8 = get_option('illinois_image_8');
+                $florida_image_8 = get_option('florida_image_8');
 
-                if ($illinois_image_8) {
+                if ($florida_image_8) {
                     echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_8) . '" alt="Image One">';
+                    echo '<img src="' . esc_url($florida_image_8) . '" alt="Image One">';
                     echo '</div>';
                 }
                 ?>
@@ -108,10 +107,10 @@ Template Name: Illinois Archive
     <div class="search-section">
         <div class="container">
             <div class="wrapper-1">
-                <h2>Find A Business in Illinois</h2>
+                <h2>Find A Business in Florida</h2>
                 <div class="input-wrapper">
                     <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/search-icon.png" alt="">
-                    <input type="text" placeholder="Business name & location in Illinois">
+                    <input type="text" placeholder="Business name & location in Florida">
                 </div>
                 <div class="list">
                 </div>
@@ -155,9 +154,9 @@ Template Name: Illinois Archive
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
                     <?php
-                    $illinois_most_searched = get_option('illinois_most_searched_list');
-                    if ($illinois_most_searched) {
-                        echo wp_kses_post($illinois_most_searched);  // Outputs the WYSIWYG content
+                    $florida_most_searched = get_option('florida_most_searched_list');
+                    if ($florida_most_searched) {
+                        echo wp_kses_post($florida_most_searched);  // Outputs the WYSIWYG content
                     }
                     ?>
                 </div>
@@ -266,8 +265,4 @@ Template Name: Illinois Archive
         <!-- end of section 2 -->
     </div>
 </section>
-
-
-</div>
-
 <?php get_footer(); ?>

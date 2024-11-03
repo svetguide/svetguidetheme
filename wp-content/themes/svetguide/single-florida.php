@@ -1,13 +1,11 @@
 <?php
 /*
-Template Name: Illinois Single
+Template Name: Florida Single
 */
 ?>
-
-
 <?php get_header(); ?>
 
-<section class="sg-illinois-inner">
+<section class="sg-florida-inner">
     <div class="container">
 
         <!-- section 1 start -->
@@ -16,11 +14,11 @@ Template Name: Illinois Single
 
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/home-icon.png" alt="">
-                <a href="/illinois/">All Categories</a>
+                <a href="/florida/">All Categories</a>
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
-                <a class="ss-illinois-category-name" href="">All Categories</a>
+                <a class="ss-florida-category-name" href="">All Categories</a>
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
@@ -42,9 +40,9 @@ Template Name: Illinois Single
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
                     <?php
-                    $illinois_most_searched = get_option('illinois_most_searched_list');
-                    if ($illinois_most_searched) {
-                        echo wp_kses_post($illinois_most_searched);  // Outputs the WYSIWYG content
+                    $most_searched_list = get_option('most_searched_list', '');
+                    if ($most_searched_list) {
+                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
                     }
                     ?>
                 </div>
@@ -153,6 +151,5 @@ Template Name: Illinois Single
         <!-- end of section 2 -->
     </div>
 </section>
-
 
 <?php get_footer(); ?>
