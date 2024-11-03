@@ -157,9 +157,9 @@ Template Name: Florida Taxonomy
                 <h3 class="title">Most Searched</h3>
                 <div class="most-searched-list">
                     <?php
-                    $most_searched_list = get_option('most_searched_list', '');
-                    if ($most_searched_list) {
-                        echo wp_kses_post($most_searched_list);  // Outputs the WYSIWYG content
+                    $florida_most_searched = get_option('florida_most_searched_list');
+                    if ($florida_most_searched) {
+                        echo wp_kses_post($florida_most_searched);  // Outputs the WYSIWYG content
                     }
                     ?>
                 </div>
