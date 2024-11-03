@@ -160,6 +160,11 @@ Template Name: Florida Archive
                     }
                     ?>
                 </div>
+                <div class="wrapper-image">
+                    <a href="/asdf">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
+                    </a>
+                </div>
             </div>
 
             <!-- wrapper-1 end -->
@@ -247,13 +252,6 @@ Template Name: Florida Archive
                     <div class="category-list">
                         <p>Z</p>
                     </div>
-                </div>
-
-
-                <div class="wrapper-image">
-                    <a href="/asdf">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
-                    </a>
                 </div>
 
             </div>
