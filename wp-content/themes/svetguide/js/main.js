@@ -218,6 +218,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
     let loader = document.querySelector(".loader");
     let noResultsFound = document.querySelector(".no-results-found");
+
     let pageUrl = window.location.pathname;
     let pathnameArray = pageUrl.split("/");
     let categoryName = pathnameArray[2].split("-");
@@ -225,8 +226,8 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
-    categoryTitle.textContent = combinedName;
+    // categoryNav.textContent = combinedName;
+    // categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -283,11 +284,17 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     async function fetchData() {
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name`
         );
         let data = response.data;
         dataItems = [...data];
         isDataItemEmpty(data);
+
+        // category name and breadcrumb name (only appears if category contains posts)
+        categoryNav.textContent = dataItems[0]?.category_name;
+        categoryTitle.textContent = dataItems[0]?.category_name;
+
+        console.log(dataItems);
 
         data.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {
@@ -1025,8 +1032,6 @@ if (document.querySelector(".sg-florida-taxonomy")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
-    categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -1083,11 +1088,15 @@ if (document.querySelector(".sg-florida-taxonomy")) {
     async function fetchData() {
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name`
         );
         let data = response.data;
         dataItems = [...data];
         isDataItemEmpty(data);
+        console.log(dataItems);
+        // category name and breadcrumb name (only appears if category contains posts)
+        categoryNav.textContent = dataItems[0]?.category_name;
+        categoryTitle.textContent = dataItems[0]?.category_name;
 
         data.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {

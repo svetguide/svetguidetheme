@@ -277,62 +277,61 @@ add_action('rest_api_init', 'add_acf_to_rest_api');
 
 // http://localhost:8888/wp-json/wp/v2/illinois?il_slug=Accounting Services
 
+// function filter_illinois_by_il_slug($args, $request)
+// {
+// 	if (isset($request['il_slug'])) {
+// 		$search_slug = sanitize_text_field($request['il_slug']);
+
+// 		// Get the term object by slug
+// 		$term = get_term_by('slug', $search_slug, 'il');
+
+// 		// If the term is found, add it to the tax_query
+// 		if ($term) {
+// 			$args['tax_query'] = array(
+// 				array(
+// 					'taxonomy' => 'il',
+// 					'field'    => 'term_id',
+// 					'terms'    => $term->term_id,
+// 				),
+// 			);
+// 		}
+// 	}
+// 	return $args;
+// }
+
+// // Hook into the REST API for the 'illinois' post type
+// add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
+
 function filter_illinois_by_il_slug($args, $request)
 {
 	if (isset($request['il_slug'])) {
 		$search_slug = sanitize_text_field($request['il_slug']);
 
-		// Get all terms from the 'il' taxonomy
-		$all_terms = get_terms(array(
-			'taxonomy' => 'il',
-			'hide_empty' => false,
-		));
+		// Get the term object by slug
+		$term = get_term_by('slug', $search_slug, 'il');
 
-		if (!empty($all_terms) && !is_wp_error($all_terms)) {
-			$best_match = null;
-			$highest_similarity = 0;
+		// If the term is found, add it to the tax_query
+		if ($term) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'il',
+					'field'    => 'term_id',
+					'terms'    => $term->term_id,
+				),
+			);
 
-			foreach ($all_terms as $term) {
-				// Calculate similarity scores using different methods
-				$term_name = strtolower($term->name);
-				$term_slug = strtolower($term->slug);
-				$search_term = strtolower($search_slug);
-
-				// Check if search term is contained within the term name or slug
-				$contains_search = (strpos($term_name, $search_term) !== false) ||
-					(strpos($term_slug, $search_term) !== false);
-
-				// Calculate Levenshtein distance (lower is better)
-				$lev_distance = levenshtein($search_term, $term_name);
-				$max_length = max(strlen($search_term), strlen($term_name));
-				$lev_similarity = 1 - ($lev_distance / $max_length);
-
-				// Similar_text percentage
-				similar_text($search_term, $term_name, $percent_similarity);
-				$percent_similarity = $percent_similarity / 100;
-
-				// Combine similarity scores with weights
-				$final_similarity = ($contains_search ? 0.5 : 0) +
-					($lev_similarity * 0.25) +
-					($percent_similarity * 0.25);
-
-				// Update best match if this term has a higher similarity
-				if ($final_similarity > $highest_similarity && $final_similarity > 0.3) { // Threshold of 0.3
-					$highest_similarity = $final_similarity;
-					$best_match = $term;
-				}
-			}
-
-			// If we found a match above our threshold, add it to the query
-			if ($best_match) {
-				$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'il',
-						'field'    => 'term_id',
-						'terms'    => $best_match->term_id,
-					),
-				);
-			}
+			// Add the category name to the response
+			register_rest_field('illinois', 'category_name', array(
+				'get_callback' => function ($post) use ($term) {
+					return $term->name;
+				},
+				'update_callback' => null,
+				'schema' => array(
+					'description' => 'The name of the category',
+					'type' => 'string',
+					'context' => array('view', 'edit', 'embed')
+				)
+			));
 		}
 	}
 	return $args;
@@ -340,6 +339,7 @@ function filter_illinois_by_il_slug($args, $request)
 
 // Hook into the REST API for the 'illinois' post type
 add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
+
 
 
 ///////////////////
@@ -620,57 +620,31 @@ function filter_florida_by_fl_slug($args, $request)
 	if (isset($request['fl_slug'])) {
 		$search_slug = sanitize_text_field($request['fl_slug']);
 
-		// Get all terms from the 'fl' taxonomy
-		$all_terms = get_terms(array(
-			'taxonomy' => 'fl',
-			'hide_empty' => false,
-		));
+		// Get the term object by slug
+		$term = get_term_by('slug', $search_slug, 'fl');
 
-		if (!empty($all_terms) && !is_wp_error($all_terms)) {
-			$best_match = null;
-			$highest_similarity = 0;
+		// If the term is found, add it to the tax_query
+		if ($term) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'fl',
+					'field'    => 'term_id',
+					'terms'    => $term->term_id,
+				),
+			);
 
-			foreach ($all_terms as $term) {
-				// Calculate similarity scores using different methods
-				$term_name = strtolower($term->name);
-				$term_slug = strtolower($term->slug);
-				$search_term = strtolower($search_slug);
-
-				// Check if search term is contained within the term name or slug
-				$contains_search = (strpos($term_name, $search_term) !== false) ||
-					(strpos($term_slug, $search_term) !== false);
-
-				// Calculate Levenshtein distance (lower is better)
-				$lev_distance = levenshtein($search_term, $term_name);
-				$max_length = max(strlen($search_term), strlen($term_name));
-				$lev_similarity = 1 - ($lev_distance / $max_length);
-
-				// Similar_text percentage
-				similar_text($search_term, $term_name, $percent_similarity);
-				$percent_similarity = $percent_similarity / 100;
-
-				// Combine similarity scores with weights
-				$final_similarity = ($contains_search ? 0.5 : 0) +
-					($lev_similarity * 0.25) +
-					($percent_similarity * 0.25);
-
-				// Update best match if this term has a higher similarity
-				if ($final_similarity > $highest_similarity && $final_similarity > 0.3) { // Threshold of 0.3
-					$highest_similarity = $final_similarity;
-					$best_match = $term;
-				}
-			}
-
-			// If we found a match above our threshold, add it to the query
-			if ($best_match) {
-				$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'fl',
-						'field'    => 'term_id',
-						'terms'    => $best_match->term_id,
-					),
-				);
-			}
+			// Add the category name to the response
+			register_rest_field('florida', 'category_name', array(
+				'get_callback' => function ($post) use ($term) {
+					return $term->name;
+				},
+				'update_callback' => null,
+				'schema' => array(
+					'description' => 'The name of the category',
+					'type' => 'string',
+					'context' => array('view', 'edit', 'embed')
+				)
+			));
 		}
 	}
 	return $args;
