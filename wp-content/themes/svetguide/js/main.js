@@ -12,13 +12,28 @@ if (document.querySelector(".sg-illinois-archive")) {
 
     async function showItems() {
       try {
-        const res = await axios.get(
-          `${window.location.origin}/wp-json/wp/v2/il?_fields=link,name`
-        );
-        const dataArr = await res.data;
+        let page = 1;
+        let allData = [];
+        let hasMoreItems = true;
 
+        // Fetch all pages
+        while (hasMoreItems) {
+          const res = await axios.get(
+            `${window.location.origin}/wp-json/wp/v2/il?_fields=link,name&per_page=100&page=${page}`
+          );
+          const dataArr = res.data;
+
+          if (dataArr.length > 0) {
+            allData = allData.concat(dataArr);
+            page++;
+          } else {
+            hasMoreItems = false;
+          }
+        }
+
+        // Display items based on listArray
         for (let i of listArray) {
-          dataArr.forEach((item) => {
+          allData.forEach((item) => {
             if (item?.name[0] === i.textContent.trim()[0]) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
@@ -1328,13 +1343,28 @@ if (document.querySelector(".sg-florida-archive")) {
 
     async function showItems() {
       try {
-        const res = await axios.get(
-          `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name`
-        );
-        const dataArr = await res.data;
+        let page = 1;
+        let allData = [];
+        let hasMoreItems = true;
 
+        // Fetch all pages
+        while (hasMoreItems) {
+          const res = await axios.get(
+            `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name&per_page=100&page=${page}`
+          );
+          const dataArr = res.data;
+
+          if (dataArr.length > 0) {
+            allData = allData.concat(dataArr);
+            page++;
+          } else {
+            hasMoreItems = false;
+          }
+        }
+
+        // Display items based on listArray
         for (let i of listArray) {
-          dataArr.forEach((item) => {
+          allData.forEach((item) => {
             if (item?.name[0] === i.textContent.trim()[0]) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
