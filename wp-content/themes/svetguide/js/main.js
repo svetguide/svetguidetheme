@@ -218,6 +218,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     let subWrapper = document.querySelector(".wrapper-2 .sub-wrapper");
     let loader = document.querySelector(".loader");
     let noResultsFound = document.querySelector(".no-results-found");
+
     let pageUrl = window.location.pathname;
     let pathnameArray = pageUrl.split("/");
     let categoryName = pathnameArray[2].split("-");
@@ -225,8 +226,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
-    categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -283,11 +282,17 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     async function fetchData() {
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name`
         );
         let data = response.data;
         dataItems = [...data];
         isDataItemEmpty(data);
+
+        // category name and breadcrumb name (only appears if category contains posts)
+        categoryNav.textContent = dataItems[0]?.category_name;
+        categoryTitle.textContent = dataItems[0]?.category_name;
+
+        console.log(dataItems);
 
         data.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {
@@ -500,6 +505,8 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
           if (val.length === 0) {
             noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
           }
 
           val.map((item) => {
@@ -541,8 +548,17 @@ if (document.querySelector(".sg-illinois-inner")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
+    // categoryNav.textContent = combinedName;
     categoryNav.href = `${window.location.origin}/illinois/${pathnameArray[2]}`;
+
+    async function getCategoryName() {
+      let response = await axios(
+        `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=category_name&per_page=1`
+      );
+      let data = await response.data[0].category_name;
+      categoryNav.textContent = data;
+    }
+    getCategoryName();
   })();
 }
 
@@ -801,13 +817,9 @@ if (document.querySelector(".sg-search-results-illinois")) {
             }
             dataItems = [...val];
             isDataItemEmpty(dataItems);
-            val.splice(0, 2).map((item) => {
+            val.splice(0, 5).map((item) => {
               createBusinessCard(item);
             });
-
-            // val.map((item) => {
-            //   createBusinessCard(item);
-            // });
           } catch (err) {
             console.error(err);
           }
@@ -992,20 +1004,214 @@ if (document.querySelector(".sg-search-results-illinois")) {
 
 // florida
 
-// single florida inner page
+// archive florida
 
-if (document.querySelector(".sg-florida-inner")) {
+if (document.querySelector(".sg-florida-archive")) {
   (function () {
-    let categoryNav = document.querySelector(".ss-florida-category-name");
-    let pageUrl = window.location.pathname;
-    let pathnameArray = pageUrl.split("/");
-    let categoryName = pathnameArray[2].split("-");
-    let capitalCaseArray = categoryName.map((item) => {
-      return item.charAt(0).toUpperCase() + item.slice(1);
+    let listArray = [];
+    let loader = document.querySelector(".loader");
+    let noResultsFound = document.querySelector(".no-results-found");
+    let categoryList = document.querySelectorAll(".category-list");
+    categoryList.forEach((item) => {
+      listArray.push(item);
     });
-    let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
-    categoryNav.href = `${window.location.origin}/florida/${pathnameArray[2]}`;
+
+    async function showItems() {
+      try {
+        let page = 1;
+        let allData = [];
+        let hasMoreItems = true;
+
+        // Fetch all pages
+        while (hasMoreItems) {
+          const res = await axios.get(
+            `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name&per_page=100&page=${page}`
+          );
+          const dataArr = res.data;
+
+          if (dataArr.length > 0) {
+            allData = allData.concat(dataArr);
+            page++;
+          } else {
+            hasMoreItems = false;
+          }
+        }
+
+        // Display items based on listArray
+        for (let i of listArray) {
+          allData.forEach((item) => {
+            if (item?.name[0] === i.textContent.trim()[0]) {
+              i.classList.add("show-category-list");
+              let element = document.createElement("div");
+              element.classList.add("category-list-item");
+              element.innerHTML = `<a href="${item?.link}">${item?.name}</a>`;
+              i.appendChild(element);
+            }
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    showItems();
+
+    // carousel
+
+    jQuery(document).ready(function ($) {
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        dots: false,
+        animateOut: "fadeOut",
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          600: {
+            items: 1,
+          },
+          1000: {
+            items: 1,
+          },
+        },
+      });
+    });
+
+    // search function
+
+    let searchBar = document.querySelector(".search-section input");
+    let list = document.querySelector(".search-section .list");
+    let arr = [];
+
+    function listItems(data) {
+      list.style.display = "block";
+      let item = document.createElement("div");
+      item.classList.add(".list-item");
+      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
+      list.append(item);
+    }
+
+    function unlistItem() {
+      document.querySelectorAll(".list-item").forEach((val) => {
+        val.remove();
+      });
+      list.style.display = "none";
+    }
+
+    function debounce(func, timeout = 500) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, timeout);
+      };
+    }
+
+    async function searching(e) {
+      arr = [];
+      if (e.target.value.trim().length === 0) {
+        noResultsFound.style.display = "none";
+      }
+      if (e.target.value.trim().length > 0) {
+        loader.style.display = "grid";
+        try {
+          let res = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/florida?search=${e.target.value.trim()}&_fields=title,link`
+          );
+          let data = await res.data;
+
+          let tagsRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields.search_terms,title,link,acf_fields.address`
+          );
+
+          let tagsData = await tagsRes.data;
+
+          let filteredValue = tagsData.filter((item) => {
+            // Trim the input and split it into an array of words
+            let searchedArray = e.target.value.trimEnd().split(" ");
+
+            // Check if the first word is "service" or "services"
+            const firstWordIsService =
+              searchedArray[0]?.toLowerCase() === "service" ||
+              searchedArray[0]?.toLowerCase() === "services";
+
+            // Case 1: If the first word is "service" or "services", there must be at least two words
+            if (firstWordIsService && searchedArray.length >= 2) {
+              // Ensure all search terms match as whole words
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                return regex.test(item.acf_fields.search_terms.toLowerCase());
+              });
+            }
+
+            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
+            if (!firstWordIsService) {
+              return searchedArray.every((val) => {
+                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
+                let searchTermAndAddress =
+                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
+                  " " +
+                  item.acf_fields.search_terms.toLowerCase();
+                return regex.test(searchTermAndAddress);
+                // return regex.test(
+
+                // );
+              });
+            }
+
+            // Case 3: Ignore if only "service" or "services" is searched as a single word
+            return false;
+          });
+
+          unlistItem();
+          arr = [...data, ...filteredValue].map((item) => {
+            delete item.acf_fields;
+            return item;
+          });
+
+          let val = Array.from(
+            new Set(arr.map((item) => JSON.stringify(item)))
+          ).map((item) => JSON.parse(item));
+
+          if (val.length === 0 && e.target.value.trim().length > 0) {
+            noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
+          }
+
+          val.map((item) => {
+            listItems(item);
+          });
+
+          loader.style.display = "none";
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      if (e.target.value.length === 0) {
+        unlistItem();
+      }
+    }
+
+    searchBar.addEventListener(
+      "input",
+      debounce((e) => searching(e))
+    );
+
+    //redirect to search results page on pressing enter
+    searchBar.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        window.location = `${window.location.origin}/search-results-florida/?searchterm=${e.target.value}`;
+      }
+    });
   })();
 }
 
@@ -1025,8 +1231,6 @@ if (document.querySelector(".sg-florida-taxonomy")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    categoryNav.textContent = combinedName;
-    categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -1083,11 +1287,15 @@ if (document.querySelector(".sg-florida-taxonomy")) {
     async function fetchData() {
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug`
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name`
         );
         let data = response.data;
         dataItems = [...data];
         isDataItemEmpty(data);
+        console.log(dataItems);
+        // category name and breadcrumb name (only appears if category contains posts)
+        categoryNav.textContent = dataItems[0]?.category_name;
+        categoryTitle.textContent = dataItems[0]?.category_name;
 
         data.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {
@@ -1300,6 +1508,8 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
           if (val.length === 0) {
             noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
           }
 
           val.map((item) => {
@@ -1329,214 +1539,29 @@ if (document.querySelector(".sg-florida-taxonomy")) {
   })();
 }
 
-// archive florida
+// single florida inner page
 
-if (document.querySelector(".sg-florida-archive")) {
+if (document.querySelector(".sg-florida-inner")) {
   (function () {
-    let listArray = [];
-    let loader = document.querySelector(".loader");
-    let noResultsFound = document.querySelector(".no-results-found");
-    let categoryList = document.querySelectorAll(".category-list");
-    categoryList.forEach((item) => {
-      listArray.push(item);
+    let categoryNav = document.querySelector(".ss-florida-category-name");
+    let pageUrl = window.location.pathname;
+    let pathnameArray = pageUrl.split("/");
+    let categoryName = pathnameArray[2].split("-");
+    let capitalCaseArray = categoryName.map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
     });
+    let combinedName = capitalCaseArray.join(" ");
+    // categoryNav.textContent = combinedName;
+    categoryNav.href = `${window.location.origin}/florida/${pathnameArray[2]}`;
 
-    async function showItems() {
-      try {
-        let page = 1;
-        let allData = [];
-        let hasMoreItems = true;
-
-        // Fetch all pages
-        while (hasMoreItems) {
-          const res = await axios.get(
-            `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name&per_page=100&page=${page}`
-          );
-          const dataArr = res.data;
-
-          if (dataArr.length > 0) {
-            allData = allData.concat(dataArr);
-            page++;
-          } else {
-            hasMoreItems = false;
-          }
-        }
-
-        // Display items based on listArray
-        for (let i of listArray) {
-          allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0]) {
-              i.classList.add("show-category-list");
-              let element = document.createElement("div");
-              element.classList.add("category-list-item");
-              element.innerHTML = `<a href="${item?.link}">${item?.name}</a>`;
-              i.appendChild(element);
-            }
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    async function getCategoryName() {
+      let response = await axios(
+        `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=category_name&per_page=1`
+      );
+      let data = await response.data[0].category_name;
+      categoryNav.textContent = data;
     }
-
-    showItems();
-
-    // carousel
-
-    jQuery(document).ready(function ($) {
-      $(".owl-carousel").owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: false,
-        dots: false,
-        animateOut: "fadeOut",
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: false,
-        responsive: {
-          0: {
-            items: 1,
-          },
-          600: {
-            items: 1,
-          },
-          1000: {
-            items: 1,
-          },
-        },
-      });
-    });
-
-    // search function
-
-    let searchBar = document.querySelector(".search-section input");
-    let list = document.querySelector(".search-section .list");
-    let arr = [];
-
-    function listItems(data) {
-      list.style.display = "block";
-      let item = document.createElement("div");
-      item.classList.add(".list-item");
-      item.innerHTML = `<div class="list-item"><a href="${data?.link}">${data?.title?.rendered}</a></div>`;
-      list.append(item);
-    }
-
-    function unlistItem() {
-      document.querySelectorAll(".list-item").forEach((val) => {
-        val.remove();
-      });
-      list.style.display = "none";
-    }
-
-    function debounce(func, timeout = 500) {
-      let timer;
-      return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-          func.apply(this, args);
-        }, timeout);
-      };
-    }
-
-    async function searching(e) {
-      arr = [];
-      if (e.target.value.trim().length === 0) {
-        noResultsFound.style.display = "none";
-      }
-      if (e.target.value.trim().length > 0) {
-        loader.style.display = "grid";
-        try {
-          let res = await axios(
-            `${
-              window.location.origin
-            }/wp-json/wp/v2/florida?search=${e.target.value.trim()}&_fields=title,link`
-          );
-          let data = await res.data;
-
-          let tagsRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields.search_terms,title,link,acf_fields.address`
-          );
-
-          let tagsData = await tagsRes.data;
-
-          let filteredValue = tagsData.filter((item) => {
-            // Trim the input and split it into an array of words
-            let searchedArray = e.target.value.trimEnd().split(" ");
-
-            // Check if the first word is "service" or "services"
-            const firstWordIsService =
-              searchedArray[0]?.toLowerCase() === "service" ||
-              searchedArray[0]?.toLowerCase() === "services";
-
-            // Case 1: If the first word is "service" or "services", there must be at least two words
-            if (firstWordIsService && searchedArray.length >= 2) {
-              // Ensure all search terms match as whole words
-              return searchedArray.every((val) => {
-                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-                return regex.test(item.acf_fields.search_terms.toLowerCase());
-              });
-            }
-
-            // Case 2: If the first word is not "service" or "services", apply the original filtering logic
-            if (!firstWordIsService) {
-              return searchedArray.every((val) => {
-                let regex = new RegExp(`\\b${val.toLowerCase()}\\b`, "i");
-                let searchTermAndAddress =
-                  item.acf_fields.address.replace(/,/g, "").toLowerCase() +
-                  " " +
-                  item.acf_fields.search_terms.toLowerCase();
-                return regex.test(searchTermAndAddress);
-                // return regex.test(
-
-                // );
-              });
-            }
-
-            // Case 3: Ignore if only "service" or "services" is searched as a single word
-            return false;
-          });
-
-          unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
-            delete item.acf_fields;
-            return item;
-          });
-
-          let val = Array.from(
-            new Set(arr.map((item) => JSON.stringify(item)))
-          ).map((item) => JSON.parse(item));
-
-          if (val.length === 0 && e.target.value.trim().length > 0) {
-            noResultsFound.style.display = "block";
-          } else {
-            noResultsFound.style.display = "none";
-          }
-
-          val.map((item) => {
-            listItems(item);
-          });
-
-          loader.style.display = "none";
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      if (e.target.value.length === 0) {
-        unlistItem();
-      }
-    }
-
-    searchBar.addEventListener(
-      "input",
-      debounce((e) => searching(e))
-    );
-
-    //redirect to search results page on pressing enter
-    searchBar.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        window.location = `${window.location.origin}/search-results-florida/?searchterm=${e.target.value}`;
-      }
-    });
+    getCategoryName();
   })();
 }
 
