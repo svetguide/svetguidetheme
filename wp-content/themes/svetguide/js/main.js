@@ -226,8 +226,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
-    // categoryNav.textContent = combinedName;
-    // categoryTitle.textContent = combinedName;
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -507,6 +505,8 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
           if (val.length === 0) {
             noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
           }
 
           val.map((item) => {
@@ -817,13 +817,9 @@ if (document.querySelector(".sg-search-results-illinois")) {
             }
             dataItems = [...val];
             isDataItemEmpty(dataItems);
-            val.splice(0, 2).map((item) => {
+            val.splice(0, 5).map((item) => {
               createBusinessCard(item);
             });
-
-            // val.map((item) => {
-            //   createBusinessCard(item);
-            // });
           } catch (err) {
             console.error(err);
           }
@@ -1512,6 +1508,8 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
           if (val.length === 0) {
             noResultsFound.style.display = "block";
+          } else {
+            noResultsFound.style.display = "none";
           }
 
           val.map((item) => {
