@@ -254,6 +254,12 @@
 .sg-florida-archive .container .section-2 .wrapper-1 {
   flex-basis: 20%;
 }
+@media screen and (min-width: 1024px) {
+  .sg-florida-archive .container .section-2 .wrapper-1 {
+    padding-right: 50px;
+    border-right: 1px solid lightgray;
+  }
+}
 .sg-florida-archive .container .section-2 .wrapper-1 .title {
   font-family: "Open Sans";
   font-size: 18px;
@@ -311,6 +317,11 @@
   gap: 18px;
   flex-basis: 80%;
   width: 100%;
+}
+@media screen and (min-width: 1024px) {
+  .sg-florida-archive .container .section-2 .wrapper-2 {
+    padding-left: 30px;
+  }
 }
 @media screen and (max-width: 768px) {
   .sg-florida-archive .container .section-2 .wrapper-2 {
