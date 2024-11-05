@@ -287,6 +287,10 @@
 
       .wrapper-1 {
         flex-basis: 20%;
+        @media screen and (min-width: 1024px) {
+          padding-right: 50px;
+          border-right: 1px solid lightgray;
+        }
         .title {
           font-family: "Open Sans";
           font-size: 18px;
@@ -357,6 +361,10 @@
         gap: 18px;
         flex-basis: 80%;
         width: 100%;
+
+        @media screen and (min-width: 1024px) {
+          padding-left: 30px;
+        }
 
         @media screen and (max-width: 768px) {
           flex-direction: column;
