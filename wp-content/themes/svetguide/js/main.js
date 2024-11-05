@@ -19,7 +19,7 @@ if (document.querySelector(".sg-illinois-archive")) {
         // Fetch all pages
         while (hasMoreItems) {
           const res = await axios.get(
-            `${window.location.origin}/wp-json/wp/v2/il?_fields=link,name&per_page=100&page=${page}`
+            `${window.location.origin}/wp-json/wp/v2/il?_fields=link,name,count&per_page=100&page=${page}`
           );
           const dataArr = res.data;
 
@@ -34,7 +34,7 @@ if (document.querySelector(".sg-illinois-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0]) {
+            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
@@ -1025,7 +1025,7 @@ if (document.querySelector(".sg-florida-archive")) {
         // Fetch all pages
         while (hasMoreItems) {
           const res = await axios.get(
-            `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name&per_page=100&page=${page}`
+            `${window.location.origin}/wp-json/wp/v2/fl?_fields=link,name,count&per_page=100&page=${page}`
           );
           const dataArr = res.data;
 
@@ -1040,7 +1040,7 @@ if (document.querySelector(".sg-florida-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0]) {
+            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
