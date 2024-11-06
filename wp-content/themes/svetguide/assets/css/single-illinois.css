@@ -203,6 +203,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .website div img,
 .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .phone div img,
