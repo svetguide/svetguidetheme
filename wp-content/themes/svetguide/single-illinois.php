@@ -105,7 +105,7 @@ Template Name: Illinois Single
                         </div>
                     <?php endif; ?>
 
-                    <?php if (get_field('social_media_facebook') || get_field('social_media_instagram') || get_field('social_media_linkdin')): ?>
+                    <?php if (get_field('social_media_facebook') || get_field('social_media_instagram') || get_field('social_media_linkdin') || get_field('social_media_youtube') || get_field('social_media_tiktok') || get_field('social_media_pinterest') || get_field('social_media_telegram')): ?>
                         <div class="social-media">
 
                             <div>
@@ -122,6 +122,18 @@ Template Name: Illinois Single
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_linkdin')): ?>
                                     <a href="<?php the_field('social_media_linkdin'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/linkdin.png' class="linkdin"></img></a>
+                                <?php endif; ?>
+                                <?php if (get_field('social_media_youtube')): ?>
+                                    <a href="<?php the_field('social_media_youtube'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/youtube.png' class="youtube"></img></a>
+                                <?php endif; ?>
+                                <?php if (get_field('social_media_tiktok')): ?>
+                                    <a href="<?php the_field('social_media_tiktok'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/tiktok.png' class="tiktok"></img></a>
+                                <?php endif; ?>
+                                <?php if (get_field('social_media_pinterest')): ?>
+                                    <a href="<?php the_field('social_media_pinterest'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/pinterest.png' class="pinterest"></img></a>
+                                <?php endif; ?>
+                                <?php if (get_field('social_media_telegram')): ?>
+                                    <a href="<?php the_field('social_media_telegram'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/telegram.png' class="telegram"></img></a>
                                 <?php endif; ?>
                             </div>
 
