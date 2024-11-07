@@ -89,7 +89,7 @@ Template Name: Florida Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/phone.png" alt="">
                                 <h5>Phone</h5>
                             </div>
-                            <p><?php the_field('phone'); ?></p>
+                            <a href="tel:<?php the_field('phone'); ?>"><?php the_field('phone'); ?></a>
                         </div>
                     <?php endif; ?>
 
