@@ -231,9 +231,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.slug}">${
-        data?.acf_fields?.title
-      }</a>
+                            <a href="${data?.slug}">${data?.title?.rendered}</a>
                           </div>
 
                             <div class="about">
@@ -710,7 +708,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.link}">${data?.acf_fields?.title}</a>
+                            <a href="${data?.link}">${data?.title?.rendered}</a>
                           </div>
 
                             <div class="about">
@@ -1236,9 +1234,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.slug}">${
-        data?.acf_fields?.title
-      }</a>
+                            <a href="${data?.slug}">${data?.title?.rendered}</a>
                           </div>
 
                             <div class="about">
@@ -1713,7 +1709,7 @@ if (document.querySelector(".sg-search-results-florida")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.link}">${data?.acf_fields?.title}</a>
+                            <a href="${data?.link}">${data?.title?.rendered}</a>
                           </div>
 
                             <div class="about">
