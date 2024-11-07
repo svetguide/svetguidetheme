@@ -78,7 +78,7 @@ Template Name: Florida Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/website.png" alt="">
                                 <h5>Website</h5>
                             </div>
-                            <a href=''><?php the_field('website'); ?></a>
+                            <a href="<?php the_field('website'); ?>"><?php the_field('website'); ?></a>
                         </div>
                     <?php endif; ?>
 
