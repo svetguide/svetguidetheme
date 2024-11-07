@@ -22,7 +22,7 @@ Template Name: Florida Single
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
-                <p><?php the_field('title'); ?></p>
+                <p><?php the_title(); ?></p>
             </div>
 
         </div>
@@ -57,7 +57,7 @@ Template Name: Florida Single
                 <div class="wrapper-content">
 
                     <div class="title">
-                        <h1><?php the_field('title'); ?></h1>
+                        <h1><?php the_title(); ?></h1>
                         <a href="<?php the_field('website'); ?>">Visit Site
 
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/visit-site.png" alt="">
@@ -78,7 +78,7 @@ Template Name: Florida Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/website.png" alt="">
                                 <h5>Website</h5>
                             </div>
-                            <a href=''><?php the_field('website'); ?></a>
+                            <a href="<?php the_field('website'); ?>"><?php the_field('website'); ?></a>
                         </div>
                     <?php endif; ?>
 
@@ -89,7 +89,7 @@ Template Name: Florida Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/phone.png" alt="">
                                 <h5>Phone</h5>
                             </div>
-                            <p><?php the_field('phone'); ?></p>
+                            <a href="tel:<?php the_field('phone'); ?>"><?php the_field('phone'); ?></a>
                         </div>
                     <?php endif; ?>
 
