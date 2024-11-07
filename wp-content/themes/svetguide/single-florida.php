@@ -22,7 +22,7 @@ Template Name: Florida Single
             </div>
             <div>
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
-                <p><?php the_field('title'); ?></p>
+                <p><?php the_title(); ?></p>
             </div>
 
         </div>
@@ -57,7 +57,7 @@ Template Name: Florida Single
                 <div class="wrapper-content">
 
                     <div class="title">
-                        <h1><?php the_field('title'); ?></h1>
+                        <h1><?php the_title(); ?></h1>
                         <a href="<?php the_field('website'); ?>">Visit Site
 
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/visit-site.png" alt="">
