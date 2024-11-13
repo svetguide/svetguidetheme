@@ -206,7 +206,12 @@ function illinois_permalink_structure($post_link, $post)
 		$terms = wp_get_object_terms($post->ID, 'il');
 		if ($terms) {
 			$term = $terms[0];
-			return home_url("illinois/{$term->slug}/{$post->post_name}/");
+			// Check if the post is being edited
+			if (is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit') {
+				return home_url("illinois/{$term->slug}/%postname%/");
+			} else {
+				return home_url("illinois/{$term->slug}/{$post->post_name}/");
+			}
 		}
 	}
 	return $post_link;
@@ -548,7 +553,12 @@ function florida_permalink_structure($post_link, $post)
 		$terms = wp_get_object_terms($post->ID, 'fl');
 		if ($terms) {
 			$term = $terms[0];
-			return home_url("florida/{$term->slug}/{$post->post_name}/");
+			// Check if the post is being edited
+			if (is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit') {
+				return home_url("florida/{$term->slug}/%postname%/");
+			} else {
+				return home_url("florida/{$term->slug}/{$post->post_name}/");
+			}
 		}
 	}
 	return $post_link;
