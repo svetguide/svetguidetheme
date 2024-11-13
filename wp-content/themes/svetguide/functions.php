@@ -206,7 +206,12 @@ function illinois_permalink_structure($post_link, $post)
 		$terms = wp_get_object_terms($post->ID, 'il');
 		if ($terms) {
 			$term = $terms[0];
-			return home_url("illinois/{$term->slug}/{$post->post_name}/");
+			// Check if the post is being edited
+			if (is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit') {
+				return home_url("illinois/{$term->slug}/%postname%/");
+			} else {
+				return home_url("illinois/{$term->slug}/{$post->post_name}/");
+			}
 		}
 	}
 	return $post_link;
@@ -548,12 +553,32 @@ function florida_permalink_structure($post_link, $post)
 		$terms = wp_get_object_terms($post->ID, 'fl');
 		if ($terms) {
 			$term = $terms[0];
-			return home_url("florida/{$term->slug}/{$post->post_name}/");
+			// Check if the post is being edited
+			if (is_admin() && isset($_GET['action']) && $_GET['action'] === 'edit') {
+				return home_url("florida/{$term->slug}/%postname%/");
+			} else {
+				return home_url("florida/{$term->slug}/{$post->post_name}/");
+			}
 		}
 	}
 	return $post_link;
 }
 add_filter('post_type_link', 'florida_permalink_structure', 10, 2);
+
+// permalink link substitute for illinois and florida
+function disable_permalink_pointer_events()
+{
+?>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+			const permalink = document.querySelector('#sample-permalink a'); // Selects the permalink text
+			permalink.href = permalink.textContent
+		});
+	</script>
+<?php
+}
+add_action('admin_head', 'disable_permalink_pointer_events');
+
 
 // Custom Rewrite Rules
 function florida_rewrite_rules()
