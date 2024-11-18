@@ -58,7 +58,6 @@ Template Name: Search Results Illinois
             <!-- wrapper-2 -->
 
             <div class="wrapper-2">
-
                 <div class="list-of-cards">
                     <div class="sub-wrapper">
                         <div class="message">
@@ -75,7 +74,7 @@ Template Name: Search Results Illinois
                 </div>
 
                 <div class="wrapper-image">
-                    <a href="/asdf">
+                    <a href="https://issuu.com/svet-svet/docs/svet_chicago2024-new_print_os" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
                     </a>
                 </div>

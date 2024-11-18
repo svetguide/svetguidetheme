@@ -213,7 +213,10 @@ body {
   display: flex;
   flex-direction: column;
 }
-.sg-footer .container .wrapper .contact > img {
+.sg-footer .container .wrapper .contact .sg-footer-svetlogo a {
+  width: 252px;
+}
+.sg-footer .container .wrapper .contact .sg-footer-svetlogo > img {
   width: 252px;
   margin-bottom: 15px;
 }

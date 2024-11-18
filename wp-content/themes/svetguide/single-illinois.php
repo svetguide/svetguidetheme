@@ -60,7 +60,7 @@ Template Name: Illinois Single
 
                     <div class="title">
                         <h1><?php the_title(); ?></h1>
-                        <a href="<?php the_field('website'); ?>">Visit Site
+                        <a href="<?php the_field('website'); ?>" target="_blank">Visit Site
 
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/visit-site.png" alt="">
                         </a>
@@ -80,7 +80,7 @@ Template Name: Illinois Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/website.png" alt="">
                                 <h5>Website</h5>
                             </div>
-                            <a href="<?php the_field('website'); ?>"><?php the_field('website'); ?></a>
+                            <a href="<?php the_field('website'); ?>" target="_blank"><?php the_field('website'); ?></a>
                         </div>
                     <?php endif; ?>
 
@@ -91,7 +91,7 @@ Template Name: Illinois Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/phone.png" alt="">
                                 <h5>Phone</h5>
                             </div>
-                            <a href="tel:<?php the_field('phone'); ?>"><?php the_field('phone'); ?></a>
+                            <a href="tel:<?php the_field('phone'); ?>" target="_blank"><?php the_field('phone'); ?></a>
                         </div>
                     <?php endif; ?>
 
@@ -115,25 +115,25 @@ Template Name: Illinois Single
 
                             <div>
                                 <?php if (get_field('social_media_facebook')): ?>
-                                    <a href="<?php the_field('social_media_facebook'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/facebook.png' class="facebook"></img></a>
+                                    <a href="<?php the_field('social_media_facebook'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/facebook.png' class="facebook"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_instagram')): ?>
-                                    <a href="<?php the_field('social_media_instagram'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/instagram.png' class="instagram"></img></a>
+                                    <a href="<?php the_field('social_media_instagram'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/instagram.png' class="instagram"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_linkdin')): ?>
-                                    <a href="<?php the_field('social_media_linkdin'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/linkdin.png' class="linkdin"></img></a>
+                                    <a href="<?php the_field('social_media_linkdin'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/linkdin.png' class="linkdin"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_youtube')): ?>
-                                    <a href="<?php the_field('social_media_youtube'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/youtube.png' class="youtube"></img></a>
+                                    <a href="<?php the_field('social_media_youtube'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/youtube.png' class="youtube"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_tiktok')): ?>
-                                    <a href="<?php the_field('social_media_tiktok'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/tiktok.png' class="tiktok"></img></a>
+                                    <a href="<?php the_field('social_media_tiktok'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/tiktok.png' class="tiktok"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_pinterest')): ?>
-                                    <a href="<?php the_field('social_media_pinterest'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/pinterest.png' class="pinterest"></img></a>
+                                    <a href="<?php the_field('social_media_pinterest'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/pinterest.png' class="pinterest"></img></a>
                                 <?php endif; ?>
                                 <?php if (get_field('social_media_telegram')): ?>
-                                    <a href="<?php the_field('social_media_telegram'); ?>"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/telegram.png' class="telegram"></img></a>
+                                    <a href="<?php the_field('social_media_telegram'); ?>" target="_blank"> <img src='<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/telegram.png' class="telegram"></img></a>
                                 <?php endif; ?>
                             </div>
 
@@ -151,7 +151,7 @@ Template Name: Illinois Single
 
 
                 <div class="wrapper-image">
-                    <a href="/asdf">
+                    <a href="https://issuu.com/svet-svet/docs/svet_chicago2024-new_print_os" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
                     </a>
                 </div>

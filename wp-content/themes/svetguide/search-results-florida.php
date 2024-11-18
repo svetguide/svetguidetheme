@@ -75,7 +75,7 @@ Template Name: Search Results Florida
                 </div>
 
                 <div class="wrapper-image">
-                    <a href="/asdf">
+                    <a href="https://issuu.com/svet-svet/docs/svet_florida2024-new_press_021224_os" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
                     </a>
                 </div>

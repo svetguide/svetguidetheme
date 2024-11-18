@@ -229,9 +229,14 @@ body {
       .contact {
         display: flex;
         flex-direction: column;
-        > img {
-          width: 252px;
-          margin-bottom: 15px;
+        .sg-footer-svetlogo {
+          a {
+            width: 252px;
+          }
+          > img {
+            width: 252px;
+            margin-bottom: 15px;
+          }
         }
 
         > a {

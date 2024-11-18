@@ -3,15 +3,16 @@
 
         <div class="wrapper">
 
-
             <!-- contact  -->
             <div class="contact">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/svetguide-logo.png" alt="svetguide logo">
-                <a href="">
+                <a href="/" class="sg-footer-svetlogo" target="_blank">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/svetguide-logo.png" alt="svetguide logo">
+                </a>
+                <a href="mailto: manager@svet.com" target="_blank">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/mail.svg" alt="">
                     manager@svet.com
                 </a>
-                <a href="">
+                <a href="tel:847-715-9407" target="_blank">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/phone.svg" alt="">
                     847-715-9407
                 </a>
@@ -21,16 +22,16 @@
             <div class="social-media">
                 <p>Connect with us:</p>
                 <div>
-                    <a href="https://www.facebook.com/svetmedia">
+                    <a href="https://www.facebook.com/svetmedia" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/facebook-logo.png" alt="facebook logo">
                     </a>
-                    <a href="https://www.instagram.com/svetmediagroup/">
+                    <a href="https://www.instagram.com/svetmediagroup/" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/instagram-logo.png" alt="instagram logo">
                     </a>
-                    <a href="https://www.linkedin.com/company/svet-russian-media-group/">
+                    <a href="https://www.linkedin.com/company/svet-russian-media-group/" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/linkdin-logo.png" alt="linkdin logo">
                     </a>
-                    <a href="https://www.youtube.com/@SvetMediaGroup">
+                    <a href="https://www.youtube.com/@SvetMediaGroup" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/youtube-logo.png" alt="youtube logo">
                     </a>
                 </div>
