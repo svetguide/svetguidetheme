@@ -379,7 +379,8 @@ function custom_theme_options_pages()
 }
 add_action('admin_menu', 'custom_theme_options_pages');
 
-// Display Illinois settings page
+/////////
+
 function illinois_settings_page_html()
 {
 	if (!current_user_can('manage_options')) {
@@ -391,24 +392,28 @@ function illinois_settings_page_html()
 		update_option('illinois_most_searched_list', wp_kses_post($_POST['illinois_most_searched_list']));
 	}
 
-	// Save the image fields
+	// Save the image fields and their corresponding alt text
 	for ($i = 1; $i <= 8; $i++) {
 		if (isset($_POST["illinois_image_$i"])) {
 			update_option("illinois_image_$i", esc_url_raw($_POST["illinois_image_$i"]));
+		}
+		if (isset($_POST["illinois_image_alt_$i"])) {
+			update_option("illinois_image_alt_$i", sanitize_text_field($_POST["illinois_image_alt_$i"]));
 		}
 	}
 
 	// Get current values
 	$most_searched_list = get_option('illinois_most_searched_list', '');
 	$images = [];
+	$image_alts = [];
 	for ($i = 1; $i <= 8; $i++) {
 		$images[$i] = get_option("illinois_image_$i", '');
+		$image_alts[$i] = get_option("illinois_image_alt_$i", '');
 	}
 
-	render_settings_page('Illinois', $most_searched_list, $images);
+	render_settings_page('Illinois', $most_searched_list, $images, $image_alts);
 }
 
-// Display Florida settings page
 function florida_settings_page_html()
 {
 	if (!current_user_can('manage_options')) {
@@ -420,25 +425,32 @@ function florida_settings_page_html()
 		update_option('florida_most_searched_list', wp_kses_post($_POST['florida_most_searched_list']));
 	}
 
-	// Save the image fields
+	// Save the image fields and their corresponding alt text
 	for ($i = 1; $i <= 8; $i++) {
 		if (isset($_POST["florida_image_$i"])) {
 			update_option("florida_image_$i", esc_url_raw($_POST["florida_image_$i"]));
+		}
+		if (isset($_POST["florida_image_alt_$i"])) {
+			update_option("florida_image_alt_$i", sanitize_text_field($_POST["florida_image_alt_$i"]));
 		}
 	}
 
 	// Get current values
 	$most_searched_list = get_option('florida_most_searched_list', '');
 	$images = [];
+	$image_alts = [];
 	for ($i = 1; $i <= 8; $i++) {
 		$images[$i] = get_option("florida_image_$i", '');
+		$image_alts[$i] = get_option("florida_image_alt_$i", '');
 	}
 
-	render_settings_page('Florida', $most_searched_list, $images);
+	render_settings_page('Florida', $most_searched_list, $images, $image_alts);
 }
 
+// //////////
+
 // Common render function for both pages
-function render_settings_page($state, $most_searched_list, $images)
+function render_settings_page($state, $most_searched_list, $images, $image_alts)
 {
 	$state_lower = strtolower($state);
 ?>
@@ -464,6 +476,14 @@ function render_settings_page($state, $most_searched_list, $images)
 					id="<?php echo $state_lower; ?>_image_<?php echo $i; ?>"
 					value="<?php echo esc_url($images[$i]); ?>"
 					placeholder="Image URL" />
+				<br>
+				<label for="<?php echo $state_lower; ?>_image_alt_<?php echo $i; ?>">Image URL/ALT Text</label><br>
+				<input type="text"
+					name="<?php echo $state_lower; ?>_image_alt_<?php echo $i; ?>"
+					id="<?php echo $state_lower; ?>_image_alt_<?php echo $i; ?>"
+					value="<?php echo esc_attr($image_alts[$i]); ?>"
+					placeholder="Alternative URL/Description" />
+				<br>
 				<input type="button"
 					class="upload_image_button button"
 					value="Upload Image"
@@ -501,6 +521,7 @@ function render_settings_page($state, $most_searched_list, $images)
 	</script>
 <?php
 }
+
 
 //florida
 

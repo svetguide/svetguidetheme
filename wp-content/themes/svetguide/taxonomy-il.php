@@ -18,80 +18,114 @@ Template Name: Illinois Taxonomy
 
                 <?php
                 $illinois_image_1 = get_option('illinois_image_1');
+                $illinois_image_alt_1 = get_option('illinois_image_alt_1'); // Fetch the alt text
                 if ($illinois_image_1) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_1) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_1); ?>">
+                            <img src="<?php echo esc_url($illinois_image_1); ?>" alt="<?php echo esc_attr($illinois_image_alt_1); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
+
                 <?php
                 $illinois_image_2 = get_option('illinois_image_2');
-
+                $illinois_image_alt_2 = get_option('illinois_image_alt_2'); // Fetch the alt text
                 if ($illinois_image_2) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_2) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_2); ?>">
+                            <img src="<?php echo esc_url($illinois_image_2); ?>" alt="<?php echo esc_attr($illinois_image_alt_2); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_3 = get_option('illinois_image_3');
-
+                $illinois_image_alt_3 = get_option('illinois_image_alt_3'); // Fetch the alt text
                 if ($illinois_image_3) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_3) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_3); ?>">
+                            <img src="<?php echo esc_url($illinois_image_3); ?>" alt="<?php echo esc_attr($illinois_image_alt_3); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_4 = get_option('illinois_image_4');
-
+                $illinois_image_alt_4 = get_option('illinois_image_alt_4'); // Fetch the alt text
                 if ($illinois_image_4) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_4) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_4); ?>">
+                            <img src="<?php echo esc_url($illinois_image_4); ?>" alt="<?php echo esc_attr($illinois_image_alt_4); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_5 = get_option('illinois_image_5');
-
+                $illinois_image_alt_5 = get_option('illinois_image_alt_5'); // Fetch the alt text
                 if ($illinois_image_5) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_5) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_5); ?>">
+                            <img src="<?php echo esc_url($illinois_image_5); ?>" alt="<?php echo esc_attr($illinois_image_alt_5); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_6 = get_option('illinois_image_6');
-
+                $illinois_image_alt_6 = get_option('illinois_image_alt_6'); // Fetch the alt text
                 if ($illinois_image_6) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_6) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_6); ?>">
+                            <img src="<?php echo esc_url($illinois_image_6); ?>" alt="<?php echo esc_attr($illinois_image_alt_6); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_7 = get_option('illinois_image_7');
-
+                $illinois_image_alt_7 = get_option('illinois_image_alt_7'); // Fetch the alt text
                 if ($illinois_image_7) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_7) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_7); ?>">
+                            <img src="<?php echo esc_url($illinois_image_7); ?>" alt="<?php echo esc_attr($illinois_image_alt_7); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
                 <?php
                 $illinois_image_8 = get_option('illinois_image_8');
-
+                $illinois_image_alt_8 = get_option('illinois_image_alt_8'); // Fetch the alt text
                 if ($illinois_image_8) {
-                    echo  ' <div class="item">';
-                    echo '<img src="' . esc_url($illinois_image_8) . '" alt="Image One">';
-                    echo '</div>';
+                ?>
+                    <div class="item">
+                        <a href="<?php echo esc_attr($illinois_image_alt_8); ?>">
+                            <img src="<?php echo esc_url($illinois_image_8); ?>" alt="<?php echo esc_attr($illinois_image_alt_8); ?>">
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
 
