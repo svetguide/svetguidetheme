@@ -214,6 +214,17 @@
   .container {
     //section-2 - start
 
+    .return-to-home {
+      margin-top: 30px;
+      a {
+        color: black;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #b73b0c;
+      }
+    }
+
     .section-2 {
       display: flex;
       align-items: start;

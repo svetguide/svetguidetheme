@@ -35,6 +35,10 @@ Template Name: Search Results Florida
 
     <div class="container">
 
+        <section class="return-to-home">
+            <a href='/florida/'>Return Home</a>
+        </section>
+
         <!-- section-2 -->
 
         <div class="section-2">

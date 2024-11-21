@@ -35,6 +35,9 @@ Template Name: Search Results Illinois
 
     <div class="container">
 
+        <section class="return-to-home">
+            <a href='/illinois/'>Return Home</a>
+        </section>
         <!-- section-2 -->
 
         <div class="section-2">
