@@ -162,7 +162,7 @@ Template Name: Illinois Archive
                     ?>
                 </div>
                 <div class="wrapper-image">
-                    <a href="/asdf">
+                    <a href="https://issuu.com/svet-svet/docs/svet_chicago2024-new_print_os" target="_blank">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
                     </a>
                 </div>
