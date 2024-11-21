@@ -710,7 +710,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
                           </div>
 
                             <div class="about">
-                                <p>${data?.acf_fields?.about}</p>
+                                <p>${data?.acf_fields?.category_description}</p>
                             </div>
 
                             <div class="phone">
@@ -1710,7 +1710,7 @@ if (document.querySelector(".sg-search-results-florida")) {
                           </div>
 
                             <div class="about">
-                                <p>${data?.acf_fields?.about}</p>
+                                <p>${data?.acf_fields?.category_description}</p>
                             </div>
 
                             <div class="phone">
