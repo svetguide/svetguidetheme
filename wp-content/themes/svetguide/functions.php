@@ -282,41 +282,16 @@ add_action('rest_api_init', 'add_acf_to_rest_api');
 
 // http://localhost:8888/wp-json/wp/v2/illinois?il_slug=Accounting Services
 
-// function filter_illinois_by_il_slug($args, $request)
-// {
-// 	if (isset($request['il_slug'])) {
-// 		$search_slug = sanitize_text_field($request['il_slug']);
-
-// 		// Get the term object by slug
-// 		$term = get_term_by('slug', $search_slug, 'il');
-
-// 		// If the term is found, add it to the tax_query
-// 		if ($term) {
-// 			$args['tax_query'] = array(
-// 				array(
-// 					'taxonomy' => 'il',
-// 					'field'    => 'term_id',
-// 					'terms'    => $term->term_id,
-// 				),
-// 			);
-// 		}
-// 	}
-// 	return $args;
-// }
-
-// // Hook into the REST API for the 'illinois' post type
-// add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
-
 function filter_illinois_by_il_slug($args, $request)
 {
 	if (isset($request['il_slug'])) {
 		$search_slug = sanitize_text_field($request['il_slug']);
 
 		// Get the term object by slug
-		$term = get_term_by('slug', $search_slug, 'il');
+		$term = get_term_by('slug', sanitize_title($search_slug), 'il');
 
-		// If the term is found, add it to the tax_query
 		if ($term) {
+			// If term is found, add it to tax_query
 			$args['tax_query'] = array(
 				array(
 					'taxonomy' => 'il',
@@ -324,19 +299,15 @@ function filter_illinois_by_il_slug($args, $request)
 					'terms'    => $term->term_id,
 				),
 			);
-
-			// Add the category name to the response
-			register_rest_field('illinois', 'category_name', array(
-				'get_callback' => function ($post) use ($term) {
-					return $term->name;
-				},
-				'update_callback' => null,
-				'schema' => array(
-					'description' => 'The name of the category',
-					'type' => 'string',
-					'context' => array('view', 'edit', 'embed')
-				)
-			));
+		} else {
+			// If term is not found, force no results by using an impossible term ID
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'il',
+					'field'    => 'term_id',
+					'terms'    => -1, // Using -1 as an impossible term ID
+				),
+			);
 		}
 	}
 	return $args;
@@ -344,8 +315,6 @@ function filter_illinois_by_il_slug($args, $request)
 
 // Hook into the REST API for the 'illinois' post type
 add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
-
-
 
 ///////////////////
 
@@ -379,7 +348,6 @@ function custom_theme_options_pages()
 }
 add_action('admin_menu', 'custom_theme_options_pages');
 
-/////////
 
 function illinois_settings_page_html()
 {
@@ -667,10 +635,10 @@ function filter_florida_by_fl_slug($args, $request)
 		$search_slug = sanitize_text_field($request['fl_slug']);
 
 		// Get the term object by slug
-		$term = get_term_by('slug', $search_slug, 'fl');
+		$term = get_term_by('slug', sanitize_title($search_slug), 'fl');
 
-		// If the term is found, add it to the tax_query
 		if ($term) {
+			// If term is found, add it to tax_query
 			$args['tax_query'] = array(
 				array(
 					'taxonomy' => 'fl',
@@ -678,19 +646,15 @@ function filter_florida_by_fl_slug($args, $request)
 					'terms'    => $term->term_id,
 				),
 			);
-
-			// Add the category name to the response
-			register_rest_field('florida', 'category_name', array(
-				'get_callback' => function ($post) use ($term) {
-					return $term->name;
-				},
-				'update_callback' => null,
-				'schema' => array(
-					'description' => 'The name of the category',
-					'type' => 'string',
-					'context' => array('view', 'edit', 'embed')
-				)
-			));
+		} else {
+			// If term is not found, force no results by using an impossible term ID
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'fl',
+					'field'    => 'term_id',
+					'terms'    => -1, // Using -1 as an impossible term ID
+				),
+			);
 		}
 	}
 	return $args;
