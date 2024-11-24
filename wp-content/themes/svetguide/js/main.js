@@ -122,6 +122,14 @@ if (document.querySelector(".sg-illinois-archive")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -166,10 +174,12 @@ if (document.querySelector(".sg-illinois-archive")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
+
+          console.log(data, filteredValue, taxData);
 
           let val = Array.from(
             new Set(arr.map((item) => JSON.stringify(item)))
@@ -446,6 +456,14 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -490,7 +508,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
@@ -614,6 +632,14 @@ if (document.querySelector(".sg-search-results-illinois")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -658,7 +684,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
@@ -754,6 +780,14 @@ if (document.querySelector(".sg-search-results-illinois")) {
             );
             let data = await res.data;
 
+            let taxRes = await axios(
+              `${
+                window.location.origin
+              }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link`
+            );
+
+            let taxData = await taxRes.data;
+
             let tagsRes = await axios(
               `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link,acf_fields.address`
             );
@@ -796,9 +830,11 @@ if (document.querySelector(".sg-search-results-illinois")) {
 
             unlistItem();
             removeCards();
-            arrayOnEnter = [...data, ...filteredValue].map((item) => {
-              return item;
-            });
+            arrayOnEnter = [...data, ...filteredValue, ...taxData].map(
+              (item) => {
+                return item;
+              }
+            );
 
             let val = Array.from(
               new Set(arrayOnEnter.map((item) => JSON.stringify(item)))
@@ -844,6 +880,12 @@ if (document.querySelector(".sg-search-results-illinois")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${queryTerm}&_fields=title,link,acf_fields`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/illinois?_fields=acf_fields,title,link,acf_fields.address`
           );
@@ -886,7 +928,9 @@ if (document.querySelector(".sg-search-results-illinois")) {
 
           let val = Array.from(
             new Set(
-              [...data, ...filteredValue].map((item) => JSON.stringify(item))
+              [...data, ...filteredValue, ...taxData].map((item) =>
+                JSON.stringify(item)
+              )
             )
           ).map((item) => JSON.parse(item));
 
@@ -1124,6 +1168,14 @@ if (document.querySelector(".sg-florida-archive")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -1168,7 +1220,7 @@ if (document.querySelector(".sg-florida-archive")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
@@ -1446,6 +1498,14 @@ if (document.querySelector(".sg-florida-taxonomy")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -1490,7 +1550,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
@@ -1614,6 +1674,14 @@ if (document.querySelector(".sg-search-results-florida")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${
+              window.location.origin
+            }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields.search_terms,title,link,acf_fields.address`
           );
@@ -1658,7 +1726,7 @@ if (document.querySelector(".sg-search-results-florida")) {
           });
 
           unlistItem();
-          arr = [...data, ...filteredValue].map((item) => {
+          arr = [...data, ...filteredValue, ...taxData].map((item) => {
             delete item.acf_fields;
             return item;
           });
@@ -1754,6 +1822,14 @@ if (document.querySelector(".sg-search-results-florida")) {
             );
             let data = await res.data;
 
+            let taxRes = await axios(
+              `${
+                window.location.origin
+              }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+            );
+
+            let taxData = await taxRes.data;
+
             let tagsRes = await axios(
               `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields,title,link,acf_fields.address`
             );
@@ -1796,9 +1872,11 @@ if (document.querySelector(".sg-search-results-florida")) {
 
             unlistItem();
             removeCards();
-            arrayOnEnter = [...data, ...filteredValue].map((item) => {
-              return item;
-            });
+            arrayOnEnter = [...data, ...filteredValue, ...taxData].map(
+              (item) => {
+                return item;
+              }
+            );
 
             let val = Array.from(
               new Set(arrayOnEnter.map((item) => JSON.stringify(item)))
@@ -1848,6 +1926,12 @@ if (document.querySelector(".sg-search-results-florida")) {
           );
           let data = await res.data;
 
+          let taxRes = await axios(
+            `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${queryTerm}&_fields=title,link,acf_fields`
+          );
+
+          let taxData = await taxRes.data;
+
           let tagsRes = await axios(
             `${window.location.origin}/wp-json/wp/v2/florida?_fields=acf_fields,title,link,acf_fields.address`
           );
@@ -1890,7 +1974,9 @@ if (document.querySelector(".sg-search-results-florida")) {
 
           let val = Array.from(
             new Set(
-              [...data, ...filteredValue].map((item) => JSON.stringify(item))
+              [...data, ...filteredValue, ...taxData].map((item) =>
+                JSON.stringify(item)
+              )
             )
           ).map((item) => JSON.parse(item));
 
