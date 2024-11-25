@@ -172,11 +172,75 @@ function register_illinois_post_type()
 			'slug' => 'illinois',
 			'with_front' => false,
 		),
-		'show_in_rest' => true
+		'show_in_rest' => true,
+		'taxonomies' => array('il') // Add this line to ensure taxonomy is linked
 	);
 	register_post_type('illinois', $args);
 }
 add_action('init', 'register_illinois_post_type');
+
+// Add filter dropdown to admin screen
+function add_illinois_taxonomy_filters()
+{
+	global $typenow;
+
+	// Only add filter to illinois post type
+	if ($typenow == 'illinois') {
+		$taxonomy = 'il';
+
+		// Get taxonomy object
+		$tax = get_taxonomy($taxonomy);
+
+		// Get terms
+		$terms = get_terms([
+			'taxonomy' => $taxonomy,
+			'hide_empty' => true
+		]);
+
+		// Display dropdown if terms exist
+		if (!empty($terms)) {
+			$selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+
+			echo '<select name="' . $taxonomy . '" id="' . $taxonomy . '" class="postform">';
+			echo '<option value="">' . sprintf(__('All %s', 'textdomain'), $tax->labels->name) . '</option>';
+
+			foreach ($terms as $term) {
+				printf(
+					'<option value="%1$s" %2$s>%3$s (%4$s)</option>',
+					$term->slug,
+					selected($selected, $term->slug, false),
+					$term->name,
+					$term->count
+				);
+			}
+			echo '</select>';
+		}
+	}
+}
+add_action('restrict_manage_posts', 'add_illinois_taxonomy_filters');
+
+// Make the filter work with the query
+function filter_illinois_admin_filter($query)
+{
+	global $pagenow, $typenow;
+
+	// Ensure we're in the admin area, on the posts list page, and working with our custom post type
+	if (is_admin() && $pagenow == 'edit.php' && $typenow == 'illinois') {
+		$taxonomy = 'il';
+
+		// Only modify query if the taxonomy filter is set
+		if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
+			$query->query_vars['tax_query'] = array(
+				array(
+					'taxonomy' => $taxonomy,
+					'field' => 'slug',
+					'terms' => $_GET[$taxonomy]
+				)
+			);
+		}
+	}
+}
+add_action('parse_query', 'filter_illinois_admin_filter');
 
 // Register IL Taxonomy
 function register_illinois_il_taxonomy()
@@ -523,11 +587,75 @@ function register_florida_post_type()
 			'slug' => 'florida',
 			'with_front' => false,
 		),
-		'show_in_rest' => true
+		'show_in_rest' => true,
+		'taxonomies' => array('fl') // Add this line to ensure taxonomy is linked
 	);
 	register_post_type('florida', $args);
 }
 add_action('init', 'register_florida_post_type');
+
+// Add filter dropdown to admin screen
+function add_florida_taxonomy_filters()
+{
+	global $typenow;
+
+	// Only add filter to florida post type
+	if ($typenow == 'florida') {
+		$taxonomy = 'fl';
+
+		// Get taxonomy object
+		$tax = get_taxonomy($taxonomy);
+
+		// Get terms
+		$terms = get_terms([
+			'taxonomy' => $taxonomy,
+			'hide_empty' => true
+		]);
+
+		// Display dropdown if terms exist
+		if (!empty($terms)) {
+			$selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+
+			echo '<select name="' . $taxonomy . '" id="' . $taxonomy . '" class="postform">';
+			echo '<option value="">' . sprintf(__('All %s', 'textdomain'), $tax->labels->name) . '</option>';
+
+			foreach ($terms as $term) {
+				printf(
+					'<option value="%1$s" %2$s>%3$s (%4$s)</option>',
+					$term->slug,
+					selected($selected, $term->slug, false),
+					$term->name,
+					$term->count
+				);
+			}
+			echo '</select>';
+		}
+	}
+}
+add_action('restrict_manage_posts', 'add_florida_taxonomy_filters');
+
+// Make the filter work with the query
+function filter_florida_admin_filter($query)
+{
+	global $pagenow, $typenow;
+
+	// Ensure we're in the admin area, on the posts list page, and working with our custom post type
+	if (is_admin() && $pagenow == 'edit.php' && $typenow == 'florida') {
+		$taxonomy = 'fl';
+
+		// Only modify query if the taxonomy filter is set
+		if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
+			$query->query_vars['tax_query'] = array(
+				array(
+					'taxonomy' => $taxonomy,
+					'field' => 'slug',
+					'terms' => $_GET[$taxonomy]
+				)
+			);
+		}
+	}
+}
+add_action('parse_query', 'filter_florida_admin_filter');
 
 // Register FL Taxonomy
 function register_florida_fl_taxonomy()
