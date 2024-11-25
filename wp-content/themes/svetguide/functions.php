@@ -282,6 +282,7 @@ add_action('rest_api_init', 'add_acf_to_rest_api');
 
 // http://localhost:8888/wp-json/wp/v2/illinois?il_slug=Accounting Services
 
+
 function filter_illinois_by_il_slug($args, $request)
 {
 	if (isset($request['il_slug'])) {
@@ -299,6 +300,19 @@ function filter_illinois_by_il_slug($args, $request)
 					'terms'    => $term->term_id,
 				),
 			);
+
+			// Add the category name to the response
+			register_rest_field('illinois', 'category_name', array(
+				'get_callback' => function ($post) use ($term) {
+					return $term->name;
+				},
+				'update_callback' => null,
+				'schema' => array(
+					'description' => 'The name of the category',
+					'type' => 'string',
+					'context' => array('view', 'edit', 'embed')
+				)
+			));
 		} else {
 			// If term is not found, force no results by using an impossible term ID
 			$args['tax_query'] = array(
@@ -306,6 +320,7 @@ function filter_illinois_by_il_slug($args, $request)
 					'taxonomy' => 'il',
 					'field'    => 'term_id',
 					'terms'    => -1, // Using -1 as an impossible term ID
+					'operator' => 'IN'
 				),
 			);
 		}
@@ -646,6 +661,19 @@ function filter_florida_by_fl_slug($args, $request)
 					'terms'    => $term->term_id,
 				),
 			);
+
+			// Add the category name to the response
+			register_rest_field('florida', 'category_name', array(
+				'get_callback' => function ($post) use ($term) {
+					return $term->name;
+				},
+				'update_callback' => null,
+				'schema' => array(
+					'description' => 'The name of the category',
+					'type' => 'string',
+					'context' => array('view', 'edit', 'embed')
+				)
+			));
 		} else {
 			// If term is not found, force no results by using an impossible term ID
 			$args['tax_query'] = array(
@@ -653,6 +681,7 @@ function filter_florida_by_fl_slug($args, $request)
 					'taxonomy' => 'fl',
 					'field'    => 'term_id',
 					'terms'    => -1, // Using -1 as an impossible term ID
+					'operator' => 'IN'
 				),
 			);
 		}
