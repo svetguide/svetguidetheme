@@ -173,11 +173,52 @@ function register_illinois_post_type()
 			'with_front' => false,
 		),
 		'show_in_rest' => true,
-		'taxonomies' => array('il') // Add this line to ensure taxonomy is linked
+		'taxonomies' => array('il', 'additional_taxonomy_1', 'additional_taxonomy_2') // Add all taxonomies here
 	);
 	register_post_type('illinois', $args);
 }
 add_action('init', 'register_illinois_post_type');
+
+// code to show taxonomy of each post in the admin panel - start
+
+// Add a filter to display all taxonomies in admin columns
+function add_illinois_taxonomy_columns($taxonomies)
+{
+	$screen = get_current_screen();
+
+	if ($screen->post_type === 'illinois') {
+		$taxonomies_for_illinois = get_object_taxonomies('illinois', 'objects');
+
+		foreach ($taxonomies_for_illinois as $taxonomy) {
+			$taxonomies[$taxonomy->name] = $taxonomy->label;
+		}
+	}
+
+	return $taxonomies;
+}
+add_filter('manage_taxonomies_for_illinois_columns', 'add_illinois_taxonomy_columns');
+
+// Populate the custom taxonomy columns
+function populate_illinois_taxonomy_columns($column, $post_id)
+{
+	$taxonomies = get_object_taxonomies('illinois');
+
+	foreach ($taxonomies as $taxonomy) {
+		$terms = get_the_terms($post_id, $taxonomy);
+		if ($terms && !is_wp_error($terms)) {
+			$term_names = array();
+			foreach ($terms as $term) {
+				$term_names[] = $term->name;
+			}
+			echo '<div>' . $taxonomy . ': ' . implode(', ', $term_names) . '</div>';
+		}
+	}
+}
+add_action('manage_illinois_posts_custom_column', 'populate_illinois_taxonomy_columns', 10, 2);
+
+// code to show taxonomy of each post in the admin panel - end
+
+// code to filter posts by taxonomy inside admin panel - start
 
 // Add filter dropdown to admin screen
 function add_illinois_taxonomy_filters()
@@ -241,6 +282,9 @@ function filter_illinois_admin_filter($query)
 	}
 }
 add_action('parse_query', 'filter_illinois_admin_filter');
+
+// code to filter posts by taxonomy inside admin panel - end
+
 
 // Register IL Taxonomy
 function register_illinois_il_taxonomy()
@@ -588,11 +632,52 @@ function register_florida_post_type()
 			'with_front' => false,
 		),
 		'show_in_rest' => true,
-		'taxonomies' => array('fl') // Add this line to ensure taxonomy is linked
+		'taxonomies' => array('fl', 'additional_taxonomy_1', 'additional_taxonomy_2') // Add all taxonomies here
 	);
 	register_post_type('florida', $args);
 }
 add_action('init', 'register_florida_post_type');
+
+// code to show taxonomy of each post in the admin panel - start
+
+// Add a filter to display all taxonomies in admin columns
+function add_florida_taxonomy_columns($taxonomies)
+{
+	$screen = get_current_screen();
+
+	if ($screen->post_type === 'florida') {
+		$taxonomies_for_florida = get_object_taxonomies('florida', 'objects');
+
+		foreach ($taxonomies_for_florida as $taxonomy) {
+			$taxonomies[$taxonomy->name] = $taxonomy->label;
+		}
+	}
+
+	return $taxonomies;
+}
+add_filter('manage_taxonomies_for_florida_columns', 'add_florida_taxonomy_columns');
+
+// Populate the custom taxonomy columns
+function populate_florida_taxonomy_columns($column, $post_id)
+{
+	$taxonomies = get_object_taxonomies('florida');
+
+	foreach ($taxonomies as $taxonomy) {
+		$terms = get_the_terms($post_id, $taxonomy);
+		if ($terms && !is_wp_error($terms)) {
+			$term_names = array();
+			foreach ($terms as $term) {
+				$term_names[] = $term->name;
+			}
+			echo '<div>' . $taxonomy . ': ' . implode(', ', $term_names) . '</div>';
+		}
+	}
+}
+add_action('manage_florida_posts_custom_column', 'populate_florida_taxonomy_columns', 10, 2);
+
+// code to show taxonomy of each post in the admin panel - end
+
+// code to filter the post my taxonomies - start
 
 // Add filter dropdown to admin screen
 function add_florida_taxonomy_filters()
@@ -656,6 +741,8 @@ function filter_florida_admin_filter($query)
 	}
 }
 add_action('parse_query', 'filter_florida_admin_filter');
+
+// code to filter the post my taxonomies - end
 
 // Register FL Taxonomy
 function register_florida_fl_taxonomy()
