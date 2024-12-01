@@ -299,8 +299,12 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
         categoryTitle.textContent = dataItems[0]?.category_name;
-
-        data.slice(0, 5).forEach((item) => createBusinessCard(item));
+        let sortedData = data.sort((a, b) => {
+          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
+            ? -1
+            : 1;
+        });
+        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -352,7 +356,15 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           document
             .querySelectorAll(".wrapper-content")
             .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
+
+          let sortedItems = dataItems.sort((a, b) => {
+            return a.title.rendered.toLowerCase() <
+              b.title.rendered.toLowerCase()
+              ? -1
+              : 1;
+          });
+
+          let currentItems = sortedItems.slice(
             currentStartIndex,
             currentEndIndex
           );
@@ -374,10 +386,19 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
           document
             .querySelectorAll(".wrapper-content")
             .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
+
+          let sortedItems = dataItems.sort((a, b) => {
+            return a.title.rendered.toLowerCase() <
+              b.title.rendered.toLowerCase()
+              ? -1
+              : 1;
+          });
+
+          let currentItems = sortedItems.slice(
             currentStartIndex,
             currentEndIndex
           );
+
           currentItems.forEach((item) => createBusinessCard(item));
         }
       }
@@ -1342,7 +1363,13 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         categoryNav.textContent = dataItems[0]?.category_name;
         categoryTitle.textContent = dataItems[0]?.category_name;
 
-        data.slice(0, 5).forEach((item) => createBusinessCard(item));
+        let sortedData = data.sort((a, b) => {
+          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
+            ? -1
+            : 1;
+        });
+
+        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -1394,10 +1421,19 @@ if (document.querySelector(".sg-florida-taxonomy")) {
           document
             .querySelectorAll(".wrapper-content")
             .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
+
+          let sortedItems = dataItems.sort((a, b) => {
+            return a.title.rendered.toLowerCase() <
+              b.title.rendered.toLowerCase()
+              ? -1
+              : 1;
+          });
+
+          let currentItems = sortedItems.slice(
             currentStartIndex,
             currentEndIndex
           );
+
           currentItems.forEach((item) => createBusinessCard(item));
         }
       }
@@ -1416,10 +1452,19 @@ if (document.querySelector(".sg-florida-taxonomy")) {
           document
             .querySelectorAll(".wrapper-content")
             .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
+
+          let sortedItems = dataItems.sort((a, b) => {
+            return a.title.rendered.toLowerCase() <
+              b.title.rendered.toLowerCase()
+              ? -1
+              : 1;
+          });
+
+          let currentItems = sortedItems.slice(
             currentStartIndex,
             currentEndIndex
           );
+
           currentItems.forEach((item) => createBusinessCard(item));
         }
       }
