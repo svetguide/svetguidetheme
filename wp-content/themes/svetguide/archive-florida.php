@@ -207,7 +207,7 @@ Template Name: Florida Archive
 
             <div class="wrapper-2">
 
-                <div class="category-list-wrapper">
+                <div class="category-list-wrapper macy-container">
                     <div class="category-list">
                         <p>A</p>
                     </div>

@@ -43,6 +43,9 @@ if (document.querySelector(".sg-illinois-archive")) {
             }
           });
         }
+
+        const macyContainer = document.querySelector(".macy-container");
+        macyContainer.style.height = "auto";
       } catch (error) {
         console.error(error);
       }
@@ -254,9 +257,10 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
                             <div class="phone">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
-                                    <p><?php the_field('phone'); ?>${
+                                    <a href="tel:${
                                       data?.acf_fields?.phone
-                                    }</p>
+                                    }"><?php the_field('phone'); ?>
+                                    ${data?.acf_fields?.phone}</a>
                                 </div>
                             </div>
 
@@ -763,7 +767,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
                             <div class="phone">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
-                                    <p><?php the_field('phone'); ?>${data?.acf_fields?.phone}</p>
+                                    <a href="tel:${data?.acf_fields?.phone}"><?php the_field('phone'); ?>${data?.acf_fields?.phone}</a>
                                 </div>
                             </div>
 
@@ -1110,6 +1114,8 @@ if (document.querySelector(".sg-florida-archive")) {
             }
           });
         }
+        const macyContainer = document.querySelector(".macy-container");
+        macyContainer.style.height = "auto";
       } catch (error) {
         console.error(error);
       }
@@ -1318,9 +1324,11 @@ if (document.querySelector(".sg-florida-taxonomy")) {
                             <div class="phone">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
-                                    <p><?php the_field('phone'); ?>${
+                                    <a href="tel:${
                                       data?.acf_fields?.phone
-                                    }</p>
+                                    }"><?php the_field('phone'); ?>${
+        data?.acf_fields?.phone
+      }</a>
                                 </div>
                             </div>
 
@@ -1829,7 +1837,7 @@ if (document.querySelector(".sg-search-results-florida")) {
                             <div class="phone">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/phone.png" alt="">
-                                    <p><?php the_field('phone'); ?>${data?.acf_fields?.phone}</p>
+                                    <a href="tel:${data?.acf_fields?.phone}"><?php the_field('phone'); ?>${data?.acf_fields?.phone}</a>
                                 </div>
                             </div>
 
