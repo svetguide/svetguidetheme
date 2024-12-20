@@ -291,7 +291,7 @@ function register_illinois_il_taxonomy()
 {
 	$args = array(
 		'labels' => array(
-			'name' => 'il',
+			'name' => 'il-category',
 			'singular_name' => 'il',
 		),
 		'hierarchical' => true,
@@ -749,7 +749,7 @@ function register_florida_fl_taxonomy()
 {
 	$args = array(
 		'labels' => array(
-			'name' => 'fl',
+			'name' => 'fl-category',
 			'singular_name' => 'fl',
 		),
 		'hierarchical' => true,
