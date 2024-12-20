@@ -99,7 +99,7 @@ Template Name: Florida Single
                                 <img src=" <?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/location.png" alt="">
                                 <h5>Address</h5>
                             </div>
-                            <a href="<?php the_field('google_link'); ?>" target="_blank"><?php the_field('address'); ?></a>
+                            <a href="<?php the_field('google_map'); ?>" target="_blank"><?php the_field('address'); ?></a>
                         </div>
                     <?php endif; ?>
 
