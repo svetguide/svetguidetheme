@@ -140,7 +140,7 @@ Template Name: Florida Single
 
                     <?php if (get_field('full_description')): ?>
                         <div class="full-description-image">
-                            <h5>Full Description</h5>
+                            <h5>Who We Are</h5>
                             <img src="<?php the_field('full_description'); ?>" alt="">
                         </div>
                     <?php endif; ?>
