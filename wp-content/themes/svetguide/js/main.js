@@ -43,9 +43,6 @@ if (document.querySelector(".sg-illinois-archive")) {
             }
           });
         }
-
-        const macyContainer = document.querySelector(".macy-container");
-        macyContainer.style.height = "auto";
       } catch (error) {
         console.error(error);
       }
@@ -1114,8 +1111,6 @@ if (document.querySelector(".sg-florida-archive")) {
             }
           });
         }
-        const macyContainer = document.querySelector(".macy-container");
-        macyContainer.style.height = "auto";
       } catch (error) {
         console.error(error);
       }

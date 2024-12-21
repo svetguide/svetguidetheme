@@ -333,19 +333,6 @@
 .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper {
   width: 100%;
   flex-grow: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  row-gap: 33px;
-}
-@media screen and (max-width: 1024px) {
-  .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper {
-    grid-template-columns: repeat(3, minmax(180px, 1fr));
-  }
-}
-@media screen and (max-width: 540px) {
-  .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper {
-    grid-template-columns: repeat(2, minmax(180px, 1fr));
-  }
 }
 .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper .category-list {
   display: none;
@@ -370,7 +357,60 @@
   width: fit-content;
 }
 .sg-florida-archive .container .section-2 .wrapper-2 .show-category-list {
-  display: block !important;
+  display: inline-block !important;
+}
+.sg-florida-archive .container .masonry {
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 1 em;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  padding: 0;
+  -moz-column-gap: 1.5em;
+  -webkit-column-gap: 1.5em;
+  column-gap: 1.5em;
+  font-size: 0.85em;
+}
+.sg-florida-archive .container .item {
+  display: inline-block;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 0 0 1.2em;
+  width: 100%;
+  -webkit-transition: 1s ease all;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+@media only screen and (max-width: 320px) {
+  .sg-florida-archive .container .masonry {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    column-count: 1;
+  }
+}
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+  .sg-florida-archive .container .masonry {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+  .sg-florida-archive .container .masonry {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+@media only screen and (min-width: 1201px) {
+  .sg-florida-archive .container .masonry {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
 }
 
 /*# sourceMappingURL=archive-florida.css.map */

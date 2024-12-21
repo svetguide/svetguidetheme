@@ -208,83 +208,83 @@ Template Name: Illinois Archive
 
             <div class="wrapper-2">
 
-                <div class="category-list-wrapper macy-container">
-                    <div class="category-list">
+                <div class="category-list-wrapper masonry">
+                    <div class="category-list item">
                         <p>A</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>B</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>C</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>D</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>E</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>F</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>G</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>H</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>I</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>J</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>K</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>L</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>M</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>N</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>O</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>P</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>Q</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>R</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>S</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>T</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>U</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>V</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>W</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>X</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>Y</p>
                     </div>
-                    <div class="category-list">
+                    <div class="category-list item">
                         <p>Z</p>
                     </div>
                 </div>
