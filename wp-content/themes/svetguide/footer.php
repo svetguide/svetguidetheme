@@ -63,26 +63,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
-<script type="module">
-    if (document.querySelector(".sg-illinois-archive") || document.querySelector(".sg-florida-archive")) {
-        var macy = Macy({
-            container: '.macy-container',
-            trueOrder: false,
-            waitForImages: false,
-            margin: 24,
-            columns: 4,
-            breakAt: {
-                1200: 4,
-                940: 3,
-                520: 2,
-                400: 1
-            }
-        });
-
-    }
-</script>
-
 <?php wp_footer(); ?>
 </body>
 
