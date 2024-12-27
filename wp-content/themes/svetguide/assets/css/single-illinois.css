@@ -128,7 +128,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  column-gap: 50px;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 @media screen and (max-width: 1280px) {
   .sg-illinois-inner .container .section-2 .wrapper-2 .wrapper-content .title {
