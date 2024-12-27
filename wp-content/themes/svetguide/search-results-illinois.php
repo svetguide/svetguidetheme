@@ -24,7 +24,7 @@ Template Name: Search Results Illinois
             </div>
             <div class="wrapper-2">
                 <p>Do you want your business to be found by the local Eastern European Communities?</p>
-                <a href="/asdf">Contact us</a>
+                <a href="https://svet.com/contact-us/">Contact us</a>
             </div>
         </div>
     </div>
