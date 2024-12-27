@@ -156,7 +156,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            column-gap: 50px;
+            gap: 30px;
+            flex-wrap: wrap;
 
             @media screen and (max-width: 1280px) {
               flex-direction: column;
@@ -257,8 +258,6 @@
               font-weight: 400;
               line-height: 24px;
               text-align: left;
-              color: black;
-              text-decoration: none;
               display: block;
               margin-bottom: 10px;
               width: fit-content;
