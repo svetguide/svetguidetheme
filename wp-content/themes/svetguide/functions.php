@@ -179,119 +179,12 @@ function register_illinois_post_type()
 }
 add_action('init', 'register_illinois_post_type');
 
-// code to show taxonomy of each post in the admin panel - start
-
-// Add a filter to display all taxonomies in admin columns
-function add_illinois_taxonomy_columns($taxonomies)
-{
-	$screen = get_current_screen();
-
-	if ($screen->post_type === 'illinois') {
-		$taxonomies_for_illinois = get_object_taxonomies('illinois', 'objects');
-
-		foreach ($taxonomies_for_illinois as $taxonomy) {
-			$taxonomies[$taxonomy->name] = $taxonomy->label;
-		}
-	}
-
-	return $taxonomies;
-}
-add_filter('manage_taxonomies_for_illinois_columns', 'add_illinois_taxonomy_columns');
-
-// Populate the custom taxonomy columns
-function populate_illinois_taxonomy_columns($column, $post_id)
-{
-	$taxonomies = get_object_taxonomies('illinois');
-
-	foreach ($taxonomies as $taxonomy) {
-		$terms = get_the_terms($post_id, $taxonomy);
-		if ($terms && !is_wp_error($terms)) {
-			$term_names = array();
-			foreach ($terms as $term) {
-				$term_names[] = $term->name;
-			}
-			echo '<div>' . $taxonomy . ': ' . implode(', ', $term_names) . '</div>';
-		}
-	}
-}
-add_action('manage_illinois_posts_custom_column', 'populate_illinois_taxonomy_columns', 10, 2);
-
-// code to show taxonomy of each post in the admin panel - end
-
-// code to filter posts by taxonomy inside admin panel - start
-
-// Add filter dropdown to admin screen
-function add_illinois_taxonomy_filters()
-{
-	global $typenow;
-
-	// Only add filter to illinois post type
-	if ($typenow == 'illinois') {
-		$taxonomy = 'il';
-
-		// Get taxonomy object
-		$tax = get_taxonomy($taxonomy);
-
-		// Get terms
-		$terms = get_terms([
-			'taxonomy' => $taxonomy,
-			'hide_empty' => true
-		]);
-
-		// Display dropdown if terms exist
-		if (!empty($terms)) {
-			$selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
-
-			echo '<select name="' . $taxonomy . '" id="' . $taxonomy . '" class="postform">';
-			echo '<option value="">' . sprintf(__('All %s', 'textdomain'), $tax->labels->name) . '</option>';
-
-			foreach ($terms as $term) {
-				printf(
-					'<option value="%1$s" %2$s>%3$s (%4$s)</option>',
-					$term->slug,
-					selected($selected, $term->slug, false),
-					$term->name,
-					$term->count
-				);
-			}
-			echo '</select>';
-		}
-	}
-}
-add_action('restrict_manage_posts', 'add_illinois_taxonomy_filters');
-
-// Make the filter work with the query
-function filter_illinois_admin_filter($query)
-{
-	global $pagenow, $typenow;
-
-	// Ensure we're in the admin area, on the posts list page, and working with our custom post type
-	if (is_admin() && $pagenow == 'edit.php' && $typenow == 'illinois') {
-		$taxonomy = 'il';
-
-		// Only modify query if the taxonomy filter is set
-		if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
-			$query->query_vars['tax_query'] = array(
-				array(
-					'taxonomy' => $taxonomy,
-					'field' => 'slug',
-					'terms' => $_GET[$taxonomy]
-				)
-			);
-		}
-	}
-}
-add_action('parse_query', 'filter_illinois_admin_filter');
-
-// code to filter posts by taxonomy inside admin panel - end
-
-
 // Register IL Taxonomy
 function register_illinois_il_taxonomy()
 {
 	$args = array(
 		'labels' => array(
-			'name' => 'il-category',
+			'name' => 'il-categories',
 			'singular_name' => 'il',
 		),
 		'hierarchical' => true,
@@ -306,6 +199,69 @@ function register_illinois_il_taxonomy()
 	register_taxonomy('il', array('illinois'), $args);
 }
 add_action('init', 'register_illinois_il_taxonomy');
+
+
+//////////// illinois taxonomy column inside admin dashboard
+
+
+// Add a taxonomy column to the admin list view
+function add_il_taxonomy_column($columns)
+{
+	// Insert the new column before the 'Date' column
+	$new_columns = [];
+	foreach ($columns as $key => $value) {
+		if ($key === 'date') {
+			$new_columns['il_taxonomy'] = 'IL Category';
+		}
+		$new_columns[$key] = $value;
+	}
+	return $new_columns;
+}
+add_filter('manage_edit-illinois_columns', 'add_il_taxonomy_column');
+
+// Populate the taxonomy column with terms
+function populate_il_taxonomy_column($column, $post_id)
+{
+	if ($column === 'il_taxonomy') {
+		$terms = get_the_terms($post_id, 'il');
+		if ($terms && !is_wp_error($terms)) {
+			$term_names = array_map(function ($term) {
+				return $term->name;
+			}, $terms);
+			echo implode(', ', $term_names);
+		} else {
+			echo '—';
+		}
+	}
+}
+add_action('manage_illinois_posts_custom_column', 'populate_il_taxonomy_column', 10, 2);
+
+// Add a filter dropdown for the taxonomy with post counts
+function add_il_taxonomy_filter_dropdown()
+{
+	global $typenow;
+	if ($typenow === 'illinois') {
+		$taxonomy = 'il';
+		$terms = get_terms(array('taxonomy' => $taxonomy, 'hide_empty' => false));
+		if ($terms) {
+			echo '<select name="' . $taxonomy . '" id="' . $taxonomy . '" class="postform">';
+			echo '<option value="">' . __('Show All IL Categories', 'textdomain') . '</option>';
+			foreach ($terms as $term) {
+				$term_count = $term->count; // Get the post count for the term
+				$selected = (isset($_GET[$taxonomy]) && $_GET[$taxonomy] == $term->slug) ? ' selected="selected"' : '';
+				echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . ' (' . $term_count . ')</option>';
+			}
+			echo '</select>';
+		}
+	}
+}
+add_action('restrict_manage_posts', 'add_il_taxonomy_filter_dropdown');
+
+
+
+
+/////////////
+
 
 // Permalink Structure
 function illinois_permalink_structure($post_link, $post)
@@ -638,118 +594,71 @@ function register_florida_post_type()
 }
 add_action('init', 'register_florida_post_type');
 
-// code to show taxonomy of each post in the admin panel - start
 
-// Add a filter to display all taxonomies in admin columns
-function add_florida_taxonomy_columns($taxonomies)
+//////////
+
+// Add a taxonomy column to the admin list view for FL Category
+function add_fl_taxonomy_column($columns)
 {
-	$screen = get_current_screen();
-
-	if ($screen->post_type === 'florida') {
-		$taxonomies_for_florida = get_object_taxonomies('florida', 'objects');
-
-		foreach ($taxonomies_for_florida as $taxonomy) {
-			$taxonomies[$taxonomy->name] = $taxonomy->label;
+	// Insert the new column before the 'Date' column
+	$new_columns = [];
+	foreach ($columns as $key => $value) {
+		if ($key === 'date') {
+			$new_columns['fl_taxonomy'] = 'FL Category';
 		}
+		$new_columns[$key] = $value;
 	}
-
-	return $taxonomies;
+	return $new_columns;
 }
-add_filter('manage_taxonomies_for_florida_columns', 'add_florida_taxonomy_columns');
+add_filter('manage_edit-florida_columns', 'add_fl_taxonomy_column');
 
-// Populate the custom taxonomy columns
-function populate_florida_taxonomy_columns($column, $post_id)
+// Populate the FL taxonomy column with terms
+function populate_fl_taxonomy_column($column, $post_id)
 {
-	$taxonomies = get_object_taxonomies('florida');
-
-	foreach ($taxonomies as $taxonomy) {
-		$terms = get_the_terms($post_id, $taxonomy);
+	if ($column === 'fl_taxonomy') {
+		$terms = get_the_terms($post_id, 'fl');
 		if ($terms && !is_wp_error($terms)) {
-			$term_names = array();
-			foreach ($terms as $term) {
-				$term_names[] = $term->name;
-			}
-			echo '<div>' . $taxonomy . ': ' . implode(', ', $term_names) . '</div>';
+			$term_names = array_map(function ($term) {
+				return $term->name;
+			}, $terms);
+			echo implode(', ', $term_names);
+		} else {
+			echo '—';
 		}
 	}
 }
-add_action('manage_florida_posts_custom_column', 'populate_florida_taxonomy_columns', 10, 2);
+add_action('manage_florida_posts_custom_column', 'populate_fl_taxonomy_column', 10, 2);
 
-// code to show taxonomy of each post in the admin panel - end
-
-// code to filter the post my taxonomies - start
-
-// Add filter dropdown to admin screen
-function add_florida_taxonomy_filters()
+// Add a filter dropdown for FL taxonomy with post counts
+function add_fl_taxonomy_filter_dropdown()
 {
 	global $typenow;
-
-	// Only add filter to florida post type
-	if ($typenow == 'florida') {
+	if ($typenow === 'florida') {
 		$taxonomy = 'fl';
-
-		// Get taxonomy object
-		$tax = get_taxonomy($taxonomy);
-
-		// Get terms
-		$terms = get_terms([
-			'taxonomy' => $taxonomy,
-			'hide_empty' => true
-		]);
-
-		// Display dropdown if terms exist
-		if (!empty($terms)) {
-			$selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
-
+		$terms = get_terms(array('taxonomy' => $taxonomy, 'hide_empty' => false));
+		if ($terms) {
 			echo '<select name="' . $taxonomy . '" id="' . $taxonomy . '" class="postform">';
-			echo '<option value="">' . sprintf(__('All %s', 'textdomain'), $tax->labels->name) . '</option>';
-
+			echo '<option value="">' . __('Show All FL Categories', 'textdomain') . '</option>';
 			foreach ($terms as $term) {
-				printf(
-					'<option value="%1$s" %2$s>%3$s (%4$s)</option>',
-					$term->slug,
-					selected($selected, $term->slug, false),
-					$term->name,
-					$term->count
-				);
+				$term_count = $term->count; // Get the post count for the term
+				$selected = (isset($_GET[$taxonomy]) && $_GET[$taxonomy] == $term->slug) ? ' selected="selected"' : '';
+				echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . ' (' . $term_count . ')</option>';
 			}
 			echo '</select>';
 		}
 	}
 }
-add_action('restrict_manage_posts', 'add_florida_taxonomy_filters');
+add_action('restrict_manage_posts', 'add_fl_taxonomy_filter_dropdown');
 
-// Make the filter work with the query
-function filter_florida_admin_filter($query)
-{
-	global $pagenow, $typenow;
 
-	// Ensure we're in the admin area, on the posts list page, and working with our custom post type
-	if (is_admin() && $pagenow == 'edit.php' && $typenow == 'florida') {
-		$taxonomy = 'fl';
-
-		// Only modify query if the taxonomy filter is set
-		if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
-			$query->query_vars['tax_query'] = array(
-				array(
-					'taxonomy' => $taxonomy,
-					'field' => 'slug',
-					'terms' => $_GET[$taxonomy]
-				)
-			);
-		}
-	}
-}
-add_action('parse_query', 'filter_florida_admin_filter');
-
-// code to filter the post my taxonomies - end
+////////////
 
 // Register FL Taxonomy
 function register_florida_fl_taxonomy()
 {
 	$args = array(
 		'labels' => array(
-			'name' => 'fl-category',
+			'name' => 'fl-categories',
 			'singular_name' => 'fl',
 		),
 		'hierarchical' => true,
