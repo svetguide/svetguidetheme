@@ -90,6 +90,7 @@
   width: 100%;
   border-radius: 15px;
   background-color: white;
+  scrollbar-width: none;
 }
 .sg-illinois-archive .search-section .container .wrapper-1 .list .list-item {
   border-bottom: 1px solid rgba(16, 39, 56, 0.0705882353);
