@@ -258,8 +258,6 @@ function add_il_taxonomy_filter_dropdown()
 add_action('restrict_manage_posts', 'add_il_taxonomy_filter_dropdown');
 
 
-
-
 /////////////
 
 
@@ -396,6 +394,16 @@ function filter_illinois_by_il_slug($args, $request)
 add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
 
 ///////////////////
+
+// remove the limit of fetching 100 results for api calls
+function custom_rest_posts_per_page($args, $request)
+{
+	$args['posts_per_page'] = -1; // Return all posts
+	$args['no_found_rows'] = true; // Optimize query by skipping pagination calculations
+	return $args;
+}
+add_filter('rest_illinois_query', 'custom_rest_posts_per_page', 10, 2);
+
 
 
 //Global Settings page for text field and image field
@@ -815,3 +823,12 @@ function filter_florida_by_fl_slug($args, $request)
 
 // Hook into the REST API for the 'florida' post type
 add_filter('rest_florida_query', 'filter_florida_by_fl_slug', 10, 2);
+
+// remove the limit of fetching 100 results for api calls
+function custom_rest_posts_per_page_florida($args, $request)
+{
+	$args['posts_per_page'] = -1; // Return all posts
+	$args['no_found_rows'] = true; // Optimize query by skipping pagination calculations
+	return $args;
+}
+add_filter('rest_florida_query', 'custom_rest_posts_per_page_florida', 10, 2);
