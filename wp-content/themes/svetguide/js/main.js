@@ -267,7 +267,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
                             `<div class="website">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/website.png" alt="">
-                                    <a href="${data?.acf_fields?.website}">${data?.acf_fields?.website}</a>
+                                    <p>${data?.acf_fields?.website}</p>
                                 </div>
                             </div>`
                           }
@@ -277,7 +277,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
                              `<div class="address">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/location.png" alt="">
-                                    <a href="${data?.acf_fields?.google_map}">${data?.acf_fields?.address}</a>
+                                    <p>${data?.acf_fields?.address}</p>
                                 </div>
                             </div>`
                            }
@@ -785,7 +785,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
                             `<div class="website">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/website.png" alt="">
-                                    <a href="${data?.acf_fields?.website}">${data?.acf_fields?.website}</a>
+                                    <p>${data?.acf_fields?.website}</p>
                                 </div>
                             </div>`
                           }
@@ -795,7 +795,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
                              `<div class="address">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/location.png" alt="">
-                                    <a href="${data?.acf_fields?.google_map}">${data?.acf_fields?.address}</a>
+                                    <p>${data?.acf_fields?.address}</p>
                                 </div>
                             </div>`
                            }
@@ -1353,7 +1353,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
                             `<div class="website">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/website.png" alt="">
-                                    <a href="${data?.acf_fields?.website}">${data?.acf_fields?.website}</a>
+                                    <p>${data?.acf_fields?.website}</p>
                                 </div>
                             </div>`
                           }
@@ -1363,7 +1363,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
                             `<div class="address">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/location.png" alt="">
-                                    <a href="${data?.acf_fields?.google_map}">${data?.acf_fields?.address}</a>
+                                    <p>${data?.acf_fields?.address}</p>
                                 </div>
                             </div>`
                           }
@@ -1874,7 +1874,7 @@ if (document.querySelector(".sg-search-results-florida")) {
                             `<div class="website">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/website.png" alt="">
-                                    <a href="${data?.acf_fields?.website}">${data?.acf_fields?.website}</a>
+                                    <p>${data?.acf_fields?.website}</p>
                                 </div>
                             </div>`
                           }
@@ -1884,7 +1884,7 @@ if (document.querySelector(".sg-search-results-florida")) {
                              `<div class="address">
                                 <div>
                                     <img src="/wp-content/themes/svetguide/assets/images/single-illinois/location.png" alt="">
-                                    <a href="${data?.acf_fields?.google_map}">${data?.acf_fields?.address}</a>
+                                    <p>${data?.acf_fields?.address}</p>
                                 </div>
                             </div>`
                            }
