@@ -5,7 +5,7 @@
 
             <!-- contact  -->
             <div class="contact">
-                <a href="/" class="sg-footer-svetlogo" target="_blank">
+                <a href="https://svet.com/" class="sg-footer-svetlogo" target="_blank">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/svetguide-logo.png" alt="svetguide logo">
                 </a>
                 <a href="mailto: manager@svet.com" target="_blank">
