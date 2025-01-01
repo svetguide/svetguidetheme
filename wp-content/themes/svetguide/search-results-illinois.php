@@ -68,12 +68,12 @@ Template Name: Search Results Illinois
                         </div>
                     </div>
                     <div class="page-nav">
-                        <button class="prev">Prev</button>
-                        <button class="next">Next</button>
+                        <!-- <button class="prev">Prev</button>
+                        <button class="next">Next</button> -->
                     </div>
-                    <div class="load-more-wrapper">
+                    <!-- <div class="load-more-wrapper">
                         <button class="load-more-btn">Load more</button>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="wrapper-image">

@@ -395,15 +395,23 @@ add_filter('rest_illinois_query', 'filter_illinois_by_il_slug', 10, 2);
 
 ///////////////////
 
-// remove the limit of fetching 100 results for api calls
-function custom_rest_posts_per_page($args, $request)
+// removed pagination for illinois endpoint unless il_slug is present in the endpoint
+function custom_rest_illinois_query($args, $request)
 {
+	// Check if the query parameters 'il_slug' and 'page' exist
+	if (isset($request['il_slug'])) {
+		// Enable pagination
+		$args['page'] = $request['page']; // Use the 'page' parameter for pagination
+		return $args;
+	}
+
+	// For all other queries, fetch all posts (archive behavior)
 	$args['posts_per_page'] = -1; // Return all posts
 	$args['no_found_rows'] = true; // Optimize query by skipping pagination calculations
+
 	return $args;
 }
-add_filter('rest_illinois_query', 'custom_rest_posts_per_page', 10, 2);
-
+add_filter('rest_illinois_query', 'custom_rest_illinois_query', 10, 2);
 
 
 //Global Settings page for text field and image field
