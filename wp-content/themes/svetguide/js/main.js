@@ -341,8 +341,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     }
     fetchData();
 
-    ////////////
-
     paginationContainer.addEventListener("click", async function (e) {
       let pageNumberElements = document.querySelectorAll(".page-number");
 
@@ -376,10 +374,6 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         console.error("Failed to fetch data:", error);
       }
     });
-
-    /////////////
-
-    ///////////
 
     // carousel
 
@@ -626,14 +620,14 @@ if (document.querySelector(".sg-search-results-illinois")) {
           let res = await axios(
             `${
               window.location.origin
-            }/wp-json/wp/v2/illinois?search=${e.target.value.trim()}&_fields=title,link`
+            }/wp-json/wp/v2/illinois?search=${e.target.value.trim()}&_fields=title,link,acf_fields`
           );
           let data = await res.data;
 
           let taxRes = await axios(
             `${
               window.location.origin
-            }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link`
+            }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link,acf_fields&per_page=100`
           );
 
           let taxData = await taxRes.data;
@@ -803,7 +797,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
             let taxRes = await axios(
               `${
                 window.location.origin
-              }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link,acf_fields`
+              }/wp-json/wp/v2/illinois?il_slug=${e.target.value.trim()}&_fields=title,link,acf_fields&per_page=100`
             );
 
             let taxData = await taxRes.data;
@@ -925,7 +919,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
           let data = await res.data;
 
           let taxRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${queryTerm}&_fields=title,link,acf_fields`
+            `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${queryTerm}&_fields=title,link,acf_fields&per_page=100`
           );
 
           let taxData = await taxRes.data;
@@ -1427,21 +1421,33 @@ if (document.querySelector(".sg-florida-taxonomy")) {
     //  pagination functionality
     let dataItems = [];
     let paginationContainer = document.querySelector(".page-nav");
-    let previousButton = document.querySelector(".prev");
-    let nextButton = document.querySelector(".next");
-    let loadMoreWrapper = document.querySelector(".load-more-wrapper");
-    let loadMoreBtn = document.querySelector(".load-more-btn");
-    let currentStartIndex = 0;
-    let currentEndIndex = 5;
+    // let previousButton = document.querySelector(".prev");
+    // let nextButton = document.querySelector(".next");
+    // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
+    // let loadMoreBtn = document.querySelector(".load-more-btn");
+    // let currentStartIndex = 0;
+    // let currentEndIndex = 5;
+
+    let num = 1;
+    let totalNumberOfPosts;
+
+    function createbtn(val) {
+      let ele = document.createElement("button");
+      ele.classList.add("page-number");
+      ele.innerText = val;
+      paginationContainer.appendChild(ele);
+    }
 
     async function fetchData() {
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title`
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
         let data = response.data;
         dataItems = [...data];
-        isDataItemEmpty(data);
+
+        totalNumberOfPosts = dataItems.length;
+
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
         categoryTitle.textContent = dataItems[0]?.category_name;
@@ -1453,103 +1459,54 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         });
 
         sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+
+        for (let i = 1; i <= totalNumberOfPosts; i++) {
+          if (i % 5 === 0) {
+            createbtn(num++);
+            console.log(num);
+          }
+          if (totalNumberOfPosts - i > 0 && totalNumberOfPosts - i < 2) {
+            createbtn(num++);
+            break;
+          }
+        }
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     }
     fetchData();
 
-    // hide btns
-    function isDataItemEmpty(data) {
-      if (data.length <= 5) {
-        [previousButton, nextButton, loadMoreBtn].map((item) => {
-          item.style.display = "none";
-        });
-      }
-    }
+    paginationContainer.addEventListener("click", async function (e) {
+      let pageNumberElements = document.querySelectorAll(".page-number");
 
-    // loadmore btn
-    loadMoreWrapper.addEventListener("click", function () {
-      currentStartIndex += 5;
-      currentEndIndex += 5;
-      if (dataItems.length < currentEndIndex) {
-        loadMoreBtn.style.display = "none";
-      }
-      let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
-      slicedArray.map((item) => {
-        createBusinessCard(item);
+      pageNumberElements.forEach((item) => {
+        if (item.classList.contains("active")) {
+          item.classList.remove("active");
+        }
       });
-    });
 
-    // prev and next btn
-    previousButton.style.pointerEvents = "none";
-    previousButton.style.opacity = ".6";
+      e.target.classList.add("active");
 
-    paginationContainer.addEventListener("click", function (event) {
-      if (event.target.textContent === "Next") {
-        if (dataItems.length >= currentEndIndex) {
-          currentStartIndex += 5;
-          currentEndIndex += 5;
-          previousButton.style.pointerEvents =
-            currentStartIndex > 0 ? "all" : "none";
-          previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
-        }
+      try {
+        let response = await axios(
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
+        );
+        let data = response.data;
+        dataItems = [...data];
 
-        if (dataItems.length - currentStartIndex <= 5) {
-          nextButton.style.pointerEvents = "none";
-          nextButton.style.opacity = ".6";
-        }
+        let items = document.querySelectorAll(".wrapper-content");
+        items.forEach((item) => {
+          item.remove();
+        });
 
-        if (dataItems.length > currentStartIndex) {
-          document
-            .querySelectorAll(".wrapper-content")
-            .forEach((item) => item.remove());
-
-          let sortedItems = dataItems.sort((a, b) => {
-            return a.title.rendered.toLowerCase() <
-              b.title.rendered.toLowerCase()
-              ? -1
-              : 1;
-          });
-
-          let currentItems = sortedItems.slice(
-            currentStartIndex,
-            currentEndIndex
-          );
-
-          currentItems.forEach((item) => createBusinessCard(item));
-        }
-      }
-
-      if (event.target.textContent === "Prev") {
-        nextButton.style.pointerEvents = "all";
-        nextButton.style.opacity = "1";
-
-        previousButton.style.pointerEvents =
-          currentStartIndex <= 5 ? "none" : "all";
-        previousButton.style.opacity = currentStartIndex <= 5 ? ".6" : "1";
-
-        if (currentStartIndex > 0) {
-          currentStartIndex -= 5;
-          currentEndIndex -= 5;
-          document
-            .querySelectorAll(".wrapper-content")
-            .forEach((item) => item.remove());
-
-          let sortedItems = dataItems.sort((a, b) => {
-            return a.title.rendered.toLowerCase() <
-              b.title.rendered.toLowerCase()
-              ? -1
-              : 1;
-          });
-
-          let currentItems = sortedItems.slice(
-            currentStartIndex,
-            currentEndIndex
-          );
-
-          currentItems.forEach((item) => createBusinessCard(item));
-        }
+        let sortedData = data.sort((a, b) => {
+          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
+            ? -1
+            : 1;
+        });
+        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
       }
     });
 
@@ -1798,14 +1755,14 @@ if (document.querySelector(".sg-search-results-florida")) {
           let res = await axios(
             `${
               window.location.origin
-            }/wp-json/wp/v2/florida?search=${e.target.value.trim()}&_fields=title,link`
+            }/wp-json/wp/v2/florida?search=${e.target.value.trim()}&_fields=title,link,acf_fields`
           );
           let data = await res.data;
 
           let taxRes = await axios(
             `${
               window.location.origin
-            }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+            }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link,acf_fields&per_page=100`
           );
 
           let taxData = await taxRes.data;
@@ -1893,10 +1850,19 @@ if (document.querySelector(".sg-search-results-florida")) {
     let paginationContainer = document.querySelector(".page-nav");
     let previousButton = document.querySelector(".prev");
     let nextButton = document.querySelector(".next");
-    let loadMoreWrapper = document.querySelector(".load-more-wrapper");
+    // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
     let loadMoreBtn = document.querySelector(".load-more-btn");
-    let currentStartIndex = 0;
-    let currentEndIndex = 5;
+    // let currentStartIndex = 0;
+    // let currentEndIndex = 5;
+    let num = 1;
+    let totalNumberOfPosts;
+
+    function createbtn(val) {
+      let ele = document.createElement("button");
+      ele.classList.add("page-number");
+      ele.innerText = val;
+      paginationContainer.appendChild(ele);
+    }
 
     function createBusinessCard(data) {
       let wrapper = document.createElement("div");
@@ -1951,6 +1917,7 @@ if (document.querySelector(".sg-search-results-florida")) {
     }
 
     async function searchOnEnter(e) {
+      num = 1;
       dataItems = [];
       arrayOnEnter = [];
       if (e.key === "Enter") {
@@ -1964,7 +1931,7 @@ if (document.querySelector(".sg-search-results-florida")) {
             let taxRes = await axios(
               `${
                 window.location.origin
-              }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link`
+              }/wp-json/wp/v2/florida?fl_slug=${e.target.value.trim()}&_fields=title,link,acf_fields&per_page=100`
             );
 
             let taxData = await taxRes.data;
@@ -2028,15 +1995,34 @@ if (document.querySelector(".sg-search-results-florida")) {
               noResultsElement.style.display = "block";
               query.textContent = e.target.value.trim();
             }
-            dataItems = [...val];
-            isDataItemEmpty(dataItems);
-            val.splice(0, 5).map((item) => {
-              createBusinessCard(item);
-            });
 
-            // val.map((item) => {
-            //   createBusinessCard(item);
-            // });
+            // isDataItemEmpty(dataItems);
+            let sortedData = val.sort((a, b) => {
+              return a.title.rendered.toLowerCase() <
+                b.title.rendered.toLowerCase()
+                ? -1
+                : 1;
+            });
+            sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+            dataItems = [...sortedData];
+            totalNumberOfPosts = dataItems.length;
+
+            if (document.querySelectorAll(".page-number")) {
+              let wrapperElements = document.querySelectorAll(".page-number");
+              wrapperElements.forEach((item) => {
+                item.remove();
+              });
+            }
+
+            for (let i = 1; i <= totalNumberOfPosts; i++) {
+              if (i % 5 === 0) {
+                createbtn(num++);
+              }
+              if (totalNumberOfPosts - i > 0 && totalNumberOfPosts - i < 2) {
+                createbtn(num++);
+                break;
+              }
+            }
           } catch (err) {
             console.error(err);
           }
@@ -2059,6 +2045,7 @@ if (document.querySelector(".sg-search-results-florida")) {
       const queryTerm = searchParams.get("searchterm").trim();
 
       async function showCardsOnPageLoad() {
+        num = 1;
         try {
           let res = await axios(
             `${window.location.origin}/wp-json/wp/v2/florida?search=${queryTerm}&_fields=title,link,acf_fields`
@@ -2066,7 +2053,7 @@ if (document.querySelector(".sg-search-results-florida")) {
           let data = await res.data;
 
           let taxRes = await axios(
-            `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${queryTerm}&_fields=title,link,acf_fields`
+            `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${queryTerm}&_fields=title,link,acf_fields&per_page=100`
           );
 
           let taxData = await taxRes.data;
@@ -2126,11 +2113,39 @@ if (document.querySelector(".sg-search-results-florida")) {
             noResultsElement.style.display = "block";
             query.textContent = searchParams.get("searchterm").trim();
           }
-          dataItems = [...val];
-          isDataItemEmpty(dataItems);
-          val.splice(0, 5).map((item) => {
-            createBusinessCard(item);
+          // dataItems = [...val];
+          // isDataItemEmpty(dataItems);
+          // val.splice(0, 5).map((item) => {
+          //   createBusinessCard(item);
+          // });
+
+          let sortedData = val.sort((a, b) => {
+            return a.title.rendered.toLowerCase() <
+              b.title.rendered.toLowerCase()
+              ? -1
+              : 1;
           });
+
+          sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+          dataItems = [...sortedData];
+          totalNumberOfPosts = dataItems.length;
+
+          if (document.querySelectorAll(".page-number")) {
+            let wrapperElements = document.querySelectorAll(".page-number");
+            wrapperElements.forEach((item) => {
+              item.remove();
+            });
+          }
+
+          for (let i = 1; i <= totalNumberOfPosts; i++) {
+            if (i % 5 === 0) {
+              createbtn(num++);
+            }
+            if (totalNumberOfPosts - i > 0 && totalNumberOfPosts - i < 2) {
+              createbtn(num++);
+              break;
+            }
+          }
         } catch (err) {
           console.error(err);
         }
@@ -2145,84 +2160,26 @@ if (document.querySelector(".sg-search-results-florida")) {
 
     //  pagination functionality
 
-    // hide btns
-    function isDataItemEmpty(data) {
-      if (data.length <= 5) {
-        [previousButton, nextButton, loadMoreBtn].map((item) => {
-          item.style.display = "none";
-        });
-      } else {
-        [previousButton, nextButton, loadMoreBtn].map((item) => {
-          item.style.display = "block";
-        });
-      }
-    }
+    paginationContainer.addEventListener("click", function (e) {
+      let cardElements = document.querySelectorAll(".wrapper-content");
 
-    // loadmore btn
-    loadMoreWrapper.addEventListener("click", function () {
-      currentStartIndex += 5;
-      currentEndIndex += 5;
-      if (dataItems.length < currentEndIndex) {
-        loadMoreBtn.style.display = "none";
-      }
-      let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
-      slicedArray.map((item) => {
-        createBusinessCard(item);
+      cardElements.forEach((item) => {
+        item.remove();
       });
-    });
 
-    // prev and next btn
-    previousButton.style.pointerEvents = "none";
-    previousButton.style.opacity = ".6";
+      let pageNumberElements = document.querySelectorAll(".page-number");
 
-    paginationContainer.addEventListener("click", function (event) {
-      if (event.target.textContent === "Next") {
-        if (dataItems.length >= currentEndIndex) {
-          currentStartIndex += 5;
-          currentEndIndex += 5;
-          previousButton.style.pointerEvents =
-            currentStartIndex > 0 ? "all" : "none";
-          previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
+      pageNumberElements.forEach((item) => {
+        if (item.classList.contains("active")) {
+          item.classList.remove("active");
         }
+      });
 
-        if (dataItems.length - currentStartIndex <= 5) {
-          nextButton.style.pointerEvents = "none";
-          nextButton.style.opacity = ".6";
-        }
+      e.target.classList.add("active");
 
-        if (dataItems.length > currentStartIndex) {
-          document
-            .querySelectorAll(".wrapper-content")
-            .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
-            currentStartIndex,
-            currentEndIndex
-          );
-          currentItems.forEach((item) => createBusinessCard(item));
-        }
-      }
-
-      if (event.target.textContent === "Prev") {
-        nextButton.style.pointerEvents = "all";
-        nextButton.style.opacity = "1";
-
-        previousButton.style.pointerEvents =
-          currentStartIndex <= 5 ? "none" : "all";
-        previousButton.style.opacity = currentStartIndex <= 5 ? ".6" : "1";
-
-        if (currentStartIndex > 0) {
-          currentStartIndex -= 5;
-          currentEndIndex -= 5;
-          document
-            .querySelectorAll(".wrapper-content")
-            .forEach((item) => item.remove());
-          let currentItems = dataItems.slice(
-            currentStartIndex,
-            currentEndIndex
-          );
-          currentItems.forEach((item) => createBusinessCard(item));
-        }
-      }
+      dataItems
+        .slice((e.target.innerText - 1) * 5, e.target.innerText * 5)
+        .forEach((item) => createBusinessCard(item));
     });
   })();
 }

@@ -832,11 +832,22 @@ function filter_florida_by_fl_slug($args, $request)
 // Hook into the REST API for the 'florida' post type
 add_filter('rest_florida_query', 'filter_florida_by_fl_slug', 10, 2);
 
-// remove the limit of fetching 100 results for api calls
-function custom_rest_posts_per_page_florida($args, $request)
+/////////
+
+// removed pagination for florida endpoint unless fl_slug is present in the endpoint
+function custom_rest_florida_query($args, $request)
 {
+	// Check if the query parameters 'fl_slug' and 'page' exist
+	if (isset($request['fl_slug'])) {
+		// Enable pagination
+		$args['page'] = $request['page']; // Use the 'page' parameter for pagination
+		return $args;
+	}
+
+	// For all other queries, fetch all posts (archive behavior)
 	$args['posts_per_page'] = -1; // Return all posts
 	$args['no_found_rows'] = true; // Optimize query by skipping pagination calculations
+
 	return $args;
 }
-add_filter('rest_florida_query', 'custom_rest_posts_per_page_florida', 10, 2);
+add_filter('rest_florida_query', 'custom_rest_florida_query', 10, 2);
