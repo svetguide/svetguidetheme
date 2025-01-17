@@ -1,3 +1,18 @@
+//header
+
+(function () {
+  // Hamburger menu toggle
+  document
+    .querySelector(".hamburger-menu")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      document.querySelector(".bar").classList.toggle("animate");
+      document.querySelector(".mobile-menu").classList.toggle("active");
+    });
+})();
+
+//illinois
+
 // archive illinois
 
 if (document.querySelector(".sg-illinois-archive")) {
