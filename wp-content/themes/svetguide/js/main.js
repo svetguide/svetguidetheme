@@ -289,8 +289,8 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     //  pagination functionality
     let dataItems = [];
     let paginationContainer = document.querySelector(".page-nav");
-    // let previousButton = document.querySelector(".prev");
-    // let nextButton = document.querySelector(".next");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
     // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
     // let loadMoreBtn = document.querySelector(".load-more-btn");
     // let currentStartIndex = 0;
@@ -298,6 +298,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
     let num = 1;
     let totalNumberOfPosts;
+    let allPaginationNumber;
 
     function createbtn(val) {
       let ele = document.createElement("button");
@@ -311,7 +312,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         let response = await axios(
           `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
-        let data = response.data;
+        let data = await response.data;
         dataItems = [...data];
 
         totalNumberOfPosts = dataItems.length;
@@ -335,6 +336,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
             break;
           }
         }
+        getPaginationNumber(document.querySelectorAll(".page-number"));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -375,6 +377,62 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       }
     });
 
+    // pagination
+    function getPaginationNumber(items) {
+      let newArr = [...items];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(newArr.length / itemsPerPage);
+
+      // Initial display
+      updateDisplay();
+      updateButtonVisibility();
+
+      nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      previousButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      function updateDisplay() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        newArr.forEach((item, index) => {
+          if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function updateButtonVisibility() {
+        // Hide previous button on first page
+        if (currentPage === 1) {
+          previousButton.style.display = "none";
+        } else {
+          previousButton.style.display = "block";
+        }
+
+        // Hide next button on last page
+        if (currentPage === totalPages) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "block";
+        }
+      }
+    }
     // carousel
 
     jQuery(document).ready(function ($) {
@@ -1463,7 +1521,6 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         for (let i = 1; i <= totalNumberOfPosts; i++) {
           if (i % 5 === 0) {
             createbtn(num++);
-            console.log(num);
           }
           if (totalNumberOfPosts - i > 0 && totalNumberOfPosts - i < 2) {
             createbtn(num++);
