@@ -69,10 +69,14 @@ Template Name: Search Results Florida
                             <p>Cannot find any Result : <span class="query"></span></p>
                         </div>
                     </div>
-                    <div class="page-nav">
-                        <!-- <button class="prev">Prev</button>
-                        <button class="next">Next</button> -->
+
+                    <div class="page-nav"></div>
+
+                    <div class="prev-next-btn-wrapper">
+                        <button class="prev">Prev</button>
+                        <button class="next">Next</button>
                     </div>
+
                     <!-- <div class="load-more-wrapper">
                         <button class="load-more-btn">Load more</button>
                     </div> -->

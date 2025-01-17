@@ -709,19 +709,27 @@ function florida_permalink_structure($post_link, $post)
 }
 add_filter('post_type_link', 'florida_permalink_structure', 10, 2);
 
-// permalink link substitute for illinois and florida
-function disable_permalink_pointer_events()
+///////
+
+
+function fix_permalink_in_admin()
 {
 ?>
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function() {
-			const permalink = document.querySelector('#sample-permalink a'); // Selects the permalink text
-			permalink.href = permalink.textContent
+			const permalinkElement = document.querySelector('#sample-permalink a');
+			console.log('Permalink element:', permalinkElement);
+
+			const permalinkText = document.querySelector('#sample-permalink');
+			console.log('Permalink text container:', permalinkText);
+
+			// Log the full page HTML to find the right selectors
+			console.log('Full page HTML:', document.body.innerHTML);
 		});
 	</script>
 <?php
 }
-add_action('admin_head', 'disable_permalink_pointer_events');
+add_action('admin_head', 'fix_permalink_in_admin');
 
 
 // Custom Rewrite Rules

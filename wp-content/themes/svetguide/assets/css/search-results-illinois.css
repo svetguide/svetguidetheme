@@ -385,6 +385,29 @@
   border: 1px solid #b73b0c;
   border-radius: 50px;
 }
+.sg-search-results-illinois .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.sg-search-results-illinois .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .prev,
+.sg-search-results-illinois .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .next {
+  background-color: #ed561c;
+  border: 1px solid #ed561c;
+  border-radius: 50px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: white;
+  transition: all 300ms;
+}
+.sg-search-results-illinois .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .prev:hover,
+.sg-search-results-illinois .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .next:hover {
+  background-color: #b73b0c;
+}
 .sg-search-results-illinois .container .section-2 .wrapper-2 .wrapper-image a {
   display: block;
 }

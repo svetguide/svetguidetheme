@@ -289,8 +289,8 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     //  pagination functionality
     let dataItems = [];
     let paginationContainer = document.querySelector(".page-nav");
-    // let previousButton = document.querySelector(".prev");
-    // let nextButton = document.querySelector(".next");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
     // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
     // let loadMoreBtn = document.querySelector(".load-more-btn");
     // let currentStartIndex = 0;
@@ -298,6 +298,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
     let num = 1;
     let totalNumberOfPosts;
+    let allPaginationNumber;
 
     function createbtn(val) {
       let ele = document.createElement("button");
@@ -311,7 +312,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         let response = await axios(
           `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
-        let data = response.data;
+        let data = await response.data;
         dataItems = [...data];
 
         totalNumberOfPosts = dataItems.length;
@@ -319,11 +320,13 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
         categoryTitle.textContent = dataItems[0]?.category_name;
+
         let sortedData = data.sort((a, b) => {
           return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
             ? -1
             : 1;
         });
+
         sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
 
         for (let i = 1; i <= totalNumberOfPosts; i++) {
@@ -335,12 +338,14 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
             break;
           }
         }
+        getPaginationNumber(document.querySelectorAll(".page-number"));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     }
     fetchData();
 
+    //pagination
     paginationContainer.addEventListener("click", async function (e) {
       let pageNumberElements = document.querySelectorAll(".page-number");
 
@@ -375,6 +380,62 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       }
     });
 
+    // pagination next-prev func
+    function getPaginationNumber(items) {
+      let newArr = [...items];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(newArr.length / itemsPerPage);
+
+      // Initial display
+      updateDisplay();
+      updateButtonVisibility();
+
+      nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      previousButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      function updateDisplay() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        newArr.forEach((item, index) => {
+          if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function updateButtonVisibility() {
+        // Hide previous button on first page
+        if (currentPage === 1) {
+          previousButton.style.display = "none";
+        } else {
+          previousButton.style.display = "block";
+        }
+
+        // Hide next button on last page
+        if (currentPage === totalPages) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "block";
+        }
+      }
+    }
     // carousel
 
     jQuery(document).ready(function ($) {
@@ -716,7 +777,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
     let previousButton = document.querySelector(".prev");
     let nextButton = document.querySelector(".next");
     // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
-    let loadMoreBtn = document.querySelector(".load-more-btn");
+    // let loadMoreBtn = document.querySelector(".load-more-btn");
     // let currentStartIndex = 0;
     // let currentEndIndex = 5;
     let num = 1;
@@ -889,6 +950,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
                 break;
               }
             }
+            getPaginationNumber(document.querySelectorAll(".page-number"));
           } catch (err) {
             console.error(err);
           }
@@ -1011,6 +1073,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
               break;
             }
           }
+          getPaginationNumber(document.querySelectorAll(".page-number"));
         } catch (err) {
           console.error(err);
         }
@@ -1018,7 +1081,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
       showCardsOnPageLoad();
     } else {
       noResultsElement.style.display = "block";
-      [previousButton, nextButton, loadMoreBtn].map((item) => {
+      [previousButton, nextButton].map((item) => {
         item.style.display = "none";
       });
     }
@@ -1126,6 +1189,63 @@ if (document.querySelector(".sg-search-results-illinois")) {
         .slice((e.target.innerText - 1) * 5, e.target.innerText * 5)
         .forEach((item) => createBusinessCard(item));
     });
+
+    // pagination next-prev func
+    function getPaginationNumber(items) {
+      let newArr = [...items];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(newArr.length / itemsPerPage);
+
+      // Initial display
+      updateDisplay();
+      updateButtonVisibility();
+
+      nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      previousButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      function updateDisplay() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        newArr.forEach((item, index) => {
+          if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function updateButtonVisibility() {
+        // Hide previous button on first page
+        if (currentPage === 1) {
+          previousButton.style.display = "none";
+        } else {
+          previousButton.style.display = "block";
+        }
+
+        // Hide next button on last page
+        if (currentPage === totalPages) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "block";
+        }
+      }
+    }
   })();
 }
 
@@ -1421,8 +1541,8 @@ if (document.querySelector(".sg-florida-taxonomy")) {
     //  pagination functionality
     let dataItems = [];
     let paginationContainer = document.querySelector(".page-nav");
-    // let previousButton = document.querySelector(".prev");
-    // let nextButton = document.querySelector(".next");
+    let previousButton = document.querySelector(".prev");
+    let nextButton = document.querySelector(".next");
     // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
     // let loadMoreBtn = document.querySelector(".load-more-btn");
     // let currentStartIndex = 0;
@@ -1463,19 +1583,20 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         for (let i = 1; i <= totalNumberOfPosts; i++) {
           if (i % 5 === 0) {
             createbtn(num++);
-            console.log(num);
           }
           if (totalNumberOfPosts - i > 0 && totalNumberOfPosts - i < 2) {
             createbtn(num++);
             break;
           }
         }
+        getPaginationNumber(document.querySelectorAll(".page-number"));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     }
     fetchData();
 
+    //pagination
     paginationContainer.addEventListener("click", async function (e) {
       let pageNumberElements = document.querySelectorAll(".page-number");
 
@@ -1509,6 +1630,63 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         console.error("Failed to fetch data:", error);
       }
     });
+
+    // pagination next-prev button func
+    function getPaginationNumber(items) {
+      let newArr = [...items];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(newArr.length / itemsPerPage);
+
+      // Initial display
+      updateDisplay();
+      updateButtonVisibility();
+
+      nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      previousButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      function updateDisplay() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        newArr.forEach((item, index) => {
+          if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function updateButtonVisibility() {
+        // Hide previous button on first page
+        if (currentPage === 1) {
+          previousButton.style.display = "none";
+        } else {
+          previousButton.style.display = "block";
+        }
+
+        // Hide next button on last page
+        if (currentPage === totalPages) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "block";
+        }
+      }
+    }
 
     // carousel
 
@@ -1851,7 +2029,7 @@ if (document.querySelector(".sg-search-results-florida")) {
     let previousButton = document.querySelector(".prev");
     let nextButton = document.querySelector(".next");
     // let loadMoreWrapper = document.querySelector(".load-more-wrapper");
-    let loadMoreBtn = document.querySelector(".load-more-btn");
+    // let loadMoreBtn = document.querySelector(".load-more-btn");
     // let currentStartIndex = 0;
     // let currentEndIndex = 5;
     let num = 1;
@@ -2023,6 +2201,7 @@ if (document.querySelector(".sg-search-results-florida")) {
                 break;
               }
             }
+            getPaginationNumber(document.querySelectorAll(".page-number"));
           } catch (err) {
             console.error(err);
           }
@@ -2146,6 +2325,7 @@ if (document.querySelector(".sg-search-results-florida")) {
               break;
             }
           }
+          getPaginationNumber(document.querySelectorAll(".page-number"));
         } catch (err) {
           console.error(err);
         }
@@ -2153,7 +2333,7 @@ if (document.querySelector(".sg-search-results-florida")) {
       showCardsOnPageLoad();
     } else {
       noResultsElement.style.display = "block";
-      [previousButton, nextButton, loadMoreBtn].map((item) => {
+      [previousButton, nextButton].map((item) => {
         item.style.display = "none";
       });
     }
@@ -2181,5 +2361,62 @@ if (document.querySelector(".sg-search-results-florida")) {
         .slice((e.target.innerText - 1) * 5, e.target.innerText * 5)
         .forEach((item) => createBusinessCard(item));
     });
+
+    // pagination next-prev func
+    function getPaginationNumber(items) {
+      let newArr = [...items];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      const totalPages = Math.ceil(newArr.length / itemsPerPage);
+
+      // Initial display
+      updateDisplay();
+      updateButtonVisibility();
+
+      nextButton.addEventListener("click", function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      previousButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+          currentPage--;
+          updateDisplay();
+          updateButtonVisibility();
+        }
+      });
+
+      function updateDisplay() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        newArr.forEach((item, index) => {
+          if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      function updateButtonVisibility() {
+        // Hide previous button on first page
+        if (currentPage === 1) {
+          previousButton.style.display = "none";
+        } else {
+          previousButton.style.display = "block";
+        }
+
+        // Hide next button on last page
+        if (currentPage === totalPages) {
+          nextButton.style.display = "none";
+        } else {
+          nextButton.style.display = "block";
+        }
+      }
+    }
   })();
 }

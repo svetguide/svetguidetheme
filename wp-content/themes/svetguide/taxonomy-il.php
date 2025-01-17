@@ -217,18 +217,15 @@ Template Name: Illinois Taxonomy
 
                     <div class="page-nav"></div>
 
-
-                    <!-- <div class="prev-next-btn-wrapper">
-
+                    <div class="prev-next-btn-wrapper">
                         <button class="prev">Prev</button>
                         <button class="next">Next</button>
-                    </div> -->
+                    </div>
 
                     <!-- <div class="load-more-wrapper">
                         <button class="load-more-btn">Load more</button>
                     </div> -->
                 </div>
-
 
                 <div class="wrapper-image">
                     <a href="https://issuu.com/svet-svet/docs/svet_chicago2024-new_print_os" target="_blank">
