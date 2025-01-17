@@ -34,32 +34,21 @@
                 <a class="advertise" href="https://svet.com/contact-us/">Advertise with us</a>
             </div>
             <div class="sg-nav-mob">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hamburger-menu.svg" alt="">
-                </button>
+                <a href="/">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
+                </a>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                                <div class="modal-inner-wrapper">
-
-                                    <div class="city-wrapper">
-                                        <a href="/illinois" class="city">ILLINOIS</a>
-                                        <a href="/florida" class="city">FLORIDA</a>
-                                    </div>
-                                    <a class="advertise" href="https://svet.com/contact-us/">Advertise with us</a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hamburger-menu">
+                    <div class="bar"></div>
                 </div>
+
+                <nav class="mobile-menu">
+                    <ul>
+                        <li><a href="/illinois">Illinois</a></li>
+                        <li><a href="/florida">Florida</a></li>
+                    </ul>
+                </nav>
+
 
             </div>
 
