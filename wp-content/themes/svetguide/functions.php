@@ -510,13 +510,50 @@ function florida_settings_page_html()
 	render_settings_page('Florida', $most_searched_list, $images, $image_alts);
 }
 
+////testing area
+
+function modify_sample_permalink_script()
+{
+	// Ensure the script only loads in the post edit screen
+	if (is_admin()) {
+?>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				// Get the anchor tag with the ID 'sample-permalink'
+				const permalinkAnchor = document.querySelector('#sample-permalink a');
+				// Get the element with ID 'editable-post-name'
+				const editablePostName = document.querySelector('#editable-post-name');
+
+				if (permalinkAnchor && editablePostName) {
+					// Fetch the text content of both elements
+					const baseUrl = permalinkAnchor.innerText.trim(); // Trim to remove extra spaces
+					const postSlug = editablePostName.innerText.trim();
+
+					// Create the new href value
+					const newHref = `${baseUrl}?preview=true`;
+
+					// Update the href attribute of the permalink anchor
+					permalinkAnchor.href = newHref;
+
+					// Optionally log the new href for debugging
+					console.log('Updated permalink:', newHref);
+				}
+			});
+		</script>
+	<?php
+	}
+}
+add_action('admin_footer', 'modify_sample_permalink_script');
+
+
+
 // //////////
 
 // Common render function for both pages
 function render_settings_page($state, $most_searched_list, $images, $image_alts)
 {
 	$state_lower = strtolower($state);
-?>
+	?>
 	<div class="wrap">
 		<h1><?php echo $state; ?> Settings</h1>
 		<form method="POST">
