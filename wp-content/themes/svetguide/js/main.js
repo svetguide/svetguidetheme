@@ -364,6 +364,11 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     paginationContainer.addEventListener("click", async function (e) {
       let pageNumberElements = document.querySelectorAll(".page-number");
 
+      window.scrollTo(
+        0,
+        categoryTitle.getBoundingClientRect().top + window.scrollY - 100
+      );
+
       pageNumberElements.forEach((item) => {
         if (item.classList.contains("active")) {
           item.classList.remove("active");
@@ -1186,6 +1191,13 @@ if (document.querySelector(".sg-search-results-illinois")) {
     paginationContainer.addEventListener("click", function (e) {
       let cardElements = document.querySelectorAll(".wrapper-content");
 
+      window.scrollTo(
+        0,
+        document.querySelector(".list-of-cards").getBoundingClientRect().top +
+          window.scrollY -
+          100
+      );
+
       cardElements.forEach((item) => {
         item.remove();
       });
@@ -1615,6 +1627,11 @@ if (document.querySelector(".sg-florida-taxonomy")) {
     paginationContainer.addEventListener("click", async function (e) {
       let pageNumberElements = document.querySelectorAll(".page-number");
 
+      window.scrollTo(
+        0,
+        categoryTitle.getBoundingClientRect().top + window.scrollY - 100
+      );
+
       pageNumberElements.forEach((item) => {
         if (item.classList.contains("active")) {
           item.classList.remove("active");
@@ -1627,7 +1644,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         let response = await axios(
           `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
         );
-        let data = response.data;
+        let data = response?.data;
         dataItems = [...data];
 
         let items = document.querySelectorAll(".wrapper-content");
@@ -2357,6 +2374,13 @@ if (document.querySelector(".sg-search-results-florida")) {
 
     paginationContainer.addEventListener("click", function (e) {
       let cardElements = document.querySelectorAll(".wrapper-content");
+
+      window.scrollTo(
+        0,
+        document.querySelector(".list-of-cards").getBoundingClientRect().top +
+          window.scrollY -
+          100
+      );
 
       cardElements.forEach((item) => {
         item.remove();
