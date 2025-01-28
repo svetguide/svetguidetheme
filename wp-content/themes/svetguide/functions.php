@@ -510,7 +510,6 @@ function florida_settings_page_html()
 	render_settings_page('Florida', $most_searched_list, $images, $image_alts);
 }
 
-// //////////
 
 // Common render function for both pages
 function render_settings_page($state, $most_searched_list, $images, $image_alts)
@@ -584,6 +583,7 @@ function render_settings_page($state, $most_searched_list, $images, $image_alts)
 	</script>
 <?php
 }
+
 
 
 //florida
@@ -840,8 +840,6 @@ function filter_florida_by_fl_slug($args, $request)
 // Hook into the REST API for the 'florida' post type
 add_filter('rest_florida_query', 'filter_florida_by_fl_slug', 10, 2);
 
-/////////
-
 // removed pagination for florida endpoint unless fl_slug is present in the endpoint
 function custom_rest_florida_query($args, $request)
 {
@@ -859,3 +857,45 @@ function custom_rest_florida_query($args, $request)
 	return $args;
 }
 add_filter('rest_florida_query', 'custom_rest_florida_query', 10, 2);
+
+// fix for permalink not working inside edit post - start
+// created a custom-admin.js file inside js folder and added a script
+// added the below two functions to enque and make the permalink anchor tag work similarly to the preview button
+
+function enqueue_custom_admin_script()
+{
+	// Enqueue your custom admin script
+	wp_enqueue_script(
+		'custom-admin-script', // Handle name
+		get_template_directory_uri() . '/js/custom-admin.js', // Path to the script
+		['jquery'], // Dependencies
+		'1.0', // Version
+		true // Load in the footer
+	);
+}
+add_action('admin_enqueue_scripts', 'enqueue_custom_admin_script');
+
+
+function generate_preview_url()
+{
+	// Verify the request
+	if (!isset($_POST['post_id']) || !current_user_can('edit_posts')) {
+		wp_send_json_error(['message' => 'Invalid request']);
+	}
+
+	$post_id = intval($_POST['post_id']);
+	$post = get_post($post_id);
+
+	if (!$post) {
+		wp_send_json_error(['message' => 'Post not found']);
+	}
+
+	// Generate the preview URL
+	$preview_url = get_preview_post_link($post_id);
+
+	// Send the generated preview URL back to JavaScript
+	wp_send_json_success(['preview_url' => $preview_url]);
+}
+add_action('wp_ajax_generate_preview_url', 'generate_preview_url');
+
+// fix for permalink not working inside edit post - end
