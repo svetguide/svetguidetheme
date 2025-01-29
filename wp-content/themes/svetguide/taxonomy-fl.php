@@ -214,11 +214,14 @@ Template Name: Florida Taxonomy
 
                     </div>
 
-                    <div class="page-nav"></div>
 
-                    <div class="prev-next-btn-wrapper">
-                        <button class="prev">Prev</button>
-                        <button class="next">Next</button>
+                    <div class="pagination-wrapper">
+                        <div class="page-nav"></div>
+
+                        <div class="prev-next-btn-wrapper">
+                            <button class="prev">Prev</button>
+                            <button class="next">Next</button>
+                        </div>
                     </div>
 
                     <!-- <div class="load-more-wrapper">
