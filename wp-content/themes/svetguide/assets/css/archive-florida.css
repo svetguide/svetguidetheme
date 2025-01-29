@@ -345,6 +345,7 @@
   line-height: 30px;
   text-align: left;
   color: #ed561c;
+  margin-bottom: 0;
 }
 .sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper .category-list .category-list-item a {
   font-family: "Open Sans";
@@ -378,7 +379,7 @@
   background: #fff;
   border-radius: 8px;
   padding: 1em;
-  margin: 0 0 1.2em;
+  margin: 0 0 0 1.2em;
   width: 100%;
   -webkit-transition: 1s ease all;
   box-sizing: border-box;

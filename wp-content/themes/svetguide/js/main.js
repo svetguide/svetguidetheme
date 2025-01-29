@@ -400,7 +400,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       }
     });
 
-    // pagination next-prev func
+    // next-prev function
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
@@ -432,30 +432,21 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         const endIndex = startIndex + itemsPerPage;
 
         newArr.forEach((item, index) => {
-          if (index >= startIndex && index < endIndex) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
+          item.style.display =
+            index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
 
       function updateButtonVisibility() {
         // Hide previous button on first page
-        if (currentPage === 1) {
-          previousButton.style.display = "none";
-        } else {
-          previousButton.style.display = "block";
-        }
+        previousButton.style.display = currentPage === 1 ? "none" : "block";
 
-        // Hide next button on last page
-        if (currentPage === totalPages) {
-          nextButton.style.display = "none";
-        } else {
-          nextButton.style.display = "block";
-        }
+        // Hide next button if there's only one page
+        nextButton.style.display =
+          totalPages > 1 && currentPage < totalPages ? "block" : "none";
       }
     }
+
     // carousel
 
     jQuery(document).ready(function ($) {
@@ -1217,7 +1208,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
         .forEach((item) => createBusinessCard(item));
     });
 
-    // pagination next-prev func
+    // next-prev func
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
@@ -1249,28 +1240,18 @@ if (document.querySelector(".sg-search-results-illinois")) {
         const endIndex = startIndex + itemsPerPage;
 
         newArr.forEach((item, index) => {
-          if (index >= startIndex && index < endIndex) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
+          item.style.display =
+            index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
 
       function updateButtonVisibility() {
         // Hide previous button on first page
-        if (currentPage === 1) {
-          previousButton.style.display = "none";
-        } else {
-          previousButton.style.display = "block";
-        }
+        previousButton.style.display = currentPage === 1 ? "none" : "block";
 
-        // Hide next button on last page
-        if (currentPage === totalPages) {
-          nextButton.style.display = "none";
-        } else {
-          nextButton.style.display = "block";
-        }
+        // Hide next button if there's only one page
+        nextButton.style.display =
+          totalPages > 1 && currentPage < totalPages ? "block" : "none";
       }
     }
   })();
@@ -1663,7 +1644,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
       }
     });
 
-    // pagination next-prev button func
+    // next-prev function
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
@@ -1695,28 +1676,18 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         const endIndex = startIndex + itemsPerPage;
 
         newArr.forEach((item, index) => {
-          if (index >= startIndex && index < endIndex) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
+          item.style.display =
+            index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
 
       function updateButtonVisibility() {
         // Hide previous button on first page
-        if (currentPage === 1) {
-          previousButton.style.display = "none";
-        } else {
-          previousButton.style.display = "block";
-        }
+        previousButton.style.display = currentPage === 1 ? "none" : "block";
 
-        // Hide next button on last page
-        if (currentPage === totalPages) {
-          nextButton.style.display = "none";
-        } else {
-          nextButton.style.display = "block";
-        }
+        // Hide next button if there's only one page
+        nextButton.style.display =
+          totalPages > 1 && currentPage < totalPages ? "block" : "none";
       }
     }
 
@@ -2401,7 +2372,7 @@ if (document.querySelector(".sg-search-results-florida")) {
         .forEach((item) => createBusinessCard(item));
     });
 
-    // pagination next-prev func
+    // next-prev func
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
@@ -2433,28 +2404,18 @@ if (document.querySelector(".sg-search-results-florida")) {
         const endIndex = startIndex + itemsPerPage;
 
         newArr.forEach((item, index) => {
-          if (index >= startIndex && index < endIndex) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
+          item.style.display =
+            index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
 
       function updateButtonVisibility() {
         // Hide previous button on first page
-        if (currentPage === 1) {
-          previousButton.style.display = "none";
-        } else {
-          previousButton.style.display = "block";
-        }
+        previousButton.style.display = currentPage === 1 ? "none" : "block";
 
-        // Hide next button on last page
-        if (currentPage === totalPages) {
-          nextButton.style.display = "none";
-        } else {
-          nextButton.style.display = "block";
-        }
+        // Hide next button if there's only one page
+        nextButton.style.display =
+          totalPages > 1 && currentPage < totalPages ? "block" : "none";
       }
     }
   })();

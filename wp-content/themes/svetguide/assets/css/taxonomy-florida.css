@@ -424,35 +424,40 @@
   color: #102738;
   margin-bottom: 0;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav {
   display: flex;
   justify-content: center;
   gap: 10px;
   width: fit-content;
-  margin-inline: auto;
   flex-wrap: wrap;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .page-number {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav .page-number {
   background-color: transparent;
   border: none;
   color: #b73b0c;
-}
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .page-nav .page-number.active {
   border: 1px solid #b73b0c;
-  border-radius: 50px;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper {
-  margin-top: 20px;
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav .page-number.active {
+  border: 1px solid #b73b0c;
+  background-color: #b73b0c;
+  color: white;
+}
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .prev,
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .next {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .prev,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .next {
   background-color: #ed561c;
   border: 1px solid #ed561c;
-  border-radius: 50px;
   font-family: Poppins;
   font-size: 16px;
   font-weight: 600;
@@ -460,8 +465,8 @@
   color: white;
   transition: all 300ms;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .prev:hover,
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .prev-next-btn-wrapper .next:hover {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .prev:hover,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .next:hover {
   background-color: #b73b0c;
 }
 .sg-florida-taxonomy .container .section-2 .wrapper-2 .wrapper-image a {
