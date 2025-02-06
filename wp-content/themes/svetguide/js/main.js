@@ -338,7 +338,16 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
+        if (categoryNav.textContent.includes("&amp;")) {
+          categoryNav.innerText = categoryNav.textContent.replace("&amp;", "&");
+        }
         categoryTitle.textContent = dataItems[0]?.category_name;
+        if (categoryTitle.textContent.includes("&amp;")) {
+          categoryTitle.textContent = categoryTitle.textContent.replace(
+            "&amp;",
+            "&"
+          );
+        }
 
         let sortedData = data.sort((a, b) => {
           return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
@@ -1510,7 +1519,16 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
+        if (categoryNav.textContent.includes("&amp;")) {
+          categoryNav.innerText = categoryNav.textContent.replace("&amp;", "&");
+        }
         categoryTitle.textContent = dataItems[0]?.category_name;
+        if (categoryTitle.textContent.includes("&amp;")) {
+          categoryTitle.textContent = categoryTitle.textContent.replace(
+            "&amp;",
+            "&"
+          );
+        }
 
         let sortedData = data.sort((a, b) => {
           return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
