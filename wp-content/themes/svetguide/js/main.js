@@ -49,7 +49,11 @@ if (document.querySelector(".sg-illinois-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
+            if (
+              item?.name[0].toLowerCase() ===
+                i.textContent.trim()[0].toLowerCase() &&
+              item.count > 0
+            ) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
@@ -334,7 +338,16 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
+        if (categoryNav.textContent.includes("&amp;")) {
+          categoryNav.innerText = categoryNav.textContent.replace("&amp;", "&");
+        }
         categoryTitle.textContent = dataItems[0]?.category_name;
+        if (categoryTitle.textContent.includes("&amp;")) {
+          categoryTitle.textContent = categoryTitle.textContent.replace(
+            "&amp;",
+            "&"
+          );
+        }
 
         let sortedData = data.sort((a, b) => {
           return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
@@ -379,9 +392,9 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
-        let data = response.data;
+        let data = await response.data;
         dataItems = [...data];
 
         let items = document.querySelectorAll(".wrapper-content");
@@ -390,11 +403,17 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         });
 
         let sortedData = data.sort((a, b) => {
-          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
-            ? -1
-            : 1;
+          return a.title.rendered.localeCompare(b.title.rendered, "en", {
+            sensitivity: "base",
+          });
         });
-        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+
+        sortedData
+          .slice(
+            Number(e.target.innerText) * 5 - 5,
+            Number(e.target.innerText) * 5
+          )
+          .forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -1097,88 +1116,6 @@ if (document.querySelector(".sg-search-results-illinois")) {
       });
     }
 
-    //  pagination functionality
-
-    // hide btns
-    // function isDataItemEmpty(data) {
-    //   if (data.length <= 5) {
-    //     [previousButton, nextButton, loadMoreBtn].map((item) => {
-    //       item.style.display = "none";
-    //     });
-    //   } else {
-    //     [previousButton, nextButton, loadMoreBtn].map((item) => {
-    //       item.style.display = "block";
-    //     });
-    //   }
-    // }
-
-    // // loadmore btn
-    // loadMoreWrapper.addEventListener("click", function () {
-    //   currentStartIndex += 5;
-    //   currentEndIndex += 5;
-    //   if (dataItems.length < currentEndIndex) {
-    //     loadMoreBtn.style.display = "none";
-    //   }
-    //   let slicedArray = dataItems.splice(currentStartIndex, currentEndIndex);
-    //   slicedArray.map((item) => {
-    //     createBusinessCard(item);
-    //   });
-    // });
-
-    // prev and next btn
-    // previousButton.style.pointerEvents = "none";
-    // previousButton.style.opacity = ".6";
-
-    // paginationContainer.addEventListener("click", function (event) {
-    //   if (event.target.textContent === "Next") {
-    //     if (dataItems.length >= currentEndIndex) {
-    //       currentStartIndex += 5;
-    //       currentEndIndex += 5;
-    //       previousButton.style.pointerEvents =
-    //         currentStartIndex > 0 ? "all" : "none";
-    //       previousButton.style.opacity = currentStartIndex > 0 ? "1" : ".6";
-    //     }
-
-    //     if (dataItems.length - currentStartIndex <= 2) {
-    //       nextButton.style.pointerEvents = "none";
-    //       nextButton.style.opacity = ".6";
-    //     }
-
-    //     if (dataItems.length > currentStartIndex) {
-    //       document
-    //         .querySelectorAll(".wrapper-content")
-    //         .forEach((item) => item.remove());
-    //       let currentItems = dataItems.slice(
-    //         currentStartIndex,
-    //         currentEndIndex
-    //       );
-    //       currentItems.forEach((item) => createBusinessCard(item));
-    //     }
-    //   }
-
-    //   if (event.target.textContent === "Prev") {
-    //     nextButton.style.pointerEvents = "all";
-    //     nextButton.style.opacity = "1";
-
-    //     previousButton.style.pointerEvents =
-    //       currentStartIndex <= 5 ? "none" : "all";
-    //     previousButton.style.opacity = currentStartIndex <= 5 ? ".6" : "1";
-
-    //     if (currentStartIndex > 0) {
-    //       currentStartIndex -= 5;
-    //       currentEndIndex -= 5;
-    //       document
-    //         .querySelectorAll(".wrapper-content")
-    //         .forEach((item) => item.remove());
-    //       let currentItems = dataItems.slice(
-    //         currentStartIndex,
-    //         currentEndIndex
-    //       );
-    //       currentItems.forEach((item) => createBusinessCard(item));
-    //     }
-    //   }
-    // });
-
     paginationContainer.addEventListener("click", function (e) {
       let cardElements = document.querySelectorAll(".wrapper-content");
 
@@ -1295,7 +1232,11 @@ if (document.querySelector(".sg-florida-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
+            if (
+              item?.name[0].toLowerCase() ===
+                i.textContent.trim()[0].toLowerCase() &&
+              item.count > 0
+            ) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
@@ -1578,7 +1519,16 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
         // category name and breadcrumb name (only appears if category contains posts)
         categoryNav.textContent = dataItems[0]?.category_name;
+        if (categoryNav.textContent.includes("&amp;")) {
+          categoryNav.innerText = categoryNav.textContent.replace("&amp;", "&");
+        }
         categoryTitle.textContent = dataItems[0]?.category_name;
+        if (categoryTitle.textContent.includes("&amp;")) {
+          categoryTitle.textContent = categoryTitle.textContent.replace(
+            "&amp;",
+            "&"
+          );
+        }
 
         let sortedData = data.sort((a, b) => {
           return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
@@ -1623,7 +1573,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
         let data = response?.data;
         dataItems = [...data];
@@ -1634,11 +1584,17 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         });
 
         let sortedData = data.sort((a, b) => {
-          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
-            ? -1
-            : 1;
+          return a.title.rendered.localeCompare(b.title.rendered, "en", {
+            sensitivity: "base",
+          });
         });
-        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+
+        sortedData
+          .slice(
+            Number(e.target.innerText) * 5 - 5,
+            Number(e.target.innerText) * 5
+          )
+          .forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
