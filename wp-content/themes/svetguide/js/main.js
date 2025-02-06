@@ -49,7 +49,11 @@ if (document.querySelector(".sg-illinois-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
+            if (
+              item?.name[0].toLowerCase() ===
+                i.textContent.trim()[0].toLowerCase() &&
+              item.count > 0
+            ) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
@@ -1219,7 +1223,11 @@ if (document.querySelector(".sg-florida-archive")) {
         // Display items based on listArray
         for (let i of listArray) {
           allData.forEach((item) => {
-            if (item?.name[0] === i.textContent.trim()[0] && item.count > 0) {
+            if (
+              item?.name[0].toLowerCase() ===
+                i.textContent.trim()[0].toLowerCase() &&
+              item.count > 0
+            ) {
               i.classList.add("show-category-list");
               let element = document.createElement("div");
               element.classList.add("category-list-item");
