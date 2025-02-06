@@ -379,9 +379,9 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
 
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
+          `${window.location.origin}/wp-json/wp/v2/illinois?il_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
-        let data = response.data;
+        let data = await response.data;
         dataItems = [...data];
 
         let items = document.querySelectorAll(".wrapper-content");
@@ -390,11 +390,17 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         });
 
         let sortedData = data.sort((a, b) => {
-          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
-            ? -1
-            : 1;
+          return a.title.rendered.localeCompare(b.title.rendered, "en", {
+            sensitivity: "base",
+          });
         });
-        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+
+        sortedData
+          .slice(
+            Number(e.target.innerText) * 5 - 5,
+            Number(e.target.innerText) * 5
+          )
+          .forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -1623,7 +1629,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
 
       try {
         let response = await axios(
-          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&page=${e.target.innerText}&per_page=5`
+          `${window.location.origin}/wp-json/wp/v2/florida?fl_slug=${combinedName}&_fields=acf_fields,slug,category_name,title&per_page=100`
         );
         let data = response?.data;
         dataItems = [...data];
@@ -1634,11 +1640,17 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         });
 
         let sortedData = data.sort((a, b) => {
-          return a.title.rendered.toLowerCase() < b.title.rendered.toLowerCase()
-            ? -1
-            : 1;
+          return a.title.rendered.localeCompare(b.title.rendered, "en", {
+            sensitivity: "base",
+          });
         });
-        sortedData.slice(0, 5).forEach((item) => createBusinessCard(item));
+
+        sortedData
+          .slice(
+            Number(e.target.innerText) * 5 - 5,
+            Number(e.target.innerText) * 5
+          )
+          .forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
