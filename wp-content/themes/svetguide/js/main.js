@@ -373,22 +373,11 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
     }
     fetchData();
 
-    //pagination
-    paginationContainer.addEventListener("click", async function (e) {
-      let pageNumberElements = document.querySelectorAll(".page-number");
-
+    async function commonFunction(value) {
       window.scrollTo(
         0,
         categoryTitle.getBoundingClientRect().top + window.scrollY - 100
       );
-
-      pageNumberElements.forEach((item) => {
-        if (item.classList.contains("active")) {
-          item.classList.remove("active");
-        }
-      });
-
-      e.target.classList.add("active");
 
       try {
         let response = await axios(
@@ -409,61 +398,87 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
         });
 
         sortedData
-          .slice(
-            Number(e.target.innerText) * 5 - 5,
-            Number(e.target.innerText) * 5
-          )
+          .slice(value * 5 - 5, value * 5)
           .forEach((item) => createBusinessCard(item));
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
+    }
+
+    let commonNumber = 1;
+
+    //pagination
+    paginationContainer.addEventListener("click", async function (e) {
+      let pageNumberElements = document.querySelectorAll(".page-number");
+
+      pageNumberElements.forEach((item) => {
+        if (item.classList.contains("active")) {
+          item.classList.remove("active");
+        }
+      });
+
+      e.target.classList.add("active");
+      commonFunction(Number(e.target.textContent));
+      commonNumber = Number(e.target.textContent);
     });
 
     // next-prev function
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
-      let currentPage = 1;
-      const totalPages = Math.ceil(newArr.length / itemsPerPage);
 
       // Initial display
-      updateDisplay();
-      updateButtonVisibility();
-
-      nextButton.addEventListener("click", function () {
-        if (currentPage < totalPages) {
-          currentPage++;
-          updateDisplay();
-          updateButtonVisibility();
-        }
-      });
-
-      previousButton.addEventListener("click", function () {
-        if (currentPage > 1) {
-          currentPage--;
-          updateDisplay();
-          updateButtonVisibility();
-        }
-      });
-
-      function updateDisplay() {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-
+      function updateDisplay(
+        startIndex = 0,
+        endIndex = startIndex + itemsPerPage
+      ) {
         newArr.forEach((item, index) => {
           item.style.display =
             index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
+      updateDisplay();
 
-      function updateButtonVisibility() {
-        // Hide previous button on first page
-        previousButton.style.display = currentPage === 1 ? "none" : "block";
+      // next button
+      nextButton.addEventListener("click", function () {
+        if (newArr.length === commonNumber) {
+          return;
+        }
 
-        // Hide next button if there's only one page
-        nextButton.style.display =
-          totalPages > 1 && currentPage < totalPages ? "block" : "none";
-      }
+        if (commonNumber % 5 === 0) {
+          updateDisplay(commonNumber);
+        }
+
+        commonNumber++;
+
+        newArr.forEach((item) => {
+          if (item.innerText === commonNumber.toString()) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+        commonFunction(commonNumber);
+      });
+
+      // prev button
+      previousButton.addEventListener("click", function () {
+        if (commonNumber === 1) {
+          return;
+        }
+        commonNumber--;
+        if (commonNumber % 5 === 0) {
+          updateDisplay(commonNumber - itemsPerPage, commonNumber);
+        }
+        newArr.forEach((item) => {
+          if (item.innerText === commonNumber.toString()) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+        commonFunction(commonNumber);
+      });
     }
 
     // carousel
