@@ -58,10 +58,11 @@ Template Name: Florida Single
 
                     <div class="title">
                         <h1><?php the_title(); ?></h1>
-                        <a href="<?php the_field('website'); ?>" target="_blank">Visit Site
-
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/visit-site.png" alt="">
-                        </a>
+                        <?php if (get_field('website')): ?>
+                            <a href="<?php the_field('website'); ?>" target="_blank">Visit Site
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/visit-site.png" alt="">
+                            </a>
+                        <?php endif; ?>
                     </div>
 
                     <?php if (get_field('about')): ?>
