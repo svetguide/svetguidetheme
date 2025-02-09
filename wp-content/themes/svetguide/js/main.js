@@ -428,6 +428,11 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       let newArr = [...items];
       const itemsPerPage = 5;
 
+      if (newArr.length <= 1) {
+        nextButton.style.display = "none";
+        previousButton.style.display = "none";
+      }
+
       // Initial display
       function updateDisplay(
         startIndex = 0,
@@ -1190,6 +1195,11 @@ if (document.querySelector(".sg-search-results-illinois")) {
       }
       updateDisplay();
 
+      if (newArr.length <= 1) {
+        nextButton.style.display = "none";
+        previousButton.style.display = "none";
+      }
+
       // next button
       nextButton.addEventListener("click", function () {
         if (newArr.length === commonNumber) {
@@ -1658,6 +1668,11 @@ if (document.querySelector(".sg-florida-taxonomy")) {
         });
       }
       updateDisplay();
+
+      if (newArr.length <= 1) {
+        nextButton.style.display = "none";
+        previousButton.style.display = "none";
+      }
 
       // next button
       nextButton.addEventListener("click", function () {
@@ -2405,6 +2420,11 @@ if (document.querySelector(".sg-search-results-florida")) {
         });
       }
       updateDisplay();
+
+      if (newArr.length <= 1) {
+        nextButton.style.display = "none";
+        previousButton.style.display = "none";
+      }
 
       // next button
       nextButton.addEventListener("click", function () {
