@@ -661,6 +661,7 @@ if (document.querySelector(".sg-illinois-inner")) {
       return item.charAt(0).toUpperCase() + item.slice(1);
     });
     let combinedName = capitalCaseArray.join(" ");
+
     // categoryNav.textContent = combinedName;
     categoryNav.href = `${window.location.origin}/illinois/${pathnameArray[2]}`;
 
@@ -670,6 +671,9 @@ if (document.querySelector(".sg-illinois-inner")) {
       );
       let data = await response.data[0].category_name;
       categoryNav.textContent = data;
+      if (categoryNav.textContent.includes("&amp;")) {
+        categoryNav.textContent = categoryNav.textContent.replace("&amp;", "&");
+      }
     }
     getCategoryName();
   })();
@@ -1885,6 +1889,9 @@ if (document.querySelector(".sg-florida-inner")) {
       );
       let data = await response.data[0].category_name;
       categoryNav.textContent = data;
+      if (categoryNav.textContent.includes("&amp;")) {
+        categoryNav.textContent = categoryNav.textContent.replace("&amp;", "&");
+      }
     }
     getCategoryName();
   })();
