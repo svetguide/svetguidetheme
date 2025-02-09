@@ -418,6 +418,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       });
 
       e.target.classList.add("active");
+
       commonFunction(Number(e.target.textContent));
       commonNumber = Number(e.target.textContent);
     });
@@ -1131,7 +1132,7 @@ if (document.querySelector(".sg-search-results-illinois")) {
       });
     }
 
-    paginationContainer.addEventListener("click", function (e) {
+    async function commonFunction(value) {
       let cardElements = document.querySelectorAll(".wrapper-content");
 
       window.scrollTo(
@@ -1153,58 +1154,77 @@ if (document.querySelector(".sg-search-results-illinois")) {
         }
       });
 
-      e.target.classList.add("active");
-
       dataItems
-        .slice((e.target.innerText - 1) * 5, e.target.innerText * 5)
+        // .slice((e.target.innerText - 1) * 5, e.target.innerText * 5)
+        // .forEach((item) => createBusinessCard(item));
+        .slice(value * 5 - 5, value * 5)
         .forEach((item) => createBusinessCard(item));
+    }
+
+    let commonNumber = 1;
+
+    paginationContainer.addEventListener("click", function (e) {
+      commonFunction(Number(e.target.innerText));
+      commonNumber = Number(e.target.textContent);
+      e.target.classList.add("active");
     });
 
-    // next-prev func
+    // next-prev function
     function getPaginationNumber(items) {
       let newArr = [...items];
       const itemsPerPage = 5;
-      let currentPage = 1;
-      const totalPages = Math.ceil(newArr.length / itemsPerPage);
 
       // Initial display
-      updateDisplay();
-      updateButtonVisibility();
-
-      nextButton.addEventListener("click", function () {
-        if (currentPage < totalPages) {
-          currentPage++;
-          updateDisplay();
-          updateButtonVisibility();
-        }
-      });
-
-      previousButton.addEventListener("click", function () {
-        if (currentPage > 1) {
-          currentPage--;
-          updateDisplay();
-          updateButtonVisibility();
-        }
-      });
-
-      function updateDisplay() {
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-
+      function updateDisplay(
+        startIndex = 0,
+        endIndex = startIndex + itemsPerPage
+      ) {
         newArr.forEach((item, index) => {
           item.style.display =
             index >= startIndex && index < endIndex ? "block" : "none";
         });
       }
+      updateDisplay();
 
-      function updateButtonVisibility() {
-        // Hide previous button on first page
-        previousButton.style.display = currentPage === 1 ? "none" : "block";
+      // next button
+      nextButton.addEventListener("click", function () {
+        if (newArr.length === commonNumber) {
+          return;
+        }
 
-        // Hide next button if there's only one page
-        nextButton.style.display =
-          totalPages > 1 && currentPage < totalPages ? "block" : "none";
-      }
+        if (commonNumber % 5 === 0) {
+          updateDisplay(commonNumber);
+        }
+
+        commonNumber++;
+        commonFunction(commonNumber);
+        newArr.forEach((item) => {
+          if (item.innerText === commonNumber.toString()) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      });
+
+      // prev button
+      previousButton.addEventListener("click", function () {
+        if (commonNumber === 1) {
+          return;
+        }
+        commonNumber--;
+        if (commonNumber % 5 === 0) {
+          updateDisplay(commonNumber - itemsPerPage, commonNumber);
+        }
+        commonFunction(commonNumber);
+        newArr.forEach((item) => {
+          if (item.innerText === commonNumber.toString()) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      });
     }
   })();
 }
