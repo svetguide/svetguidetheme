@@ -261,6 +261,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   padding-left: 15px;
+  background: radial-gradient(#ed561c, transparent);
 }
 .sg-nav .mobile-menu li:first-child {
   margin-top: 70px;
