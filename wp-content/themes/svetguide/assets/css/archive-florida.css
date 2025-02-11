@@ -358,6 +358,10 @@
   color: #102738;
   width: fit-content;
 }
+.sg-florida-archive .container .section-2 .wrapper-2 .category-list-wrapper .category-list .category-list-item a:hover {
+  color: #ed561c;
+  transition: all 300ms;
+}
 .sg-florida-archive .container .section-2 .wrapper-2 .show-category-list {
   display: inline-block !important;
 }

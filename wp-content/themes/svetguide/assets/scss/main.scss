@@ -285,26 +285,24 @@ Mobiles Menu
     position: relative;
     text-align: center;
     text-transform: uppercase;
-    padding-left: 15px;
-    background: radial-gradient(#ed561c, transparent);
+    font-weight: 500;
   }
 
   .mobile-menu li:first-child {
     margin-top: 70px;
   }
 
-  .mobile-menu li:hover {
-    background: rgba(0, 0, 0, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(15.5px);
-    -webkit-backdrop-filter: blur(15.5px);
-  }
-
   .mobile-menu li a {
     text-decoration: none;
-    color: white;
+    border-bottom: 1px solid #ed561c;
+    color: black;
     width: 100%;
     display: block;
+  }
+
+  .mobile-menu li a:hover {
+    color: #ed561c;
+    transition: all 0.3s ease;
   }
 
   /*---------------------
@@ -316,7 +314,7 @@ Mobiles Menu
     max-width: 250px;
     left: -100%;
     width: 100%;
-    background: rgba(237, 86, 28, 0.25);
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13px);
     -webkit-backdrop-filter: blur(13px);
