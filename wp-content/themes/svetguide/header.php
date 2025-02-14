@@ -46,7 +46,7 @@
                     <ul>
                         <li><a href="/illinois">Illinois</a></li>
                         <li><a href="/florida">Florida</a></li>
-                        <li><a href="/florida">Advertise with us</a></li>
+                        <li><a href="https://svet.com/contact-us/">Advertise with us</a></li>
                     </ul>
 
                 </nav>
