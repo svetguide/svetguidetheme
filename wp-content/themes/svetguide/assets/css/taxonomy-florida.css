@@ -448,14 +448,8 @@
   background-color: #b73b0c;
   color: white;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .prev,
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .next {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .next {
   background-color: #ed561c;
   border: 1px solid #ed561c;
   font-family: Poppins;
@@ -464,9 +458,10 @@
   padding: 5px 10px;
   color: white;
   transition: all 300ms;
+  border-radius: 5px;
 }
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .prev:hover,
-.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev-next-btn-wrapper .next:hover {
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .prev:hover,
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .next:hover {
   background-color: #b73b0c;
 }
 .sg-florida-taxonomy .container .section-2 .wrapper-2 .wrapper-image a {

@@ -216,18 +216,11 @@ Template Name: Illinois Taxonomy
                     </div>
 
                     <div class="pagination-wrapper">
+                        <button class="prev">Prev</button>
                         <div class="page-nav"></div>
-
-                        <div class="prev-next-btn-wrapper">
-                            <button class="prev">Prev</button>
-                            <button class="next">Next</button>
-                        </div>
+                        <button class="next">Next</button>
                     </div>
 
-
-                    <!-- <div class="load-more-wrapper">
-                        <button class="load-more-btn">Load more</button>
-                    </div> -->
                 </div>
 
                 <div class="wrapper-image">
