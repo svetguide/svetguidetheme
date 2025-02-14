@@ -216,12 +216,10 @@ Template Name: Florida Taxonomy
 
 
                     <div class="pagination-wrapper">
+                        <button class="prev">Prev</button>
                         <div class="page-nav"></div>
+                        <button class="next">Next</button>
 
-                        <div class="prev-next-btn-wrapper">
-                            <button class="prev">Prev</button>
-                            <button class="next">Next</button>
-                        </div>
                     </div>
 
                     <!-- <div class="load-more-wrapper">
