@@ -410,6 +410,10 @@
               width: fit-content;
               flex-wrap: wrap;
 
+              @media screen and (max-width: 640px) {
+                gap: 9px;
+              }
+
               .page-number {
                 background-color: transparent;
                 border: none;
