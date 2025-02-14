@@ -382,6 +382,11 @@
   width: fit-content;
   flex-wrap: wrap;
 }
+@media screen and (max-width: 640px) {
+  .sg-search-results-florida .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav {
+    gap: 9px;
+  }
+}
 .sg-search-results-florida .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav .page-number {
   background-color: transparent;
   border: none;
