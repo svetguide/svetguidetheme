@@ -437,6 +437,9 @@
   width: fit-content;
   flex-wrap: wrap;
 }
+.sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav button {
+  font-size: 12px;
+}
 @media screen and (max-width: 640px) {
   .sg-florida-taxonomy .container .section-2 .wrapper-2 .list-of-cards .pagination-wrapper .page-nav {
     gap: 9px;
@@ -458,7 +461,7 @@
   background-color: #ed561c;
   border: 1px solid #ed561c;
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
   padding: 5px 10px;
   color: white;
