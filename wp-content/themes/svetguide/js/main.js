@@ -260,7 +260,7 @@ if (document.querySelector(".sg-illinois-taxonomy")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.slug}/">${
+                            <a href="${window.location.href}${data?.slug}/">${
         data?.title?.rendered
       }</a>
                           </div>
@@ -1491,7 +1491,7 @@ if (document.querySelector(".sg-florida-taxonomy")) {
       let wrapper = document.createElement("div");
       wrapper.classList.add("wrapper-content");
       wrapper.innerHTML = `<div class="title">
-                            <a href="${data?.slug}/">${
+                            <a href="${window.location.href}${data?.slug}/">${
         data?.title?.rendered
       }</a>
                           </div>
