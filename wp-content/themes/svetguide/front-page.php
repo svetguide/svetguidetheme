@@ -13,13 +13,13 @@
             <div class="wrapper-1">
                 <div>
                     <a href="/illinois">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/illinois-guide.png" alt="">
+                        <img src="/wp-content/themes/svetguide/assets/images/front-page/illinois-cover-2025.png" alt="illinois guide image">
                     </a>
                     <a href="/illinois">Illinois Guide</a>
                 </div>
                 <div>
                     <a href="/florida">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/front-page/florida-guide.png" alt="">
+                        <img src="/wp-content/themes/svetguide/assets/images/front-page/florida-cover-2025.png" alt="florida guide image">
                     </a>
                     <a href="/florida">Florida Guide</a>
                 </div>
