@@ -224,8 +224,8 @@ Template Name: Illinois Taxonomy
                 </div>
 
                 <div class="wrapper-image">
-                    <a href="https://issuu.com/svet-svet/docs/svet_chicago2024-new_print_os" target="_blank">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
+                    <a href="https://issuu.com/svet-svet/docs/svet_chicago_guide_2025" target="_blank">
+                        <img src="/wp-content/themes/svetguide/assets/images/front-page/illinois-cover-2025.png" alt="illinois cover image">
                     </a>
                 </div>
 

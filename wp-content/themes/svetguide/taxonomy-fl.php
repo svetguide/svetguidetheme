@@ -229,8 +229,8 @@ Template Name: Florida Taxonomy
 
 
                 <div class="wrapper-image">
-                    <a href="https://issuu.com/svet-svet/docs/svet_florida2024-new_press_021224_os" target="_blank">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/view-pages.png" alt="">
+                    <a href="https://issuu.com/svet-svet/docs/svet_florida_guide_2025" target="_blank">
+                        <img src="/wp-content/themes/svetguide/assets/images/front-page/florida-cover-2025.png" alt="florida cover image">
                     </a>
                 </div>
 
