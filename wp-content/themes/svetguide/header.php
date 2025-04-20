@@ -22,19 +22,19 @@
         <div class="container">
 
             <div class="sg-nav-desktop">
-                <a href="/">
+                <a href="https://svetguide.com/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
                 </a>
 
                 <div class="city-wrapper">
-                    <a href="/illinois" class="city">ILLINOIS</a>
+                    <a href="https://svetguide.com/illinois/" class="city">ILLINOIS</a>
                     <div class="orange-dot"></div>
-                    <a href="/florida" class="city">FLORIDA</a>
+                    <a href="https://svetguide.com/florida/" class="city">FLORIDA</a>
                 </div>
                 <a class="advertise" href="https://svet.com/contact-us/">Advertise with us</a>
             </div>
             <div class="sg-nav-mob">
-                <a href="/">
+                <a href="https://svetguide.com/">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/svetguide-header-logo.png" alt="svetguide logo">
                 </a>
 
@@ -44,8 +44,8 @@
 
                 <nav class="mobile-menu">
                     <ul>
-                        <li><a href="/illinois">Illinois</a></li>
-                        <li><a href="/florida">Florida</a></li>
+                        <li><a href="https://svetguide.com/illinois/">Illinois</a></li>
+                        <li><a href="https://svetguide.com/florida/">Florida</a></li>
                         <li><a href="https://svet.com/contact-us/">Advertise with us</a></li>
                     </ul>
 

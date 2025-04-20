@@ -13,15 +13,15 @@ Template Name: Florida Single
         <div class="section-1">
 
             <div>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/home-icon.png" alt="">
-                <a href="/florida/">All Categories</a>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/home-icon.png" alt="home-icon">
+                <a href="https://svetguide.com/florida/">All Categories</a>
             </div>
             <div>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
-                <a class="ss-florida-category-name" href="">All Categories</a>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="nav-arrow icon">
+                <a class="ss-florida-category-name" href="">Loading...</a>
             </div>
             <div>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/single-illinois/nav-arrow.png" alt="nav-arrow icon">
                 <p><?php the_title(); ?></p>
             </div>
 
@@ -150,7 +150,7 @@ Template Name: Florida Single
 
 
                 <div class="wrapper-image">
-                    <a href="https://issuu.com/svet-svet/docs/svet_florida_guide_2025" target="_blank">
+                    <a href="https://issuu.com/svet-svet/docs/svet_florida_guide_2025" target="_blank" rel="nofollow">
                         <img src="/wp-content/themes/svetguide/assets/images/front-page/florida-cover-2025.png" alt="florida cover image">
                     </a>
                 </div>

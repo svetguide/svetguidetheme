@@ -195,7 +195,7 @@ Template Name: Florida Archive
                     ?>
                 </div>
                 <div class="wrapper-image">
-                    <a href="https://issuu.com/svet-svet/docs/svet_florida_guide_2025" target="_blank">
+                    <a href="https://issuu.com/svet-svet/docs/svet_florida_guide_2025" target="_blank" rel="nofollow">
                         <img src="/wp-content/themes/svetguide/assets/images/front-page/florida-cover-2025.png" alt="florida cover image">
                     </a>
                 </div>
