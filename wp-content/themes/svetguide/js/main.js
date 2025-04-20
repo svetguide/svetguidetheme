@@ -670,7 +670,7 @@ if (document.querySelector(".sg-illinois-inner")) {
     let combinedName = capitalCaseArray.join(" ");
 
     // categoryNav.textContent = combinedName;
-    categoryNav.href = `${window.location.origin}/illinois/${pathnameArray[2]}`;
+    categoryNav.href = `${window.location.origin}/illinois/${pathnameArray[2]}/`;
 
     async function getCategoryName() {
       let response = await axios(
@@ -1900,7 +1900,7 @@ if (document.querySelector(".sg-florida-inner")) {
     });
     let combinedName = capitalCaseArray.join(" ");
     // categoryNav.textContent = combinedName;
-    categoryNav.href = `${window.location.origin}/florida/${pathnameArray[2]}`;
+    categoryNav.href = `${window.location.origin}/florida/${pathnameArray[2]}/`;
 
     async function getCategoryName() {
       let response = await axios(
