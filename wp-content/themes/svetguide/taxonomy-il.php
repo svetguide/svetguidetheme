@@ -142,7 +142,7 @@ Template Name: Illinois Taxonomy
     <div class="search-section">
         <div class="container">
             <div class="wrapper-1">
-                <h2>Find A Business in Illinois</h2>
+                <h2>Find a Business in Illinois</h2>
                 <div class="input-wrapper">
                     <img src="/wp-content/themes/svetguide/assets/images/taxonomy-illinois/search-icon.png" alt="">
                     <input type="text" placeholder="Business name & location in Illinois">
